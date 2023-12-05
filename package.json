@@ -1,0 +1,13 @@
+{
+  "name": "matijaoe-utils",
+  "type": "module",
+  "module": "src/index.ts",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@matijaoe/eslint-config": "^1.2.0",
+    "bun-types": "latest",
+    "eslint": "^8.55.0"
+  }
+}
