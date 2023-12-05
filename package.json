@@ -1,25 +1,36 @@
 {
-  "name": "matijaoe-utils",
+  "name": "@matijaoe/utils",
   "type": "module",
   "version": "0.0.1",
   "author": {
     "name": "Matija Osrečki",
     "url": "https://github.com/matijaoe"
   },
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/matijaoe/utils"
   },
-  "module": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint .",
-    "format": "eslint . --fix"
+    "format": "eslint . --fix",
+    "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean",
+    "prepack": "bun run build",
+    "release": "bumpp && npm publish"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "devDependencies": {
     "@matijaoe/eslint-config": "^1.2.0",
+    "bumpp": "^9.2.0",
     "bun-types": "latest",
-    "eslint": "^8.55.0"
+    "eslint": "^8.55.0",
+    "tsup": "^8.0.1"
   }
 }

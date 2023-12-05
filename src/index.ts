@@ -26,7 +26,4 @@ export {
   toTypeString
 } from './typed'
 
-export {
-  StandardObject,
-  type StandardObjectModel
-} from './models'
+export * from './models'
