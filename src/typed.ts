@@ -26,6 +26,18 @@ export const isPrimitive = (value: unknown): boolean => {
   )
 }
 
+export const isNil = (val: unknown): val is undefined | null => {
+  return val === undefined || val === null
+}
+
+export const isNull = (val: unknown): val is null => {
+  return val === null
+}
+
+export const isUndefined = (val: unknown): val is undefined => {
+  return val === undefined
+}
+
 export const isArray = Array.isArray
 
 export const isDate = (val: unknown): val is Date => {
@@ -129,6 +141,7 @@ export const isEmpty = (value: unknown) => {
   if (isNumber(size)) {
     return size === 0
   }
+
   const keys = Object.keys(value).length
 
   return keys === 0
