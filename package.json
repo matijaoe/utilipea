@@ -9,7 +9,11 @@
   "repository": {
     "url": "https://github.com/matijaoe/utils"
   },
-  "module": "src/index.ts",
+  "module": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "eslint . --fix"
+  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
