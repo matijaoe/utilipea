@@ -1,4 +1,1 @@
-export {
-  StandardObject,
-  type StandardObjectModel
-} from './objects'
+export * from './objects'

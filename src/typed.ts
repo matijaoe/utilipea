@@ -18,7 +18,7 @@ export const hasOwn = (
   key: string | symbol
 ): key is keyof typeof val => hasOwnProperty.call(val, key)
 
-export const isPrimitive = (value: any): boolean => {
+export const isPrimitive = (value: unknown): boolean => {
   return (
     value === undefined
     || value === null
@@ -42,6 +42,22 @@ export const isFunction = (val: unknown): val is Function => {
 
 export const isString = (val: unknown): val is string => {
   return typeof val === 'string'
+}
+
+export const isInt = (value: any): value is number => {
+  return isNumber(value) && value % 1 === 0
+}
+
+export const isFloat = (value: any): value is number => {
+  return isNumber(value) && value % 1 !== 0
+}
+
+export const isNumber = (value: unknown): value is number => {
+  try {
+    return Number(value) === value
+  } catch {
+    return false
+  }
 }
 
 export const isSymbol = (val: unknown): val is symbol => {
@@ -82,4 +98,38 @@ export const isPromise = <T = any>(val: unknown): val is Promise<T> => {
     && isFunction((val as any).then)
     && isFunction((val as any).catch)
   )
+}
+
+export const isEmpty = (value: unknown) => {
+  if (value === true || value === false) {
+    return true
+  }
+  if (value === null || value === undefined) {
+    return true
+  }
+  if (isNumber(value)) {
+    return value === 0
+  }
+  if (isDate(value)) {
+    return Number.isNaN(value.getTime())
+  }
+  if (isFunction(value)) {
+    return false
+  }
+  if (isSymbol(value)) {
+    return false
+  }
+
+  const length = (value as any)?.length
+  if (isNumber(length)) {
+    return length === 0
+  }
+
+  const size = (value as any)?.size
+  if (isNumber(size)) {
+    return size === 0
+  }
+  const keys = Object.keys(value).length
+
+  return keys === 0
 }
