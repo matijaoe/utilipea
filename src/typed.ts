@@ -1,3 +1,4 @@
+import type { Falsy, Primitive } from './models'
 import { StandardObject } from './models'
 
 const objectToString = Object.prototype.toString
@@ -18,24 +19,36 @@ export const hasOwn = (
   key: string | symbol
 ): key is keyof typeof val => hasOwnProperty.call(val, key)
 
-export const isPrimitive = (value: unknown): boolean => {
-  return (
-    value === undefined
-    || value === null
-    || (typeof value !== 'object' && typeof value !== 'function')
-  )
+export const isPrimitive = (value: unknown): value is Primitive => {
+  return Object(value) !== value
 }
 
-export const isNil = (val: unknown): val is undefined | null => {
-  return val === undefined || val === null
+export const isDefined = <T>(val: T): val is NonNullable<T> => {
+  return typeof val !== 'undefined' && val !== null
 }
 
-export const isNull = (val: unknown): val is null => {
+export const isNonNull = <T>(val: T): val is T => {
+  return val !== null
+}
+
+export const isNil = <T>(val: T): val is Extract<T, null | undefined> => {
+  return val == null
+}
+
+export const isNull = <T>(val: T): val is Extract<T, null> => {
   return val === null
 }
 
-export const isUndefined = (val: unknown): val is undefined => {
-  return val === undefined
+export const isUndefined = <T>(val: T): val is Extract<T, undefined> => {
+  return typeof val === 'undefined'
+}
+
+export const isTruthy = <T>(val: T): val is Exclude<T, Falsy> => {
+  return !!val
+}
+
+export const isBoolean = (data: unknown): data is boolean => {
+  return typeof data === 'boolean'
 }
 
 export const isArray = Array.isArray
@@ -56,11 +69,11 @@ export const isString = (val: unknown): val is string => {
   return typeof val === 'string'
 }
 
-export const isInt = (value: any): value is number => {
+export const isInt = (value: unknown): value is number => {
   return isNumber(value) && value % 1 === 0
 }
 
-export const isFloat = (value: any): value is number => {
+export const isFloat = (value: unknown): value is number => {
   return isNumber(value) && value % 1 !== 0
 }
 
@@ -104,45 +117,54 @@ export const isError = (val: unknown): val is Error => {
   return val instanceof Error
 }
 
-export const isPromise = <T = any>(val: unknown): val is Promise<T> => {
-  return (
-    (isObject(val) || isFunction(val))
-    && isFunction((val as any).then)
-    && isFunction((val as any).catch)
-  )
+export const isPromise = <T, S>(val: Promise<T> | S): val is Promise<T> => {
+  return val instanceof Promise
 }
 
-export const isEmpty = (value: unknown) => {
-  if (value === true || value === false) {
+export const isEmpty = (val: unknown) => {
+  if (val === true || val === false) {
     return true
   }
-  if (value === null || value === undefined) {
+  if (val === null || val === undefined) {
     return true
   }
-  if (isNumber(value)) {
-    return value === 0
+  if (isNumber(val)) {
+    return val === 0
   }
-  if (isDate(value)) {
-    return Number.isNaN(value.getTime())
+  if (isDate(val)) {
+    return Number.isNaN(val.getTime())
   }
-  if (isFunction(value)) {
+  if (isFunction(val)) {
     return false
   }
-  if (isSymbol(value)) {
+  if (isSymbol(val)) {
     return false
   }
 
-  const length = (value as any)?.length
+  const length = (val as any)?.length
   if (isNumber(length)) {
     return length === 0
   }
 
-  const size = (value as any)?.size
+  const size = (val as any)?.size
   if (isNumber(size)) {
     return size === 0
   }
 
-  const keys = Object.keys(value).length
+  const keys = Object.keys(val).length
 
   return keys === 0
+}
+
+export const typeOf = (val: any) => {
+  if (val === null) {
+    return 'null'
+  }
+  if (val !== Object(val)) {
+    return typeof val
+  }
+  const result = toRawType(val).toLowerCase()
+
+  // strip function adornments (e.g. "AsyncFunction")
+  return result.includes('function') ? 'function' : result
 }
