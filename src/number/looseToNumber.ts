@@ -1,5 +1,3 @@
-import { describe } from 'vitest'
-
 /**
  * "123-foo" will be parsed to 123
  */

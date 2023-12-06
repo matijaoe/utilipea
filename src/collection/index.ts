@@ -1,1 +1,1 @@
-export * from './deepClone'
+export * from './clone'

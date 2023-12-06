@@ -13,7 +13,7 @@ export const sort = <T>(
     criteria = [{ order: 'asc' }]
   }
 
-  const sorted = [...arr].sort((a, b) => {
+  return [...arr].sort((a, b) => {
     for (const { order = 'asc', by = (item: T) => item } of criteria) {
       const aValue = by(a)
       const bValue = by(b)
@@ -30,6 +30,4 @@ export const sort = <T>(
     }
     return 0
   })
-
-  return sorted
 }
