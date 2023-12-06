@@ -1,6 +1,6 @@
 import { assertType, describe, expect, it } from 'vitest'
 import * as _ from '..'
-import { typesDataProvider } from './types-data-provider'
+import { typesDataProvider } from './tests/types-data-provider'
 
 describe('typed module', () => {
   describe('isArray', () => {

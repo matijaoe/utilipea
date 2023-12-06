@@ -16,6 +16,9 @@
   "files": [
     "dist"
   ],
+  "paths": {
+    "src": "./src/index.ts"
+  },
   "scripts": {
     "lint": "eslint .",
     "format": "eslint . --fix",
