@@ -27,6 +27,9 @@ describe('array module', () => {
         { id: 5, name: 'hank' },
         { id: 6, name: 'rob' },
       ])
+
+      const result2 = _.unique(list, (x) => x.id)
+      expect(result2.length).toBe(7)
     })
   })
 })

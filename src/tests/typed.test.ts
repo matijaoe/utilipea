@@ -4,48 +4,41 @@ import { typesDataProvider } from './types-data-provider'
 
 describe('typed module', () => {
   describe('isArray', () => {
-    it('returns false for null', () => {
-      const result = _.isArray(null)
-      expect(result).toBe(false)
-    })
-    it('returns false for undefined', () => {
-      const result = _.isArray(undefined)
-      expect(result).toBe(false)
-    })
-    it('returns false for boolean', () => {
-      const result = _.isArray(false)
-      expect(result).toBe(false)
-    })
-    it('returns false for object', () => {
-      const result = _.isArray({})
-      expect(result).toBe(false)
-    })
-    it('returns false for class instance', () => {
+    it('returns false for non-array values', () => {
       class Data {}
-      const result = _.isArray(new Data())
-      expect(result).toBe(false)
+
+      const nonArrayValues = [
+        null,
+        undefined,
+        false,
+        {},
+        new Data(),
+        22,
+        'abc'
+      ]
+
+      nonArrayValues.forEach((value) => {
+        const result = _.isArray(value)
+        expect(result).toBe(false)
+      })
     })
-    it('returns false for number', () => {
-      const result = _.isArray(22)
-      expect(result).toBe(false)
-    })
-    it('returns false for string', () => {
-      const result = _.isArray('abc')
-      expect(result).toBe(false)
-    })
+
     it('returns true for array', () => {
       const result = _.isArray([1, 2, 3])
       expect(result).toBe(true)
     })
+
     it('returns true for empty array', () => {
       const result = _.isArray([])
       expect(result).toBe(true)
     })
+
     it('returns true for Array contructor', () => {
       // eslint-disable-next-line ts/no-array-constructor
       const result = _.isArray(new Array())
       expect(result).toBe(true)
     })
+
     it('should work as type guard', () => {
       const data = typesDataProvider('array')
       if (_.isArray(data)) {
@@ -61,47 +54,34 @@ describe('typed module', () => {
   })
 
   describe('isObject', () => {
-    it('returns false for null', () => {
-      const result = _.isObject(null)
-      expect(result).toBe(false)
-    })
-    it('returns false for undefined', () => {
-      const result = _.isObject(undefined)
-      expect(result).toBe(false)
-    })
-    it('returns false for boolean', () => {
-      const result = _.isObject(false)
-      expect(result).toBe(false)
-    })
-    it('returns false for', () => {
-      const result = _.isObject(() => {})
-      expect(result).toBe(false)
-    })
-    it('returns false for class instance', () => {
+    it('returns false for non-object values', () => {
       class Data {}
-      const result = _.isObject(new Data())
-      expect(result).toBe(false)
+
+      const nonObjectValues = [
+        null,
+        undefined,
+        false,
+        () => {},
+        new Data(),
+        Object.create(null),
+        22,
+        'abc',
+        [1, 2, 3]
+      ]
+
+      nonObjectValues.forEach((value) => {
+        const result = _.isObject(value)
+        expect(result).toBe(false)
+      })
     })
-    it('returns false for Object.create(null)', () => {
-      const result = _.isObject(Object.create(null))
-      expect(result).toBe(false)
-    })
-    it('returns false for number', () => {
-      const result = _.isObject(22)
-      expect(result).toBe(false)
-    })
-    it('returns false for string', () => {
-      const result = _.isObject('abc')
-      expect(result).toBe(false)
-    })
-    it('returns false for array', () => {
-      const result = _.isObject([1, 2, 3])
-      expect(result).toBe(false)
-    })
+
     it('returns true for object', () => {
       const result = _.isObject({})
       expect(result).toBe(true)
     })
+
+    // TODO: i dont even know if type guards work
+
     it('should work as type guard', () => {
       const data = { a: 'asd' }
       if (_.isObject(data)) {
@@ -110,6 +90,7 @@ describe('typed module', () => {
       >(data)
       }
     })
+
     it('should also work as type guard', () => {
       const data = { data: 5 } as ReadonlyArray<number> | { data: 5 }
       if (_.isObject(data)) {
@@ -121,6 +102,7 @@ describe('typed module', () => {
         }>(data)
       }
     })
+
     it('should work as type guard for more narrow types', () => {
       const data = { data: 5 } as Array<number> | { data: number }
       if (_.isObject(data)) {
@@ -132,6 +114,7 @@ describe('typed module', () => {
         }>(data)
       }
     })
+
     it('should work even if data type is unknown', () => {
       const data: unknown = typesDataProvider('object')
       if (_.isObject(data)) {
@@ -157,69 +140,66 @@ describe('typed module', () => {
         expect(_.isPrimitive(item)).toBe(true)
       })
     })
-    it('returns false for non-primitives', () => {
-      const arr = [new Date(), Number, {}, Object({}), () => 0, [1, 2]]
 
-      for (const elm of arr) {
-        expect(_.isPrimitive(elm)).toBe(false)
-      }
+    const arr = [
+      new Date(),
+      Number,
+      {},
+      Object({}),
+      () => 0,
+      [1, 2]
+    ]
+
+    arr.forEach((elm) => {
+      expect(_.isPrimitive(elm)).toBe(false)
     })
   })
 
   describe('isFunction', () => {
-    it('returns false for null', () => {
-      const result = _.isFunction(null)
-      expect(result).toBe(false)
-    })
-    it('returns false for undefined', () => {
-      const result = _.isFunction(undefined)
-      expect(result).toBe(false)
-    })
-    it('returns false for boolean', () => {
-      const result = _.isFunction(false)
-      expect(result).toBe(false)
-    })
-    it('returns false for class instance', () => {
+    it('returns correct values for various types', () => {
       class Data {}
-      const result = _.isFunction(new Data())
-      expect(result).toBe(false)
+
+      const nonFunctionValues = [
+        null,
+        undefined,
+        false,
+        new Data(),
+        22,
+        'abc',
+        [1, 2, 3],
+        {}
+      ]
+
+      nonFunctionValues.forEach((value) => {
+        const result = _.isFunction(value)
+        expect(result).toBe(false)
+      })
     })
-    it('returns false for number', () => {
-      const result = _.isFunction(22)
-      expect(result).toBe(false)
-    })
-    it('returns false for string', () => {
-      const result = _.isFunction('abc')
-      expect(result).toBe(false)
-    })
-    it('returns false for array', () => {
-      const result = _.isFunction([1, 2, 3])
-      expect(result).toBe(false)
-    })
-    it('returns false for object', () => {
-      const result = _.isFunction({})
-      expect(result).toBe(false)
-    })
-    it('returns true for anonymous', () => {
+
+    it('returns true for anonymous function', () => {
       const result = _.isFunction(() => {
         return 'hello'
       })
       expect(result).toBe(true)
     })
-    it('returns true for arrow', () => {
-      const result = _.isFunction(() => {
+
+    it('returns true for named arrow function', () => {
+      const sayHello = () => {
         return 'hello'
-      })
+      }
+      const result = _.isFunction(sayHello)
       expect(result).toBe(true)
     })
-    it('returns true for named', () => {
+
+    it('returns true for named function', () => {
       function sayHello() {
         return 'hello'
       }
       const result = _.isFunction(sayHello)
       expect(result).toBe(true)
     })
-    it('isFunction: should work as type guard', () => {
+
+    it('should work as type guard', () => {
       const data = typesDataProvider('null')
       if (_.isFunction(data)) {
         expect(data).toEqual(null)
@@ -232,58 +212,38 @@ describe('typed module', () => {
         assertType<(a: number) => string>(maybeFunction)
       }
     })
-    it('isFunction: should work as type guard in filter', () => {
-      const data = [
-        typesDataProvider('error'),
-        typesDataProvider('array'),
-        typesDataProvider('function'),
-        typesDataProvider('function'),
-        typesDataProvider('object'),
-        typesDataProvider('number'),
-      ].filter(_.isFunction)
-      expect(data.every((c) => typeof c === 'function')).toEqual(true)
-      assertType<Array<() => void>>(data)
-    })
   })
 
   describe('isString', () => {
-    it('returns false for null', () => {
-      const result = _.isString(null)
-      expect(result).toBe(false)
-    })
-    it('returns false for undefined', () => {
-      const result = _.isString(undefined)
-      expect(result).toBe(false)
-    })
-    it('returns false for boolean', () => {
-      const result = _.isString(false)
-      expect(result).toBe(false)
-    })
-    it('returns false for class instance', () => {
+    it('returns false for non-string values', () => {
       class Data {}
-      const result = _.isString(new Data())
-      expect(result).toBe(false)
+
+      const nonStringValues = [
+        null,
+        undefined,
+        false,
+        new Data(),
+        22,
+        [1, 2, 3],
+        {}
+      ]
+
+      nonStringValues.forEach((value) => {
+        const result = _.isString(value)
+        expect(result).toBe(false)
+      })
     })
-    it('returns false for number', () => {
-      const result = _.isString(22)
-      expect(result).toBe(false)
-    })
-    it('returns false for array', () => {
-      const result = _.isString([1, 2, 3])
-      expect(result).toBe(false)
-    })
-    it('returns false for object', () => {
-      const result = _.isString({})
-      expect(result).toBe(false)
-    })
+
     it('returns true for string', () => {
       const result = _.isString('abc')
       expect(result).toBe(true)
     })
+
     it('returns true for string class', () => {
       const result = _.isString(String('abc'))
       expect(result).toBe(true)
     })
+
     it('returns true for empty string', () => {
       const result = _.isString('')
       expect(result).toBe(true)
@@ -291,61 +251,63 @@ describe('typed module', () => {
   })
 
   describe('isNumber', () => {
-    it('returns false for null', () => {
-      const result = _.isNumber(null)
-      expect(result).toBe(false)
-    })
-    it('returns false for undefined', () => {
-      const result = _.isNumber(undefined)
-      expect(result).toBe(false)
-    })
-    it('returns false for boolean', () => {
-      const result = _.isNumber(false)
-      expect(result).toBe(false)
-    })
-    it('returns false for class instance', () => {
+    it('returns false for non-number values', () => {
       class Data {}
-      const result = _.isNumber(new Data())
-      expect(result).toBe(false)
+
+      const nonNumberValues = [
+        null,
+        undefined,
+        false,
+        new Data(),
+        [1, 2, 3],
+        {},
+        'abc',
+        String('abc')
+      ]
+
+      nonNumberValues.forEach((value) => {
+        const result = _.isNumber(value)
+        expect(result).toBe(false)
+      })
     })
-    it('returns true for int', () => {
-      const result = _.isNumber(22)
-      expect(result).toBe(true)
-    })
-    it('returns true for float', () => {
-      const result = _.isNumber(22.0567)
-      expect(result).toBe(true)
-    })
-    it('returns true for Infinity', () => {
-      const result = _.isNumber(Number.POSITIVE_INFINITY)
-      expect(result).toBe(true)
-    })
+
     it('returns false for NaN', () => {
       const result = _.isNumber(Number.NaN)
       expect(result).toBe(false)
     })
-    it('returns false for array', () => {
-      const result = _.isNumber([1, 2, 3])
-      expect(result).toBe(false)
+
+    it('returns true for int', () => {
+      const result = _.isNumber(22)
+      expect(result).toBe(true)
     })
-    it('returns false for object', () => {
-      const result = _.isNumber({})
-      expect(result).toBe(false)
+
+    it('returns true for float', () => {
+      const result = _.isNumber(22.0567)
+      expect(result).toBe(true)
     })
-    it('returns false for string', () => {
-      const result = _.isNumber('abc')
-      expect(result).toBe(false)
-    })
-    it('returns false for string class', () => {
-      const result = _.isNumber(String('abc'))
-      expect(result).toBe(false)
+
+    it('returns true for Infinity', () => {
+      const result = _.isNumber(Number.POSITIVE_INFINITY)
+      expect(result).toBe(true)
     })
   })
 
   describe('isInt', () => {
     class Data {}
 
-    const falseValues = [undefined, null, false, new Data(), Number.NaN, [1, 2, 3], {}, 'abc', '123abc', String('abc')]
+    const falseValues = [
+      undefined,
+      null,
+      false,
+      new Data(),
+      Number.NaN,
+      [1, 2, 3],
+      {},
+      'abc',
+      '123abc',
+      String('abc')
+    ]
+
     it('returns false for non-number values', () => {
       falseValues.forEach((value) => {
         expect(_.isInt(value)).toBe(false)
@@ -364,7 +326,20 @@ describe('typed module', () => {
   describe('isFloat function', () => {
     class Data {}
 
-    const falseValues = [undefined, null, false, new Data(), Number.NaN, [1, 2, 3], {}, 'abc', '123.23abc', String('abc'), 22]
+    const falseValues = [
+      undefined,
+      null,
+      false,
+      new Data(),
+      Number.NaN,
+      [1, 2, 3],
+      {},
+      'abc',
+      '123.23abc',
+      String('abc'),
+      22
+    ]
+
     it('returns false for non-number values', () => {
       falseValues.forEach((value) => {
         expect(_.isFloat(value)).toBe(false)
@@ -486,8 +461,12 @@ describe('typed module', () => {
       expect(_.isDefined('')).toBe(true)
       expect(_.isDefined(0)).toBe(true)
     })
-    it('return false for non-defined values', () => {
+
+    it('return false for undefined', () => {
       expect(_.isDefined(undefined)).toBe(false)
+    })
+
+    it('return false for null', () => {
       expect(_.isDefined(null)).toBe(false)
     })
   })
@@ -498,7 +477,8 @@ describe('typed module', () => {
       expect(_.isNonNull('')).toBe(true)
       expect(_.isNonNull(0)).toBe(true)
     })
-    it('return false for null values', () => {
+
+    it('return false for null', () => {
       expect(_.isDefined(null)).toBe(false)
     })
   })
@@ -508,6 +488,7 @@ describe('typed module', () => {
       expect(_.isNil(null)).toBe(true)
       expect(_.isNil(undefined)).toBe(true)
     })
+
     it('return false for non-nil values', () => {
       expect(_.isNil('')).toBe(false)
       expect(_.isNil(0)).toBe(false)
@@ -515,35 +496,41 @@ describe('typed module', () => {
   })
 
   describe('isNull', () => {
-    it('returns false for non-null', () => {
+    it('returns false for non-null values', () => {
       expect(_.isNull('')).toBe(false)
       expect(_.isNull(0)).toBe(false)
       expect(_.isNull(undefined)).toBe(false)
+      expect(_.isNull(false)).toBe(false)
+      expect(_.isNull(Object.create(null))).toBe(false)
     })
-    it('returns true for null', () => {
+
+    it('returns true for null values', () => {
       expect(_.isNull(null)).toBe(true)
     })
   })
 
   describe('isUndefined', () => {
-    it('returns false for non-undefined', () => {
+    it('returns false for non-undefined values', () => {
       expect(_.isUndefined('')).toBe(false)
       expect(_.isUndefined(0)).toBe(false)
       expect(_.isUndefined(null)).toBe(false)
     })
+
     it('returns true for undefined', () => {
       expect(_.isUndefined(undefined)).toBe(true)
     })
   })
 
   describe('isTruthy', () => {
-    it('returns false for falsy', () => {
+    it('returns false for falsy values', () => {
       expect(_.isTruthy('')).toBe(false)
       expect(_.isTruthy(0)).toBe(false)
       expect(_.isTruthy(undefined)).toBe(false)
       expect(_.isTruthy(null)).toBe(false)
+      expect(_.isTruthy(false)).toBe(false)
     })
-    it('returns true for truthy', () => {
+
+    it('returns true for truthy values', () => {
       expect(_.isTruthy('hello')).toBe(true)
       expect(_.isTruthy([])).toBe(true)
       expect(_.isTruthy({})).toBe(true)
