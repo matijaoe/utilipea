@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { looseToNumber } from './looseToNumber'
 
-describe('[number]: looseToNumber', () => {
+describe('[number] looseToNumber', () => {
   it('loosely converts int number', () => {
     const result = looseToNumber('123')
     expect(result).toBe(123)

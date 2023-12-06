@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { clone } from './clone'
 
-describe('[collection]: clone', () => {
+describe('[collection] clone', () => {
   describe('deep clone objects', () => {
     it('clones shallow object', () => {
       const obj = { a: 1, b: 'foo', c: true, d: new Date(2013, 11, 25) }

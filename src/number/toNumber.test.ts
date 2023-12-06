@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { toNumber } from './toNumber'
 
-describe('[number]: toNumber', () => {
+describe('[number] toNumber', () => {
   it('converts int number', () => {
     const result = toNumber('123')
     expect(result).toBe(123)
