@@ -51,7 +51,18 @@ export const isBoolean = (data: unknown): data is boolean => {
   return typeof data === 'boolean'
 }
 
-export const isArray = Array.isArray
+type DefinitelyArray<T> = Extract<
+  T,
+  Array<any> | ReadonlyArray<any>
+> extends never
+  ? ReadonlyArray<unknown>
+  : Extract<T, Array<any> | ReadonlyArray<any>>
+
+export function isArray<T>(
+  data: T | ReadonlyArray<unknown>
+): data is DefinitelyArray<T> {
+  return Array.isArray(data)
+}
 
 export const isDate = (val: unknown): val is Date => {
   return toTypeString(val) === StandardObject.Date
@@ -61,7 +72,10 @@ export const isRegExp = (val: unknown): val is RegExp => {
   return toTypeString(val) === StandardObject.RegExp
 }
 
-export const isFunction = (val: unknown): val is Function => {
+type DefinitelyFunction<T> = Extract<T, Function> extends never
+  ? Function
+  : Extract<T, Function>
+export const isFunction = <T> (val: T | Function): val is DefinitelyFunction<T> => {
   return typeof val === 'function'
 }
 
@@ -89,12 +103,9 @@ export const isSymbol = (val: unknown): val is symbol => {
   return typeof val === 'symbol'
 }
 
-export const isObject = (val: unknown): val is Record<any, any> => {
-  return val !== null && typeof val === 'object'
-}
-
-export const isPlainObject = (val: unknown): val is object => {
-  return toTypeString(val) === StandardObject.Object
+// TODO: modify type guards
+export const isObject = (val: any): val is Record<string | symbol, any> => {
+  return !!val && toTypeString(val) === StandardObject.Object && val.constructor === Object
 }
 
 export const isMap = (val: unknown): val is Map<any, any> => {
