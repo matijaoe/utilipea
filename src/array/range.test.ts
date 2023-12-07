@@ -1,5 +1,4 @@
-import { describe } from 'test'
-import { expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { range } from '.'
 
 describe('[array] range', () => {
@@ -11,7 +10,6 @@ describe('[array] range', () => {
   }
 
   it('yields expected values', () => {
-    expect(toList(range(0, 4))).toEqual([0, 1, 2, 3, 4])
     expect(toList(range(3))).toEqual([0, 1, 2, 3])
     expect(toList(range(0, 3))).toEqual([0, 1, 2, 3])
     expect(toList(range(0, 3, 'y'))).toEqual(['y', 'y', 'y', 'y'])

@@ -1,69 +1,67 @@
-import { isFunction, isUndefined } from '../typed'
+import { isFunction, isNumber, isUndefined } from '../typed'
 
 type Mapper<T = number> = (i: number) => T
 
-type RangeOptions1<T = number> = {
+type BaseRangeOptions<T = number> = {
   start?: number
+  step?: number
+  fill?: T | Mapper<T>
+}
+
+type RangeOptionsEnd<T = number> = BaseRangeOptions<T> & {
   end: number
-  step?: number
-  fill?: T
 }
 
-type RangeOptions2<T = number> = {
-  start?: number
+type RangeOptionsLen<T = number> = BaseRangeOptions<T> & {
   len: number
-  step?: number
-  fill?: T
 }
 
+type RangeOptions<T> = RangeOptionsEnd<T> | RangeOptionsLen<T>
+
+function list<T = number>(opts: RangeOptions): T[]
 function list<T = number>(len: number): T[]
 function list<T = number>(start: number, end: number, step?: number, mapperOrValue?: Mapper<T> | T): T[]
-function list<T = number>(start: number, len?: number, step?: number, mapperOrValue?: Mapper<T> | T): T[]
-function list<T = number>(opts: RangeOptions1<T>): T[]
-function list<T = number>(opts: RangeOptions2<T>): T[]
-function list<T = number>(firstArgument: number | RangeOptions1<T> | RangeOptions2<T>, end?: number, step: number = 1, mapperOrValue: Mapper<T> | T = (i: number) => i as T): T[] {
-  let start: number
+function list<T = number>(firstArgument: number | RangeOptionsLen<T> | RangeOptionsEnd<T>, end?: number, step: number = 1, mapperOrValue: Mapper<T> | T = (i: number) => i as T): T[] {
+  let start: number = 0
   let len: number
   let fill: T | undefined
   let mapper: Mapper<T> = (i: number) => i as T
 
-  // step gives 1
-
-  if (typeof firstArgument === 'number') {
+  if (isNumber(firstArgument)) {
     // eslint-disable-next-line prefer-rest-params
-    const args = Object.values(arguments)
-    if (args.length === 1) {
-      start = 0
-      len = firstArgument
-    } else if (args.length >= 2) {
-      start = firstArgument
-    }
-    start ??= 0
-    len ??= end! - firstArgument + 1
-    step ??= 1
+    const argCount = Object.values(arguments).length
 
-    mapper = isFunction(mapperOrValue)
-      ? mapperOrValue as Mapper<T>
-      : () => mapperOrValue as T
+    if (argCount === 1) {
+      len = firstArgument
+    } else {
+      start = firstArgument
+      len = (end as number) - start + 1
+    }
+
+    mapper = isFunction(mapperOrValue) ? mapperOrValue : () => mapperOrValue
   } else {
-    fill = firstArgument.fill
+    if (isFunction(firstArgument.fill)) {
+      fill = undefined
+      mapper = firstArgument.fill
+    } else {
+      fill = firstArgument.fill
+    }
     start = firstArgument.start ?? 0
-    len = 'end' in firstArgument ? firstArgument.end - start + 1 : firstArgument.len
-    step = firstArgument.step ?? step
+    len = 'end' in firstArgument
+      ? firstArgument.end - start + 1
+      : firstArgument.len
+
+    step = firstArgument.step ?? 1
+  }
+
+  if (step !== 1) {
+    len = Math.ceil(len / step)
   }
 
   return Array.from(
     { length: len },
-    (_, i) => !isUndefined(fill) ? fill : mapper(start + i * step)
+    (_, i) => isUndefined(fill) ? mapper(start + i * step) : fill
   )
 }
 
 export { list }
-
-console.log(list(2, 10, 2))
-console.log(list({ end: 4 }))
-console.log(list({ len: 5 }))
-console.log(list({ start: 1, len: 5 }))
-console.log(list({ start: 1, end: 5 }))
-console.log(list({ start: 2, end: 10, step: 2 }))
-console.log(list({ start: 2, len: 10, step: 2 }))
