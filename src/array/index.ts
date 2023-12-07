@@ -1,4 +1,5 @@
 export * from './sort'
 export * from './unique'
-export * from './range'
+export * from './rangeGen'
 export * from './list'
+export * from './range'

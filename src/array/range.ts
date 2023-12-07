@@ -1,30 +1,24 @@
-import { isFunction } from '..'
-
-/**
- * Creates an array from start to end (inclusive).
- *
- * @example
- * range(3)                  // yields 0, 1, 2, 3
- * range(0, 3)               // yields 0, 1, 2, 3
- * range(0, 3, 'y')          // yields y, y, y, y
- * range(0, 3, () => 'y')    // yields y, y, y, y
- * range(0, 3, i => i)       // yields 0, 1, 2, 3
- * range(0, 3, i => `y${i}`) // yields y0, y1, y2, y3
- * range(0, 3, obj)          // yields obj, obj, obj, obj
- * range(0, 6, i => i, 2)    // yields 0, 2, 4, 6
- */
-// TODO: moderndash implemented it better, handles reverse, step as third parameter
-export function* range<T = number>(
-  startOrLength: number,
-  end?: number,
-  valueOrMapper: T | ((i: number) => T) = (i) => i as T,
-  step: number = 1
-): Generator<T> {
-  const mapper = isFunction(valueOrMapper) ? valueOrMapper : () => valueOrMapper
-  const start = end ? startOrLength : 0
-  const final = end ?? startOrLength
-  for (let i = start; i <= final; i += step) {
-    yield mapper(i)
-    if (i + step > final) { break }
+// TODO: make end exclusive
+export function range(len: number): number[]
+export function range(start: number, end: number, step?: number): number[]
+export function range(startOrLen: number, end?: number, step = 1): number[] {
+  if (end === undefined) {
+    end = startOrLen - 1
+    startOrLen = 0
   }
+
+  if (step <= 0) {
+    throw new Error('The step must be greater than 0.')
+  }
+
+  step = startOrLen > end ? -step : step
+  const length = Math.floor(Math.abs((end - startOrLen) / step)) + 1
+
+  const result = Array.from<number>({ length })
+
+  for (let i = 0; i < length; i++) {
+    result[i] = startOrLen + i * step
+  }
+
+  return result
 }
