@@ -13,11 +13,10 @@ export const toRawType = (value: unknown): string => {
   return toTypeString(value).slice(8, -1)
 }
 
-const hasOwnProperty = Object.prototype.hasOwnProperty
-export const hasOwn = (
-  val: object,
-  key: string | symbol
-): key is keyof typeof val => hasOwnProperty.call(val, key)
+export const hasOwn = <T extends Record<string | symbol, any>, K extends string | symbol>(
+  val: T,
+  key: K
+): key is K => val.hasOwn(val, key)
 
 export const isPrimitive = (value: unknown): value is Primitive => {
   return Object(value) !== value
