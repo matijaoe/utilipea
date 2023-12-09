@@ -4,7 +4,7 @@
 export const toNumber = <T = undefined>(
   val: any,
   fallback?: T
-): number | T | undefined => {
+): number | T => {
   const n = Number(val)
-  return Number.isNaN(n) ? fallback : n
+  return Number.isNaN(n) ? fallback as T : n
 }
