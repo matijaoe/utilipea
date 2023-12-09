@@ -10,7 +10,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "types": [
-      "bun-types"
+      "bun-types",
+      "vitest/globals"
     ],
     "allowImportingTsExtensions": true,
     "allowJs": true,
@@ -25,6 +26,10 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "./dist/**/*"
   ]
 }

@@ -22,7 +22,6 @@ describe('[array] sort', () => {
     expect(result).toEqual(['cherry', 'banana', 'apple'])
   })
 
-  // create example mixing lowercase and uppercase
   it('sorts array of strings in ascending order with mixed case', () => {
     const result = sort(['banana', 'Apple', 'cherry'])
     expect(result).toEqual(['Apple', 'banana', 'cherry'])
@@ -38,6 +37,26 @@ describe('[array] sort', () => {
     const array = [{ id: 3 }, { id: 1 }, { id: 2 }]
     const result = sort(array, { order: 'desc', by: (item) => item.id })
     expect(result).toEqual([{ id: 3 }, { id: 2 }, { id: 1 }])
+  })
+
+  it('sorts array of objects by multiple criteria', () => {
+    const array = [
+      { name: 'tom', age: 20 },
+      { name: 'leo', age: 30 },
+      { name: 'jan', age: 20 },
+      { name: 'bob', age: 10 },
+    ]
+    const result = sort(
+      array,
+      { order: 'desc', by: (item) => item.age },
+      { by: (item) => item.name }
+    )
+    expect(result).toEqual([
+      { name: 'leo', age: 30 },
+      { name: 'jan', age: 20 },
+      { name: 'tom', age: 20 },
+      { name: 'bob', age: 10 },
+    ])
   })
 
   it('sorts array of dates', () => {

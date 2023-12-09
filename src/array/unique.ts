@@ -10,6 +10,36 @@ type CmpOptions<T> = {
 
 type UniqueOptions<T, K extends string | number | symbol> = ByOptions<T, K> | CmpOptions<T>
 
+/**
+ * Returns an array with unique elements from the input array.
+ * If options are provided, uniqueness can be determined by a key function or a custom comparison function.
+ *
+ * @example
+ * unique([1, 2, 3, 2, 1]) 
+ * // [1, 2, 3]
+ *
+ * unique([1, 2, 3, 2, 1], { by: (n) => n % 2 }) 
+ * // [1, 2]
+ *
+ * unique(
+ *   [{ id: 1 }, { id: 2 }, { id: 1 }],
+ *   { by: (item) => item.id }
+ * )
+ * // [{ id: 1 }, { id: 2 }]
+ *
+ * unique(
+ *   ['apple', 'APPLE', 'banana'],
+ *   { cmp: (a, b) => a.toLowerCase() === b.toLowerCase() }
+ * )
+ * // ['apple', 'banana']
+ *
+ * @param arr - The input array.
+ * @param options - Optional configuration options.
+ * @returns An array with unique elements.
+ *
+ * @typeParam T - The type of elements in the input array.
+ * @typeParam K - The type of the key used for uniqueness.
+ */
 export const unique = <T, K extends string | number | symbol>(
   arr: Array<T>,
   options?: UniqueOptions<T, K>
