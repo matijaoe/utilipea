@@ -56,9 +56,9 @@ type DefinitelyArray<T> = Extract<
   ? ReadonlyArray<unknown>
   : Extract<T, Array<any> | ReadonlyArray<any>>
 
-export function isArray<T>(
+export const isArray = <T>(
   data: T | ReadonlyArray<unknown>
-): data is DefinitelyArray<T> {
+): data is DefinitelyArray<T> => {
   return Array.isArray(data)
 }
 
