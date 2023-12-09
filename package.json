@@ -1,7 +1,7 @@
 {
   "name": "@matijaoe/utils",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": {
     "name": "Matija Osrečki",
     "url": "https://github.com/matijaoe"
@@ -20,12 +20,12 @@
     "src": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint .",
-    "format": "eslint . --fix",
     "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean",
     "prepack": "bun run build",
     "release": "bumpp && npm publish",
-    "test": "vitest --typecheck"
+    "test": "vitest --typecheck",
+    "lint": "eslint .",
+    "format": "eslint . --fix"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
