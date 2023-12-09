@@ -103,6 +103,7 @@ export const isSymbol = (val: unknown): val is symbol => {
 
 // TODO: modify type guards
 // should I support isObject and isPlainObject?
+// i dont even know which is which
 export const isObject = (val: any): val is Record<string | symbol, any> => {
   return !!val && toTypeString(val) === StandardObject.Object && val.constructor === Object
 }
@@ -122,48 +123,6 @@ export const isError = (val: unknown): val is Error => {
 export const isPromise = <T, S>(val: Promise<T> | S): val is Promise<T> => {
   return val instanceof Promise
 }
-
-export const isEmpty = (val: unknown) => {
-  if (isNil(val)) {
-    return true
-  }
-
-  if (isString(val) || isArray(val)) {
-    return val.length === 0
-  }
-
-  if (isMap(val) || isSet(val)) {
-    return val.size === 0
-  }
-
-  if (ArrayBuffer.isView(val)) {
-    return val.byteLength === 0
-  }
-
-  if (isObject(val)) {
-    return Object.keys(val).length === 0
-  }
-
-  return true
-}
-
-console.log(isEmpty({})) // true
-console.log(isEmpty([])) // true
-console.log(isEmpty('')) // true
-console.log(isEmpty(null)) // true
-console.log(isEmpty(undefined)) // true
-console.log(isEmpty(new Map())) // true
-console.log(isEmpty(new Set())) // true
-console.log(isEmpty(new ArrayBuffer(2))) // true
-console.log(isEmpty(() => {})) // true
-console.log(isEmpty(/\/abc\//)) // true
-console.log(isEmpty({ __proto__: '' })) // true
-console.log(isEmpty(Symbol('tss'))) // true
-console.log(isEmpty(new Error('error'))) // true
-console.log(isEmpty(new Date())) // true
-console.log(isEmpty(Date.now)) // true
-
-console.log(isEmpty([null, null, null])) // false
 
 export const typeOf = (val: any) => {
   if (val === null) {

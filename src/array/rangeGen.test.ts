@@ -1,16 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { rangeGen } from './rangeGen'
+import { rangeGen, toList } from './rangeGen'
 
 describe('[array] rangeGen', () => {
   const obj = {
     name: 'bob'
-  }
-  const toList = <T>(gen: Generator<T>): T[] => {
-    const items: T[] = []
-    for (const item of gen) {
-      items.push(item)
-    }
-    return items
   }
 
   it('yields expected values', () => {

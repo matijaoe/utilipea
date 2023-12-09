@@ -156,7 +156,7 @@ describe('typed module', () => {
   })
 
   describe('isFunction', () => {
-    it('returns correct values for various types', () => {
+    it('returns false for non-functions', () => {
       class Data {}
 
       const nonFunctionValues = [
