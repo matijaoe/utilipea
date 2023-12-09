@@ -17,13 +17,16 @@ import { isDefined } from '..'
  * // => 1 2 3 4
  *
  * // Array of numbers from 0 to 4:
- * range(5); // => [0, 1, 2, 3, 4]
+ * range(5);
+ * // [0, 1, 2, 3, 4]
  *
  * // Array of even numbers between 0 and 10:
- * range(0, 10, 2); // => [0, 2, 4, 6, 8]
+ * range(0, 10, 2);
+ * // [0, 2, 4, 6, 8]
  *
  * // Descending range with negative step:
- * range(5, 0, -2); // => [5, 3, 1]
+ * range(5, 0, -2);
+ * // [5, 3, 1]
  *
  *
  * @param startOrLen The start number of the sequence, or the length of the sequence if only one argument is provided.
