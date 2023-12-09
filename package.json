@@ -36,9 +36,6 @@
     "lint": "eslint .",
     "format": "eslint . --fix"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
   "devDependencies": {
     "@matijaoe/eslint-config": "^1.2.0",
     "@vitest/ui": "^1.0.4",
