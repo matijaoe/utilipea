@@ -1,6 +1,5 @@
 import { isArray, isFunction, isMap, isNil, isSet, isString } from '..'
 
-//  && Object.getOwnPropertySymbols(val as any).length === 0
 export const isEmpty = (val: unknown, opts?: { includeSymbols: boolean }) => {
   if (isNil(val)) {
     return true

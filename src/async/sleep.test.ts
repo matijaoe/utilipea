@@ -3,11 +3,11 @@ import { sleep } from './sleep'
 
 describe('sleep', () => {
   it('suspends a thread for a specified number of milliseconds', async () => {
-    const ONE_SECOND = 1000
+    const HALF_A_SECOND = 500
     const before = Date.now()
-    await sleep(ONE_SECOND)
+    await sleep(HALF_A_SECOND)
     const after = Date.now()
-    expect(after).toBeGreaterThanOrEqual(before + ONE_SECOND)
+    expect(after).toBeGreaterThanOrEqual(before + HALF_A_SECOND)
   })
 
   it('should return a promise', () => {
