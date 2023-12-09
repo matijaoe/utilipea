@@ -16,12 +16,16 @@
   "files": [
     "dist"
   ],
+  "paths": {
+    "src": "./src/index.ts"
+  },
   "scripts": {
     "lint": "eslint .",
     "format": "eslint . --fix",
     "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean",
     "prepack": "bun run build",
-    "release": "bumpp && npm publish"
+    "release": "bumpp && npm publish",
+    "test": "vitest --typecheck"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -29,8 +33,9 @@
   "devDependencies": {
     "@matijaoe/eslint-config": "^1.2.0",
     "bumpp": "^9.2.0",
-    "bun-types": "latest",
+    "bun-types": "^1.0.15",
     "eslint": "^8.55.0",
-    "tsup": "^8.0.1"
+    "tsup": "^8.0.1",
+    "vitest": "^1.0.1"
   }
 }

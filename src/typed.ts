@@ -1,8 +1,8 @@
+import type { Falsy, Primitive } from './models'
 import { StandardObject } from './models'
 
-const objectToString = Object.prototype.toString
 export const toTypeString = (value: unknown): string => {
-  return objectToString.call(value)
+  return Object.prototype.toString.call(value)
 }
 
 /**
@@ -12,43 +12,68 @@ export const toRawType = (value: unknown): string => {
   return toTypeString(value).slice(8, -1)
 }
 
-const hasOwnProperty = Object.prototype.hasOwnProperty
-export const hasOwn = (
-  val: object,
-  key: string | symbol
-): key is keyof typeof val => hasOwnProperty.call(val, key)
+export const hasOwn = <T extends Record<string | symbol, any>, K extends string | symbol>(
+  val: T,
+  key: K
+): key is K => val.hasOwn(val, key)
 
-export const isPrimitive = (value: unknown): boolean => {
-  return (
-    value === undefined
-    || value === null
-    || (typeof value !== 'object' && typeof value !== 'function')
-  )
+export const isPrimitive = (value: unknown): value is Primitive => {
+  return Object(value) !== value
 }
 
-export const isNil = (val: unknown): val is undefined | null => {
-  return val === undefined || val === null
+export const isDefined = <T>(val: T): val is NonNullable<T> => {
+  return typeof val !== 'undefined' && val !== null
 }
 
-export const isNull = (val: unknown): val is null => {
+export const isNonNull = <T>(val: T): val is T => {
+  return val !== null
+}
+
+export const isNil = <T>(val: T): val is Extract<T, null | undefined> => {
+  return val == null
+}
+
+export const isNull = <T>(val: T): val is Extract<T, null> => {
   return val === null
 }
 
-export const isUndefined = (val: unknown): val is undefined => {
-  return val === undefined
+export const isUndefined = <T>(val: T): val is Extract<T, undefined> => {
+  return typeof val === 'undefined'
 }
 
-export const isArray = Array.isArray
+export const isTruthy = <T>(val: T): val is Exclude<T, Falsy> => {
+  return !!val
+}
+
+export const isBoolean = (data: unknown): data is boolean => {
+  return typeof data === 'boolean'
+}
+
+type DefinitelyArray<T> = Extract<
+  T,
+  Array<any> | ReadonlyArray<any>
+> extends never
+  ? ReadonlyArray<unknown>
+  : Extract<T, Array<any> | ReadonlyArray<any>>
+
+export function isArray<T>(
+  data: T | ReadonlyArray<unknown>
+): data is DefinitelyArray<T> {
+  return Array.isArray(data)
+}
 
 export const isDate = (val: unknown): val is Date => {
   return toTypeString(val) === StandardObject.Date
 }
 
-export const isRegExp = (val: unknown): val is RegExp => {
+export const isRegex = (val: unknown): val is RegExp => {
   return toTypeString(val) === StandardObject.RegExp
 }
 
-export const isFunction = (val: unknown): val is Function => {
+type DefinitelyFunction<T> = Extract<T, Function> extends never
+  ? Function
+  : Extract<T, Function>
+export const isFunction = <T> (val: T | Function): val is DefinitelyFunction<T> => {
   return typeof val === 'function'
 }
 
@@ -56,11 +81,11 @@ export const isString = (val: unknown): val is string => {
   return typeof val === 'string'
 }
 
-export const isInt = (value: any): value is number => {
+export const isInt = (value: unknown): value is number => {
   return isNumber(value) && value % 1 === 0
 }
 
-export const isFloat = (value: any): value is number => {
+export const isFloat = (value: unknown): value is number => {
   return isNumber(value) && value % 1 !== 0
 }
 
@@ -76,12 +101,11 @@ export const isSymbol = (val: unknown): val is symbol => {
   return typeof val === 'symbol'
 }
 
-export const isObject = (val: unknown): val is Record<any, any> => {
-  return val !== null && typeof val === 'object'
-}
-
-export const isPlainObject = (val: unknown): val is object => {
-  return toTypeString(val) === StandardObject.Object
+// TODO: modify type guards
+// should I support isObject and isPlainObject?
+// i dont even know which is which
+export const isObject = (val: any): val is Record<string | symbol, any> => {
+  return !!val && toTypeString(val) === StandardObject.Object && val.constructor === Object
 }
 
 export const isMap = (val: unknown): val is Map<any, any> => {
@@ -92,57 +116,25 @@ export const isSet = (val: unknown): val is Set<any> => {
   return toTypeString(val) === StandardObject.Set
 }
 
-export const isWeakMap = (val: unknown): val is WeakMap<any, any> => {
-  return toTypeString(val) === StandardObject.WeakMap
-}
-
-export const isWeakSet = (val: unknown): val is WeakSet<any> => {
-  return toTypeString(val) === StandardObject.WeakSet
-}
-
 export const isError = (val: unknown): val is Error => {
   return val instanceof Error
 }
 
-export const isPromise = <T = any>(val: unknown): val is Promise<T> => {
-  return (
-    (isObject(val) || isFunction(val))
-    && isFunction((val as any).then)
-    && isFunction((val as any).catch)
-  )
+export const isPromise = <T, S>(val: Promise<T> | S): val is Promise<T> => {
+  return val instanceof Promise
 }
 
-export const isEmpty = (value: unknown) => {
-  if (value === true || value === false) {
-    return true
-  }
-  if (value === null || value === undefined) {
-    return true
-  }
-  if (isNumber(value)) {
-    return value === 0
-  }
-  if (isDate(value)) {
-    return Number.isNaN(value.getTime())
-  }
-  if (isFunction(value)) {
-    return false
-  }
-  if (isSymbol(value)) {
-    return false
+export const typeOf = (val: any) => {
+  if (val === null) {
+    return 'null'
   }
 
-  const length = (value as any)?.length
-  if (isNumber(length)) {
-    return length === 0
+  if (val !== Object(val)) {
+    return typeof val
   }
 
-  const size = (value as any)?.size
-  if (isNumber(size)) {
-    return size === 0
-  }
+  const result = toRawType(val).toLowerCase()
 
-  const keys = Object.keys(value).length
-
-  return keys === 0
+  // strip function adornments (e.g. "AsyncFunction")
+  return result.includes('function') ? 'function' : result
 }
