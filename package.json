@@ -10,9 +10,17 @@
   "repository": {
     "url": "https://github.com/matijaoe/utils"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -24,6 +32,7 @@
     "prepack": "bun run build",
     "release": "bumpp && npm publish",
     "test": "vitest --typecheck",
+    "test:ui": "vitest --typecheck --ui",
     "lint": "eslint .",
     "format": "eslint . --fix"
   },
@@ -32,6 +41,7 @@
   },
   "devDependencies": {
     "@matijaoe/eslint-config": "^1.2.0",
+    "@vitest/ui": "^1.0.4",
     "bumpp": "^9.2.0",
     "bun-types": "^1.0.15",
     "eslint": "^8.55.0",

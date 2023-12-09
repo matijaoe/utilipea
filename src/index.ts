@@ -43,7 +43,7 @@ export {
   typeOf
 } from './typed'
 
-export {
+export type {
   Falsy,
   Primitive,
   StandardObject,

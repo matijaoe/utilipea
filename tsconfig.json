@@ -1,26 +1,28 @@
 {
   "compilerOptions": {
-    "composite": false, // does not work with true...
-    "target": "esnext",
-    "jsx": "react-jsx",
-    "lib": ["ESNext"],
+    "target": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "moduleDetection": "force",
     "rootDir": "./src",
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "types": [
-      "bun-types" // add Bun global
+      "bun-types"
     ],
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "strict": true,
+    "noImplicitReturns": false,
+    "noUncheckedIndexedAccess": false,
     "declaration": true,
     "downlevelIteration": true,
     "noEmit": true,
     "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*"
