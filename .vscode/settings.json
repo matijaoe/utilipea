@@ -60,6 +60,5 @@
     "json",
     "jsonc",
     "yaml"
-  ],
-  "testing.automaticallyOpenPeekView": "never"
+  ]
 }

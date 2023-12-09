@@ -123,46 +123,47 @@ export const isPromise = <T, S>(val: Promise<T> | S): val is Promise<T> => {
   return val instanceof Promise
 }
 
-// TODO: decide on isEmpty results of primitive values
 export const isEmpty = (val: unknown) => {
-  if (val === true || val === false) {
+  if (isNil(val)) {
     return true
   }
 
-  if (val === null || val === undefined) {
-    return true
+  if (isString(val) || isArray(val)) {
+    return val.length === 0
   }
 
-  if (isNumber(val)) {
-    return val === 0
+  if (isMap(val) || isSet(val)) {
+    return val.size === 0
   }
 
-  if (isDate(val)) {
-    return Number.isNaN(val.getTime())
+  if (ArrayBuffer.isView(val)) {
+    return val.byteLength === 0
   }
 
-  if (isFunction(val)) {
-    return false
+  if (isObject(val)) {
+    return Object.keys(val).length === 0
   }
 
-  if (isSymbol(val)) {
-    return false
-  }
-
-  const length = (val as any)?.length
-  if (isNumber(length)) {
-    return length === 0
-  }
-
-  const size = (val as any)?.size
-  if (isNumber(size)) {
-    return size === 0
-  }
-
-  const keys = Object.keys(val).length
-
-  return keys === 0
+  return true
 }
+
+console.log(isEmpty({})) // true
+console.log(isEmpty([])) // true
+console.log(isEmpty('')) // true
+console.log(isEmpty(null)) // true
+console.log(isEmpty(undefined)) // true
+console.log(isEmpty(new Map())) // true
+console.log(isEmpty(new Set())) // true
+console.log(isEmpty(new ArrayBuffer(2))) // true
+console.log(isEmpty(() => {})) // true
+console.log(isEmpty(/\/abc\//)) // true
+console.log(isEmpty({ __proto__: '' })) // true
+console.log(isEmpty(Symbol('tss'))) // true
+console.log(isEmpty(new Error('error'))) // true
+console.log(isEmpty(new Date())) // true
+console.log(isEmpty(Date.now)) // true
+
+console.log(isEmpty([null, null, null])) // false
 
 export const typeOf = (val: any) => {
   if (val === null) {
