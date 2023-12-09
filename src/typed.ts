@@ -1,9 +1,8 @@
 import type { Falsy, Primitive } from './models'
 import { StandardObject } from './models'
 
-const objectToString = Object.prototype.toString
 export const toTypeString = (value: unknown): string => {
-  return objectToString.call(value)
+  return Object.prototype.toString.call(value)
 }
 
 /**
@@ -67,7 +66,7 @@ export const isDate = (val: unknown): val is Date => {
   return toTypeString(val) === StandardObject.Date
 }
 
-export const isRegExp = (val: unknown): val is RegExp => {
+export const isRegex = (val: unknown): val is RegExp => {
   return toTypeString(val) === StandardObject.RegExp
 }
 
@@ -103,6 +102,7 @@ export const isSymbol = (val: unknown): val is symbol => {
 }
 
 // TODO: modify type guards
+// should I support isObject and isPlainObject?
 export const isObject = (val: any): val is Record<string | symbol, any> => {
   return !!val && toTypeString(val) === StandardObject.Object && val.constructor === Object
 }
@@ -115,14 +115,6 @@ export const isSet = (val: unknown): val is Set<any> => {
   return toTypeString(val) === StandardObject.Set
 }
 
-export const isWeakMap = (val: unknown): val is WeakMap<any, any> => {
-  return toTypeString(val) === StandardObject.WeakMap
-}
-
-export const isWeakSet = (val: unknown): val is WeakSet<any> => {
-  return toTypeString(val) === StandardObject.WeakSet
-}
-
 export const isError = (val: unknown): val is Error => {
   return val instanceof Error
 }
@@ -131,22 +123,28 @@ export const isPromise = <T, S>(val: Promise<T> | S): val is Promise<T> => {
   return val instanceof Promise
 }
 
+// TODO: decide on isEmpty results of primitive values
 export const isEmpty = (val: unknown) => {
   if (val === true || val === false) {
     return true
   }
+
   if (val === null || val === undefined) {
     return true
   }
+
   if (isNumber(val)) {
     return val === 0
   }
+
   if (isDate(val)) {
     return Number.isNaN(val.getTime())
   }
+
   if (isFunction(val)) {
     return false
   }
+
   if (isSymbol(val)) {
     return false
   }
@@ -170,9 +168,11 @@ export const typeOf = (val: any) => {
   if (val === null) {
     return 'null'
   }
+
   if (val !== Object(val)) {
     return typeof val
   }
+
   const result = toRawType(val).toLowerCase()
 
   // strip function adornments (e.g. "AsyncFunction")

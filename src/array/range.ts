@@ -12,8 +12,6 @@ export function range(startOrLen: number, end?: number, step = 1): number[] {
 
   if (isAsc && step < 0) {
     throw new Error('The step must be greater than 0.')
-  } else if (!isAsc && step > 0) {
-    throw new Error('The step must be less than 0.')
   }
 
   step = startOrLen > end ? -Math.abs(step) : step

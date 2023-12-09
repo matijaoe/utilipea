@@ -23,8 +23,14 @@ export function* rangeGen<T = number>(
   const mapper = isFunction(valueOrMapper) ? valueOrMapper : () => valueOrMapper
   const start = end ? startOrLength : 0
   const final = end ?? startOrLength
-  for (let i = start; i <= final; i += step) {
+
+  step = start > final ? -Math.abs(step) : step
+  const length = Math.ceil(Math.abs((final - start) / step))
+
+  for (let i = start; i <= length; i += step) {
     yield mapper(i)
-    if (i + step > final) { break }
+    if (i + step > final) {
+      break
+    }
   }
 }
