@@ -25,10 +25,10 @@ type SortCriteria<T> = {
  * // => [{ id: 1 }, { id: 2 }, { id: 3 }]
  *
  * sort(
- *  ['apple', 'APPLE', 'banana'],
- *  { by: (item) => item.toLowerCase() }
+ *  ['apple', 'fig', 'banana', 'pineapple', 'pear']
+ *  { by: (item) => item.length }
  * )
- * // => ['apple', 'APPLE', 'banana']
+ * // => ['fig', 'pear', 'apple', 'banana', 'pineapple']
  *
  * sort(
  *  [
@@ -75,3 +75,6 @@ export const sort = <T>(
     return 0
   })
 }
+
+const arr = ['banana', 'Apple', 'fig', 'Pineapple', 'pear']
+console.log(sort(arr))

@@ -27,6 +27,14 @@ describe('[array] sort', () => {
     expect(result).toEqual(['Apple', 'banana', 'cherry'])
   })
 
+  it('sorts array of strings by a specific property', () => {
+    const result = sort(
+      ['apple', 'fig', 'banana', 'pineapple', 'pear'],
+      { by: (item) => item.length }
+    )
+    expect(result).toEqual(['fig', 'pear', 'apple', 'banana', 'pineapple'])
+  })
+
   it('sorts array of objects by a specific property', () => {
     const array = [{ id: 3 }, { id: 1 }, { id: 2 }]
     const result = sort(array, { by: (item) => item.id })
