@@ -1,4 +1,5 @@
 export * from './objects'
+export * from './arrays'
 
 export type Primitive = number | string | undefined | symbol | bigint | null
 
