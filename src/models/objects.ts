@@ -40,3 +40,5 @@ export const StandardObject = {
 } as const
 
 export type StandardObjectModel = typeof StandardObject[keyof typeof StandardObject]
+
+export type PlainObject = Record<PropertyKey, any>

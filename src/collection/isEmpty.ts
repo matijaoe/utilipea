@@ -1,34 +1,31 @@
-/* eslint-disable jsdoc/check-param-names */
 import { isArray, isFunction, isMap, isNil, isSet, isString } from '..'
 
 /**
- * Checks if a value is empty.
+ * Check if value is empty.
  *
  * Numbers, booleans, symbols, dates, regular expression, null and undefined are always considered empty.
  *
+ * @category Collection
+ *
  * @example
- * isEmpty([])            // → true
- * isEmpty({})            // → true
- * isEmpty("")            // → true
- * isEmpty(new Map())     // → true
- * isEmpty(new Set())     // → true
+ * isEmpty([])            // true
+ * isEmpty({})            // true
+ * isEmpty("")            // true
+ * isEmpty(new Map())     // true
+ * isEmpty(new Set())     // true
  *
- * isEmpty(null)          // → true
- * isEmpty(undefined)     // → true
- * isEmpty(0)             // → true
- * isEmpty(1)             // → true
- * isEmpty(true)          // → true
- * isEmpty(Symbol('foo')) // → true
- * isEmpty(new Date())    // → true
- * isEmpty(/foo/)         // → true
+ * isEmpty(null)          // true
+ * isEmpty(undefined)     // true
+ * isEmpty(0)             // true
+ * isEmpty(1)             // true
+ * isEmpty(true)          // true
+ * isEmpty(Symbol('foo')) // true
+ * isEmpty(new Date())    // true
+ * isEmpty(/foo/)         // true
  *
- * isEmpty([1, 2, 3])     // → false
- * isEmpty('foo')         // → false
- * isEmpty({ a: 1 })      // → false
- *
- * @param val Value to check
- * @param opts.includeSymbols If `true`, symbols will be considered when checking for empty objects
- * @returns Returns `true` if `value` is empty, else `false`
+ * isEmpty([1, 2, 3])     // false
+ * isEmpty('foo')         // false
+ * isEmpty({ a: 1 })      // false
  */
 export const isEmpty = (val: unknown, opts?: { includeSymbols: boolean }) => {
   if (isNil(val)) {

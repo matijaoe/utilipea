@@ -1,5 +1,7 @@
 /**
- * Converts a value to a number, using `Number()`.
+ * Convert a value to a number, using `Number()`.
+ *
+ * If the conversion fails, fallback value is returned. `undefined` by default.
  *
  * @example
  * toNumber('1') // 1
@@ -7,11 +9,6 @@
  * toNumber('1.5.5') // undefined
  * toNumber('123foo', 0) // 0
  * toNumber('foo', 'bar') // 'bar'
- *
- * @param val - Value to convert
- * @param [fallback] - Fallback value to return if the conversion fails. `undefined` by default
- * @returns The converted number or the fallback value if the conversion fails
- * @template T - Type of the fallback value
  */
 export const toNumber = <T = undefined>(
   val: any,

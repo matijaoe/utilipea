@@ -1,6 +1,6 @@
 import { assertType, describe, expect, it } from 'vitest'
-import * as _ from './typed'
 import { typesDataProvider } from './tests/types-data-provider'
+import * as _ from './typed'
 
 describe('typed module', () => {
   describe('isArray', () => {
@@ -53,30 +53,46 @@ describe('typed module', () => {
     })
   })
 
-  describe('isObject', () => {
+  describe('isPlainObject', () => {
     it('returns false for non-object values', () => {
-      class Data {}
-
       const nonObjectValues = [
         null,
         undefined,
         false,
-        () => {},
-        new Data(),
-        Object.create(null),
         22,
         'abc',
         [1, 2, 3]
       ]
 
       nonObjectValues.forEach((value) => {
-        const result = _.isObject(value)
+        const result = _.isPlainObject(value)
         expect(result).toBe(false)
       })
     })
 
-    it('returns true for object', () => {
-      const result = _.isObject({})
+    it('returns false for non-plain objects', () => {
+      class Data {}
+
+      const values = [
+        () => {},
+        new Data(),
+        Object.create(null),
+      ]
+
+      values.forEach((value) => {
+        const result = _.isPlainObject(value)
+        expect(result).toBe(false)
+      })
+    })
+
+    it('returns true for new Object', () => {
+      // eslint-disable-next-line no-new-object
+      const result = _.isPlainObject(new Object())
+      expect(result).toBe(true)
+    })
+
+    it('returns true for plain object', () => {
+      const result = _.isPlainObject({})
       expect(result).toBe(true)
     })
 
@@ -84,7 +100,7 @@ describe('typed module', () => {
 
     it('should work as type guard', () => {
       const data = { a: 'asd' }
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<{ a: string }
       >(data)
@@ -93,7 +109,7 @@ describe('typed module', () => {
 
     it('should also work as type guard', () => {
       const data = { data: 5 } as ReadonlyArray<number> | { data: 5 }
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<{
           data: 5
@@ -105,7 +121,7 @@ describe('typed module', () => {
 
     it('should work as type guard for more narrow types', () => {
       const data = { data: 5 } as Array<number> | { data: number }
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<{
           data: number
@@ -117,7 +133,7 @@ describe('typed module', () => {
 
     it('should work even if data type is unknown', () => {
       const data: unknown = typesDataProvider('object')
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<Record<string, unknown>>(data)
       }
@@ -456,30 +472,30 @@ describe('typed module', () => {
     })
   })
 
-  describe('isDefined', () => {
+  describe('isDef', () => {
     it('return true for defined values', () => {
-      expect(_.isDefined('')).toBe(true)
-      expect(_.isDefined(0)).toBe(true)
+      expect(_.isDef('')).toBe(true)
+      expect(_.isDef(0)).toBe(true)
     })
 
     it('return false for undefined', () => {
-      expect(_.isDefined(undefined)).toBe(false)
+      expect(_.isDef(undefined)).toBe(false)
     })
 
     it('return false for null', () => {
-      expect(_.isDefined(null)).toBe(false)
+      expect(_.isDef(null)).toBe(false)
     })
   })
 
-  describe('isNonNull', () => {
+  describe('notNull', () => {
     it('return true for non-null values', () => {
-      expect(_.isNonNull(undefined)).toBe(true)
-      expect(_.isNonNull('')).toBe(true)
-      expect(_.isNonNull(0)).toBe(true)
+      expect(_.notNull(undefined)).toBe(true)
+      expect(_.notNull('')).toBe(true)
+      expect(_.notNull(0)).toBe(true)
     })
 
     it('return false for null', () => {
-      expect(_.isDefined(null)).toBe(false)
+      expect(_.isDef(null)).toBe(false)
     })
   })
 
