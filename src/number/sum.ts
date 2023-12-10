@@ -1,7 +1,7 @@
 /**
  * Calculate the sum of an array of numbers or objects.
  *
- * @category Math
+ * @category Number
  *
  * @example
  * sum([1, 2, 3, 4, 5])
