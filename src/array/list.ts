@@ -14,21 +14,18 @@ type RangeOptionsLen<T = number> = BaseRangeOptions<T> & { len: number }
 type RangeOptions<T> = RangeOptionsEnd<T> | RangeOptionsLen<T>
 
 /**
- * Generates a list of elements from start to end (inclusive), incrementing by step.
+ * Generate a list of elements from start to end (inclusive).
+ *
+ * @category Array
  *
  * @example
- * range({ len: 3 }) // [0, 1, 2]
- * range({ end: 3 }) // [0, 1, 2, 3]
- * range({ start: 1, len: 5 }) // [1, 2, 3, 4, 5]
- * range({ start: 1, end: 3 }) // [1, 2, 3]
- * range({ start: 1, end: 3, step: 2 }) // [1, 3]
- * range({ start: 1, end: 3, fill: 'a' }) // ['a', 'a', 'a']
- * range({ start: 1, end: 3, fill: (i) => i * i }) // [1, 4, 9]
- *
- * @param opts - Range options for generating the list
- * @returns An array of values based on the
- * @throws Error if the step is less than or equal to 0.
- * @template T - The type of values in the list.
+ * range({ len: 3 }) // =>  [0, 1, 2]
+ * range({ end: 3 }) // =>  [0, 1, 2, 3]
+ * range({ start: 1, len: 5 }) // =>  [1, 2, 3, 4, 5]
+ * range({ start: 1, end: 3 }) // =>  [1, 2, 3]
+ * range({ start: 1, end: 3, step: 2 }) // =>  [1, 3]
+ * range({ start: 1, end: 3, fill: 'a' }) // =>  ['a', 'a', 'a']
+ * range({ start: 1, end: 3, fill: (i) => i * i }) // =>  [1, 4, 9]
  */
 export const list = <T = number>(opts: RangeOptions<T>): T[] => {
   const step = opts.step || 1

@@ -21,11 +21,11 @@ export const isPrimitive = (value: unknown): value is Primitive => {
   return Object(value) !== value
 }
 
-export const isDefined = <T>(val: T): val is NonNullable<T> => {
+export const isDef = <T>(val: T): val is NonNullable<T> => {
   return typeof val !== 'undefined' && val !== null
 }
 
-export const isNonNull = <T>(val: T): val is T => {
+export const notNull = <T>(val: T): val is T => {
   return val !== null
 }
 
@@ -42,7 +42,7 @@ export const isUndefined = <T>(val: T): val is Extract<T, undefined> => {
 }
 
 export const isTruthy = <T>(val: T): val is Exclude<T, Falsy> => {
-  return !!val
+  return Boolean(val)
 }
 
 export const isBoolean = (data: unknown): data is boolean => {

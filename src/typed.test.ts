@@ -456,30 +456,30 @@ describe('typed module', () => {
     })
   })
 
-  describe('isDefined', () => {
+  describe('isDef', () => {
     it('return true for defined values', () => {
-      expect(_.isDefined('')).toBe(true)
-      expect(_.isDefined(0)).toBe(true)
+      expect(_.isDef('')).toBe(true)
+      expect(_.isDef(0)).toBe(true)
     })
 
     it('return false for undefined', () => {
-      expect(_.isDefined(undefined)).toBe(false)
+      expect(_.isDef(undefined)).toBe(false)
     })
 
     it('return false for null', () => {
-      expect(_.isDefined(null)).toBe(false)
+      expect(_.isDef(null)).toBe(false)
     })
   })
 
-  describe('isNonNull', () => {
+  describe('notNull', () => {
     it('return true for non-null values', () => {
-      expect(_.isNonNull(undefined)).toBe(true)
-      expect(_.isNonNull('')).toBe(true)
-      expect(_.isNonNull(0)).toBe(true)
+      expect(_.notNull(undefined)).toBe(true)
+      expect(_.notNull('')).toBe(true)
+      expect(_.notNull(0)).toBe(true)
     })
 
     it('return false for null', () => {
-      expect(_.isDefined(null)).toBe(false)
+      expect(_.isDef(null)).toBe(false)
     })
   })
 

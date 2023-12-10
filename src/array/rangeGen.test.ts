@@ -7,7 +7,7 @@ describe('[array] rangeGen', () => {
   }
 
   it('yields expected values', () => {
-    expect(toList(rangeGen(3))).toEqual([0, 1, 2, 3])
+    expect(toList(rangeGen(3))).toEqual([0, 1, 2])
     expect(toList(rangeGen(0, 3))).toEqual([0, 1, 2, 3])
     expect(toList(rangeGen(0, 3, 2))).toEqual([0, 2])
     expect(toList(rangeGen(0, 3, 1, 'y'))).toEqual(['y', 'y', 'y', 'y'])
