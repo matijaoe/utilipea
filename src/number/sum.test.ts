@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { sum } from '../math'
+import { sum } from './sum'
 
 describe('sum', () => {
   it('array of numbers', () => {
