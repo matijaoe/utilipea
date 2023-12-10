@@ -1,3 +1,9 @@
+import { type ArrayMinLength, flatten, isFunction, unique } from '..'
+
+// TODO: focus on types later on, organize and reuse them
+export type CompareFunction<TArrays extends ArrayMinLength<unknown[], 2>> = (a: TArrays[0][number], b: ArrayTail<TArrays>[number][number]) => boolean
+export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...infer U] ? U : never
+
 /**
  * Create an intersection of all given arrays.
  *
@@ -23,13 +29,6 @@
  * // => [{ id: 3, name: 'John' }]
  *
  */
-
-import { type ArrayMinLength, flatten, isFunction, unique } from '..'
-
-// TODO: focus on types later on, organize and reuse them
-export type CompareFunction<TArrays extends ArrayMinLength<unknown[], 2>> = (a: TArrays[0][number], b: ArrayTail<TArrays>[number][number]) => boolean
-export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...infer U] ? U : never
-
 // https://moderndash.io/docs/intersection - kudos to this guy
 export function intersection<TElem>(...arraysOrCompareFn: ArrayMinLength<TElem[], 2>): TElem[]
 export function intersection<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFunction<TArrays>]): TArrays[0]
