@@ -1,4 +1,4 @@
-import type { Falsy, Primitive } from './models'
+import type { Falsy, PlainObject, Primitive } from './models'
 import { StandardObject } from './models'
 
 export const toTypeString = (value: unknown): string => {
@@ -101,11 +101,17 @@ export const isSymbol = (val: unknown): val is symbol => {
   return typeof val === 'symbol'
 }
 
-// TODO: modify type guards
-// should I support isObject and isPlainObject?
-// i dont even know which is which
-export const isObject = (val: any): val is Record<string | symbol, any> => {
-  return !!val && toTypeString(val) === StandardObject.Object && val.constructor === Object
+/**
+ * Check if value is a plain object.
+ *
+ * @example
+ * isPlainObject({}) // true
+ * isPlainObject(new Object()) // true
+ * isPlainObject(Object.create(null)) // false
+ * isPlainObject(() => {}) // false
+ */
+export const isObject = (val: unknown): val is PlainObject => {
+  return !!val && toTypeString(val) === StandardObject.Object && val?.constructor === Object
 }
 
 export const isMap = (val: unknown): val is Map<any, any> => {
@@ -138,3 +144,12 @@ export const typeOf = (val: any) => {
   // strip function adornments (e.g. "AsyncFunction")
   return result.includes('function') ? 'function' : result
 }
+
+export const isWindow = (val: any): boolean => {
+  // @ts-ignore
+  return typeof window !== 'undefined' && toTypeString(val) === StandardObject.Window
+}
+// @ts-ignore
+export const isBrowser = typeof window !== 'undefined'
+
+export const noop = () => {}

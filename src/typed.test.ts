@@ -1,6 +1,6 @@
 import { assertType, describe, expect, it } from 'vitest'
-import * as _ from './typed'
 import { typesDataProvider } from './tests/types-data-provider'
+import * as _ from './typed'
 
 describe('typed module', () => {
   describe('isArray', () => {
@@ -55,15 +55,10 @@ describe('typed module', () => {
 
   describe('isObject', () => {
     it('returns false for non-object values', () => {
-      class Data {}
-
       const nonObjectValues = [
         null,
         undefined,
         false,
-        () => {},
-        new Data(),
-        Object.create(null),
         22,
         'abc',
         [1, 2, 3]
@@ -75,7 +70,28 @@ describe('typed module', () => {
       })
     })
 
-    it('returns true for object', () => {
+    it('returns false for non-plain objects', () => {
+      class Data {}
+
+      const values = [
+        () => {},
+        new Data(),
+        Object.create(null),
+      ]
+
+      values.forEach((value) => {
+        const result = _.isObject(value)
+        expect(result).toBe(false)
+      })
+    })
+
+    it('returns true for new Object', () => {
+      // eslint-disable-next-line no-new-object
+      const result = _.isObject(new Object())
+      expect(result).toBe(true)
+    })
+
+    it('returns true for plain object', () => {
       const result = _.isObject({})
       expect(result).toBe(true)
     })
