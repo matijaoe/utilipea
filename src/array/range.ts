@@ -46,10 +46,6 @@ export function range(...args: any): number[] {
     length = Math.ceil(Math.abs((end - start) / step))
   }
 
-  // const start = isDef(end) ? startOrLen : 0
-  // const length = isDef(end) ? Math.ceil(Math.abs((end - start) / step)) : startOrLen
-  // end ??= startOrLen - 1
-
   if (start === end) {
     return []
   }

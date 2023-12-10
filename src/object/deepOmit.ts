@@ -1,14 +1,13 @@
 import type { NestedOmit } from '..'
-import { clone, isObject } from '..'
+import { clone, isEmpty, isObject } from '..'
 import { hasNestedKeys } from '.'
 
 /**
  * Recursively delete keys from an object.
  *
- * Returns a new object.
- * The original object remains unchanged.
+ * Does not mutate the original object.
  *
- * If nested keys are specified, the object is deeply cloned, otherwise it is shallowly cloned.
+ * If nested keys are identified, the object is deeply cloned, otherwise it is shallowly cloned.
  *
  * If a key's value is `true`, the key is omitted.
  *
@@ -20,6 +19,9 @@ import { hasNestedKeys } from '.'
 export const deepOmit = <
   T extends Record<PropertyKey, any>
 >(obj: T, keys: NestedOmit<T>) => {
+  if (!obj) { return {} as T }
+  if (isEmpty(keys)) { return obj }
+
   const result = hasNestedKeys(keys) ? clone(obj) : { ...obj }
 
   for (const key in keys) {

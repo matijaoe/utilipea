@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { rangeGen, toList } from './rangeGen'
+import { rangeGen } from './rangeGen'
+import { toList } from '.'
 
 describe('[array] rangeGen', () => {
   const obj = {
