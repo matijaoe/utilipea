@@ -1,5 +1,9 @@
 import { isString } from '..'
 
+// TODO
+// add compare fn
+// do not accept empty sort criteria object
+// add dirty: options to mutate the original array
 type SortCriteria<T> = {
   order?: 'asc' | 'desc'
   by?: (item: T) => number | bigint | Date | string

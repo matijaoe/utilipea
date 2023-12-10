@@ -35,15 +35,17 @@ sort(fruit, { by: (item) => item.length })
 
 ### Multiple criteria
 
+ Allows sorting by multiple criteria, applied in the order they are specified.
+
 
 ```ts
 const animals = [
   { name: 'horse', lifespan: 25 },
   { name: 'tortoise', lifespan: 100 },
-  { name: 'parrot', lifespan: 80 },
   { name: 'rabbit', lifespan: 10 },
-  { name: 'goldfish', lifespan: 10 },
   { name: 'mouse', lifespan: 2 },
+  { name: 'parrot', lifespan: 80 },
+  { name: 'goldfish', lifespan: 10 },
 ]
 
 // Sort by lifespan in descending order,
@@ -54,16 +56,14 @@ sort(
   { by: (item) => item.name }
 )
 
-/*
-[
+/* [
   { name: 'tortoise', lifespan: 100 },
   { name: 'parrot', lifespan: 80 },
   { name: 'horse', lifespan: 25 },
   { name: 'goldfish', lifespan: 10 },
   { name: 'rabbit', lifespan: 10 },
   { name: 'mouse', lifespan: 2 },
-]
-*/
+] */
 ```
 
 
