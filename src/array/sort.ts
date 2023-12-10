@@ -79,6 +79,3 @@ export const sort = <T>(
     return 0
   })
 }
-
-const arr = ['banana', 'Apple', 'fig', 'Pineapple', 'pear']
-console.log(sort(arr))

@@ -5,11 +5,11 @@ layout: home
 hero:
   name: "@matijaoe/utils"
   text: "yet another util library"
-  tagline: My great project tagline
+  tagline: But this one is mine
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /get-started
     - theme: alt
       text: API Examples
       link: /api-examples
