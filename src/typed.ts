@@ -101,16 +101,11 @@ export const isSymbol = (val: unknown): val is symbol => {
   return typeof val === 'symbol'
 }
 
-/**
- * Check if value is a plain object.
- *
- * @example
- * isPlainObject({}) // true
- * isPlainObject(new Object()) // true
- * isPlainObject(Object.create(null)) // false
- * isPlainObject(() => {}) // false
- */
-export const isObject = (val: unknown): val is PlainObject => {
+export const isObject = (val: unknown): val is object => {
+  return toTypeString(val) === StandardObject.Object
+}
+
+export const isPlainObject = (val: unknown): val is PlainObject => {
   return !!val && toTypeString(val) === StandardObject.Object && val?.constructor === Object
 }
 

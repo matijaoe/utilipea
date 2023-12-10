@@ -53,7 +53,7 @@ describe('typed module', () => {
     })
   })
 
-  describe('isObject', () => {
+  describe('isPlainObject', () => {
     it('returns false for non-object values', () => {
       const nonObjectValues = [
         null,
@@ -65,7 +65,7 @@ describe('typed module', () => {
       ]
 
       nonObjectValues.forEach((value) => {
-        const result = _.isObject(value)
+        const result = _.isPlainObject(value)
         expect(result).toBe(false)
       })
     })
@@ -80,19 +80,19 @@ describe('typed module', () => {
       ]
 
       values.forEach((value) => {
-        const result = _.isObject(value)
+        const result = _.isPlainObject(value)
         expect(result).toBe(false)
       })
     })
 
     it('returns true for new Object', () => {
       // eslint-disable-next-line no-new-object
-      const result = _.isObject(new Object())
+      const result = _.isPlainObject(new Object())
       expect(result).toBe(true)
     })
 
     it('returns true for plain object', () => {
-      const result = _.isObject({})
+      const result = _.isPlainObject({})
       expect(result).toBe(true)
     })
 
@@ -100,7 +100,7 @@ describe('typed module', () => {
 
     it('should work as type guard', () => {
       const data = { a: 'asd' }
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<{ a: string }
       >(data)
@@ -109,7 +109,7 @@ describe('typed module', () => {
 
     it('should also work as type guard', () => {
       const data = { data: 5 } as ReadonlyArray<number> | { data: 5 }
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<{
           data: 5
@@ -121,7 +121,7 @@ describe('typed module', () => {
 
     it('should work as type guard for more narrow types', () => {
       const data = { data: 5 } as Array<number> | { data: number }
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<{
           data: number
@@ -133,7 +133,7 @@ describe('typed module', () => {
 
     it('should work even if data type is unknown', () => {
       const data: unknown = typesDataProvider('object')
-      if (_.isObject(data)) {
+      if (_.isPlainObject(data)) {
         expect(typeof data).toEqual('object')
         assertType<Record<string, unknown>>(data)
       }

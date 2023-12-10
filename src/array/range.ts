@@ -70,6 +70,3 @@ export function range(...args: any): number[] {
 
   return result
 }
-
-console.log(range(6, 0, 2))
-console.log(range(6, 0, -2))
