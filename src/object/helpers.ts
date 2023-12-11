@@ -12,7 +12,7 @@ import { isEmpty, isObject } from '..'
  * // => false
  */
 export const hasNestedKeys = (keys: NestedOmit<any>) => {
-  for (const key in keys) {
+for (const key in keys) {
     const val = keys[key]
     if (isObject(val) && !isEmpty(val)) {
       return true
