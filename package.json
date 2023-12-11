@@ -1,7 +1,7 @@
 {
   "name": "@matijaoe/utils",
   "type": "module",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": {
     "name": "Matija Osrečki",
     "url": "https://github.com/matijaoe"
@@ -34,7 +34,10 @@
     "test": "vitest --typecheck",
     "test:ui": "vitest --typecheck --ui",
     "lint": "eslint .",
-    "format": "eslint . --fix"
+    "format": "eslint . --fix",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
     "@matijaoe/eslint-config": "^1.2.0",
@@ -44,6 +47,7 @@
     "eslint": "^8.55.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
+    "vitepress": "^1.0.0-rc.31",
     "vitest": "^1.0.1"
   }
 }
