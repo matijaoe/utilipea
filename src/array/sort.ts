@@ -1,17 +1,21 @@
-import { isString } from '..'
+import type { RequireAtLeastOne } from '..'
+import { isFunction, isString } from '..'
 
-// TODO
-// add compare fn
-// do not accept empty sort criteria object
-// add dirty: options to mutate the original array
-type SortCriteria<T> = {
-  order?: 'asc' | 'desc'
-  by?: (item: T) => number | bigint | Date | string
-}
+type SortBy<T> = (item: T) => number | bigint | Date | string
+type SortCmp<T> = (a: T, b: T) => number
+type SortOrder = 'asc' | 'desc'
+
+export type SortCriteria<T> = RequireAtLeastOne<{
+  order?: SortOrder
+  by?: SortBy<T>
+  cmp?: SortCmp<T>
+}>
 
 /**
  * Sort an array based on the specified criteria.
  * Does not mutate the original array.
+ *
+ * If comparator function is specified, `by` is ignored.
  *
  * @category Array
  *
@@ -21,12 +25,6 @@ type SortCriteria<T> = {
  *
  * sort([3, 1, 2], { order: 'desc' })
  * // => [3, 2, 1]
- *
- * sort(
- *  [{ id: 1 }, { id: 2 }, { id: 3 }],
- *  { by: (item) => item.id }
- * )
- * // => [{ id: 1 }, { id: 2 }, { id: 3 }]
  *
  * sort(
  *  ['apple', 'fig', 'banana', 'pineapple', 'pear']
@@ -62,18 +60,23 @@ export const sort = <T>(
   }
 
   return [...arr].sort((a, b) => {
-    for (const { order = 'asc', by = (item: T) => item } of criteria) {
+    for (const { order = 'asc', by = (item: T) => item, cmp } of criteria) {
+      const isAsc = order === 'asc'
+      const handleOrder = (comparison: number) => (isAsc ? comparison : -comparison)
+
+      if (isFunction(cmp)) {
+        return handleOrder(cmp(a, b))
+      }
+
       const aValue = by(a)
       const bValue = by(b)
 
       if (isString(aValue) && isString(bValue)) {
-        const comparison = aValue.localeCompare(bValue)
-        return order === 'asc' ? comparison : -comparison
+        return handleOrder(aValue.localeCompare(bValue))
       }
 
       if (aValue !== bValue) {
-        const compare = aValue < bValue ? -1 : 1
-        return order === 'asc' ? compare : -compare
+        return handleOrder(aValue < bValue ? -1 : 1)
       }
     }
     return 0
