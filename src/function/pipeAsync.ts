@@ -1,47 +1,37 @@
-import { isPromise } from '..'
+import { isFunction, isPromise } from '..'
 import type { Func } from '.'
 
 type MaybePromise<T> = T | Promise<T>
-type AsyncFunc<T, R> = (...args: T[]) => Promise<R>
+type MaybeAsyncFunc<T, R> = Func<T, MaybePromise<R>>
 
-export function pipeAsync<A extends any[], B>(f1: (...args: A) => Promise<B> | B): (...args: A) => Promise<B>
-export function pipeAsync<A, B>(value: A, f1: Func<A, Promise<B> | B>): Promise<B>
-export function pipeAsync<A extends any[], B, C>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>): (...args: A) => Promise<C>
-export function pipeAsync<A, B, C>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>): Promise<C>
-export function pipeAsync<A extends any[], B, C, D>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>): (...args: A) => Promise<D>
-export function pipeAsync<A, B, C, D>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>): Promise<D>
-export function pipeAsync<A extends any[], B, C, D, E>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>): (...args: A) => Promise<E>
-export function pipeAsync<A, B, C, D, E>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>): Promise<E>
-export function pipeAsync<A extends any[], B, C, D, E, F>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>): (...args: A) => Promise<F>
-export function pipeAsync<A, B, C, D, E, F>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>): Promise<F>
-export function pipeAsync<A extends any[], B, C, D, E, F, G>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>): (...args: A) => Promise<G>
-export function pipeAsync<A, B, C, D, E, F, G>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>): Promise<G>
-export function pipeAsync<A extends any[], B, C, D, E, F, G, H>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>, f7: Func<G, Promise<H> | H>): (...args: A) => Promise<H>
-export function pipeAsync<A, B, C, D, E, F, G, H>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>, f7: Func<G, Promise<H> | H>): Promise<H>
-export function pipeAsync<A extends any[], B, C, D, E, F, G, H, I>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>, f7: Func<G, Promise<H> | H>, f8: Func<H, Promise<I> | I>): (...args: A) => Promise<I>
-export function pipeAsync<A, B, C, D, E, F, G, H, I>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>, f7: Func<G, Promise<H> | H>, f8: Func<H, Promise<I> | I>): Promise<I>
-export function pipeAsync<A extends any[], B, C, D, E, F, G, H, I, J>(f1: (...args: A) => Promise<B> | B, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>, f7: Func<G, Promise<H> | H>, f8: Func<H, Promise<I> | I>, f9: Func<I, Promise<J> | J>): (...args: A) => Promise<J>
-export function pipeAsync<A, B, C, D, E, F, G, H, I, J>(value: A, f1: Func<A, Promise<B> | B>, f2: Func<B, Promise<C> | C>, f3: Func<C, Promise<D> | D>, f4: Func<D, Promise<E> | E>, f5: Func<E, Promise<F> | F>, f6: Func<F, Promise<G> | G>, f7: Func<G, Promise<H> | H>, f8: Func<H, Promise<I> | I>, f9: Func<I, Promise<J> | J>): Promise<J>
+export function pipeAsync<A extends any[], B>(f1: (...args: A) => MaybePromise<B> | B): (...args: A) => MaybePromise<B>
+export function pipeAsync<A, B>(value: A, f1: Func<A, MaybePromise<B> | B>): MaybePromise<B>
+export function pipeAsync<A extends any[], B, C>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>): (...args: A) => MaybePromise<C>
+export function pipeAsync<A, B, C>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>): MaybePromise<C>
+export function pipeAsync<A extends any[], B, C, D>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>): (...args: A) => MaybePromise<D>
+export function pipeAsync<A, B, C, D>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>): MaybePromise<D>
+export function pipeAsync<A extends any[], B, C, D, E>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>): (...args: A) => MaybePromise<E>
+export function pipeAsync<A, B, C, D, E>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>): MaybePromise<E>
+export function pipeAsync<A extends any[], B, C, D, E, F>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>): (...args: A) => MaybePromise<F>
+export function pipeAsync<A, B, C, D, E, F>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>): MaybePromise<F>
+export function pipeAsync<A extends any[], B, C, D, E, F, G>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>): (...args: A) => MaybePromise<G>
+export function pipeAsync<A, B, C, D, E, F, G>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>): MaybePromise<G>
+export function pipeAsync<A extends any[], B, C, D, E, F, G, H>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>, f7: Func<G, MaybePromise<H> | H>): (...args: A) => MaybePromise<H>
+export function pipeAsync<A, B, C, D, E, F, G, H>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>, f7: Func<G, MaybePromise<H> | H>): MaybePromise<H>
+export function pipeAsync<A extends any[], B, C, D, E, F, G, H, I>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>, f7: Func<G, MaybePromise<H> | H>, f8: Func<H, MaybePromise<I> | I>): (...args: A) => MaybePromise<I>
+export function pipeAsync<A, B, C, D, E, F, G, H, I>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>, f7: Func<G, MaybePromise<H> | H>, f8: Func<H, MaybePromise<I> | I>): MaybePromise<I>
+export function pipeAsync<A extends any[], B, C, D, E, F, G, H, I, J>(f1: (...args: A) => MaybePromise<B> | B, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>, f7: Func<G, MaybePromise<H> | H>, f8: Func<H, MaybePromise<I> | I>, f9: Func<I, MaybePromise<J> | J>): (...args: A) => MaybePromise<J>
+export function pipeAsync<A, B, C, D, E, F, G, H, I, J>(value: A, f1: Func<A, MaybePromise<B> | B>, f2: Func<B, MaybePromise<C> | C>, f3: Func<C, MaybePromise<D> | D>, f4: Func<D, MaybePromise<E> | E>, f5: Func<E, MaybePromise<F> | F>, f6: Func<F, MaybePromise<G> | G>, f7: Func<G, MaybePromise<H> | H>, f8: Func<H, MaybePromise<I> | I>, f9: Func<I, MaybePromise<J> | J>): MaybePromise<J>
 
-export function pipeAsync(valueOrFn: AsyncFunc<any, any> | any, ...fns: AsyncFunc<any, any>[]): any {
-  const handlePromise = (acc: MaybePromise<any>, fn: AsyncFunc<any, any>) => {
+export function pipeAsync(valueOrFn: MaybeAsyncFunc<any, any> | any, ...fns: MaybeAsyncFunc<any, any>[]): any {
+  const handlePromise = (acc: MaybePromise<any>, fn: MaybeAsyncFunc<any, any>) => {
     return isPromise(acc) ? acc.then(fn) : fn(acc)
   }
 
-  if (typeof valueOrFn === 'function') {
+  if (isFunction(valueOrFn)) {
     return async (...args: any[]) => {
       return fns.reduce((acc, fn) => handlePromise(acc, fn), await (valueOrFn as Function)(...args))
     }
   }
-  return fns.reduce((acc, fn) => handlePromise(acc, fn), valueOrFn)
+  return fns.reduce((acc, fn) => handlePromise(acc, fn), Promise.resolve(valueOrFn))
 }
-
-// create pipe example
-const add = (a: number, b: number) => a + b
-const double = (a: number) => a * 2
-const increment = (a: number) => a + 1
-const square = (a: number) => a * a
-
-const pipeExample = pipeAsync(add, double, increment, square)
-const result = await pipeExample(1, 2)
-console.log(result)
