@@ -68,6 +68,14 @@ export default defineConfig({
         text: 'Async',
         items: await generateSidebar('async')
       },
+      {
+        text: 'Function',
+        items: await generateSidebar('async')
+      },
+      {
+        text: 'Number',
+        items: await generateSidebar('number')
+      },
     ], { by: (item) => item.text }),
 
     socialLinks: [
