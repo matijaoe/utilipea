@@ -16,6 +16,8 @@ import { hasNestedKeys } from '.'
  * deepOmit(obj, { a: true, b: { c: true } })
  * // => { b: { d: 3 } }
  */
+
+// TODO: return type not correct
 export const deepOmit = <
   T extends Record<PropertyKey, any>
 >(obj: T, keys: NestedOmit<T>) => {
