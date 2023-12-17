@@ -1,7 +1,7 @@
-import { isArray } from '..'
+import { ensureArray } from '..'
 
 export const insert = <T>(arr1: T[], arr2: T | T[], index?: number): T[] => {
-  const items = isArray(arr2) ? arr2 : [arr2]
+  const items = ensureArray(arr2)
 
   if (!arr1.length) { return items }
   if (!items.length) { return arr1 }
