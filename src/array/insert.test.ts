@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 import { insert } from './insert'
 
 describe('insert', () => {
-  // insert single item
   it('should insert a single item at the beginning', () => {
     expect(insert([1, 2, 3], 0, 0)).toEqual([0, 1, 2, 3])
   })
