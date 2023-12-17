@@ -14,10 +14,10 @@
  */
 export const group = <T, Key extends PropertyKey>(
   array: readonly T[],
-  getGroupId: (item: T) => Key
+  identity: (item: T) => Key
 ): Partial<Record<Key, T[]>> => {
   return array.reduce((acc, item) => {
-    const groupId = getGroupId(item)
+    const groupId = identity(item)
     acc[groupId] ??= []
     acc[groupId].push(item)
     return acc
