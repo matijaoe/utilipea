@@ -7,22 +7,23 @@ You made a wise choice, my friend. Let's get started.
 Getting toolip into your project
 
 
-### npm
-```bash
-npm i @matijaoe/utils
-```
-
-### yarn
-```bash
-yarn add @matijaoe/utils
-```
-
 ### pnpm
 ```bash
-pnpm add @matijaoe/utils
+pnpm add utilipea
 ```
 
 ### bun
 ```bash
-bun i @matijaoe/utils
+bun i utilipea
 ```
+
+### npm
+```bash
+npm i utilipea
+```
+
+### yarn
+```bash
+yarn add utilipea
+```
+

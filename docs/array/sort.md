@@ -1,6 +1,6 @@
 ---
-category: Array
-title: sort
+category: array
+title: 'sort'
 ---
 
 # sort

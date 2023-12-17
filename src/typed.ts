@@ -82,11 +82,11 @@ export const isString = (val: unknown): val is string => {
 }
 
 export const isInt = (val: unknown): val is number => {
-  return isNumber(val) && val % 1 === 0
+  return isNumber(val) && Number.isInteger(val)
 }
 
 export const isFloat = (val: unknown): val is number => {
-  return isNumber(val) && val % 1 !== 0
+  return isNumber(val) && !Number.isInteger(val)
 }
 
 export const isNumber = (val: unknown): val is number => {
@@ -144,6 +144,7 @@ export const isWindow = (val: any): boolean => {
   // @ts-ignore
   return typeof window !== 'undefined' && toTypeString(val) === StandardObject.Window
 }
+
 // @ts-ignore
 export const isBrowser = typeof window !== 'undefined'
 

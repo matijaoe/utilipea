@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "@matijaoe/utils"
+  name: "utilipea"
   text: "yet another util library"
   tagline: But this one is mine
   actions:

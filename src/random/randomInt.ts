@@ -1,4 +1,3 @@
-import { randomInt as cryptoRandomInt } from 'node:crypto'
 import { isInt } from '..'
 
 /**
@@ -57,25 +56,4 @@ export const randomInt = (min: number, max: number) => {
   } while (randomValue >= maxRandNumber - (maxRandNumber % range))
 
   return min + (randomValue % range)
-}
-
-/**
- * Generates a random float between two given numbers (inclusive).
- *
- * It uses `crypto.randomInt` to generate the random number.
- *
- * @example
- * randomInt(1, 10)
- * // => 3
- */
-export const randomIntCrypto = (min: number, max: number) => {
-  if (!isInt(min) || !isInt(max)) {
-    throw new TypeError('min and max must be integers')
-  }
-
-  if (min >= max) {
-    throw new Error('max must be greater than min')
-  }
-
-  return cryptoRandomInt(min, max)
 }
