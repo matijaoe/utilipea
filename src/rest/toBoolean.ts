@@ -1,7 +1,7 @@
 import { isBoolean, isNumber, isString } from '../../dist'
 
-const BOOL_TRUE = new Set(['true', 't', 'yes', 'y', 'on', '1'])
-const BOOL_FALSE = new Set(['false', 'f', 'no', 'n', 'off', '0'])
+export const BOOL_TRUE = new Set(['true', 't', 'yes', 'y', 'on', '1'] as const)
+export const BOOL_FALSE = new Set(['false', 'f', 'no', 'n', 'off', '0'] as const)
 
 type ToBooleanOptions = {
   strict?: boolean
@@ -9,7 +9,7 @@ type ToBooleanOptions = {
   falseValues?: Set<string>
 }
 
-export const toBoolean = (val: string | number | boolean, options?: ToBooleanOptions) => {
+export const toBoolean = (val: any, options?: ToBooleanOptions): val is boolean => {
   const {
     trueValues = BOOL_TRUE,
     falseValues = BOOL_FALSE,
@@ -36,7 +36,3 @@ export const toBoolean = (val: string | number | boolean, options?: ToBooleanOpt
 
   return false
 }
-
-toBoolean('1', {
-  falseValues: new Set(['false', 'f', 'no', 'n', 'off', '0']),
-})
