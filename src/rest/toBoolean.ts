@@ -1,4 +1,4 @@
-import { isBoolean, isNumber, isString } from '../../dist'
+import { isBoolean, isNumber, isString } from '..'
 
 export const BOOL_TRUE = new Set(['true', 't', 'yes', 'y', 'on', '1'] as const)
 export const BOOL_FALSE = new Set(['false', 'f', 'no', 'n', 'off', '0'] as const)
