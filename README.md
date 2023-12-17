@@ -1,15 +1,19 @@
-# matijaoe-utils
+# 🫛 utilipea
 
-To install dependencies:
-
-```bash
-bun install
-```
-
-To run:
+Install dependencies:
 
 ```bash
-bun run index.ts
+bun i
 ```
 
-This project was created using `bun init` in bun v1.0.14. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Run tests:
+
+```bash
+bun run test
+```
+
+Run docs
+```bash
+bun run docs:dev
+```
+
