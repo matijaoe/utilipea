@@ -1,5 +1,5 @@
 /* TODO: as group but returns count as value */
-export const groupCount = <T, TId extends PropertyKey>(
+export const count = <T, TId extends PropertyKey>(
   list: readonly T[],
   identity: (item: T) => TId
 ) => {
