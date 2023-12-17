@@ -1,4 +1,4 @@
-import { ensureArray } from '..'
+import { clamp, ensureArray } from '..'
 
 export const insert = <T>(arr1: T[], arr2: T | T[], index?: number): T[] => {
   const items = ensureArray(arr2)
@@ -10,11 +10,7 @@ export const insert = <T>(arr1: T[], arr2: T | T[], index?: number): T[] => {
     return items.concat(arr1)
   }
 
-  const normalizedIndex = index < 0 ? arr1.length + index : index
-
-  if (Math.abs(normalizedIndex) > arr1.length) {
-    return arr1.concat(items)
-  }
+  const normalizedIndex = clamp(index, [-arr1.length, arr1.length])
 
   const front = arr1.slice(0, normalizedIndex)
   const back = arr1.slice(normalizedIndex)
