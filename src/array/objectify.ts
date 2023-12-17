@@ -13,25 +13,3 @@ export const objectify = <T, Key extends PropertyKey, Value = T>(
     return acc
   }, {} as Record<Key, Value>)
 }
-
-const fish = [
-  {
-    name: 'Marlin',
-    weight: 105
-  },
-  {
-    name: 'Bass',
-    weight: 8
-  },
-  {
-    name: 'Trout',
-    weight: 13
-  }
-]
-
-console.log(objectify(fish, (f) => f.name)) // => { Marlin: [marlin object], Bass: [bass object], ... }
-console.log(objectify(
-  fish,
-  (f) => f.name,
-  (f) => f.weight
-))// => { Marlin: 105, Bass: 8, Trout: 13 }
