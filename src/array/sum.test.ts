@@ -33,6 +33,7 @@ describe('sum', () => {
   })
 
   it('gracefully handle null input list', () => {
+    // @ts-expect-error
     const result = sum(null as unknown as readonly (number | object)[])
     expect(result).toEqual(0)
   })
