@@ -17,12 +17,16 @@
  * sum([])
  * // => 0
  */
-export const sum = <T extends number | object>(
+
+export function sum(array: readonly [number, ...number[]]): number
+export function sum(array: readonly number[]): number
+export function sum<T>(
+  array: readonly T[],
+  fn: (item: T) => number): T
+export function sum<T extends number | object>(
   array: readonly T[],
   fn?: (item: T) => number
-) => {
-  return array?.reduce(
-    (acc, item) => acc + (fn?.(item) ?? (item as number)),
-    0
-  ) ?? 0
+) {
+  fn ??= (item: any) => item as number
+  return array?.reduce((acc, item) => acc + fn!(item), 0) ?? 0
 }

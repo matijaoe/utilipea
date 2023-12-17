@@ -10,11 +10,12 @@ import { boil } from './boil'
 export function max(array: readonly [number, ...number[]]): number
 export function max(array: readonly number[]): number | null
 export function max<T>(
-  array: readonly T[], getter: (item: T) => number): T | null
+  array: readonly T[],
+  by: (item: T) => number): T | null
 export function max<T>(
   array: readonly T[],
   by?: (item: T) => number
 ): T | null {
-  const get = by ?? ((v: any) => v)
-  return boil(array, (a, b) => (get(a) > get(b) ? a : b))
+  by ??= (item: any) => item
+  return boil(array, (a, b) => (by!(a) > by!(b) ? a : b))
 }
