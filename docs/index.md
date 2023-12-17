@@ -11,8 +11,8 @@ hero:
       text: Get Started
       link: /get-started
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: View on GitHub
+      link: https://github.com/matijaoe/utils
 
 features:
   - title: Feature A

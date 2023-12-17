@@ -29,7 +29,6 @@ export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...in
  * // => [{ id: 3, name: 'John' }]
  *
  */
-// https://moderndash.io/docs/intersection - kudos to this guy
 export function intersection<TElem>(...arraysOrCompareFn: ArrayMinLength<TElem[], 2>): TElem[]
 export function intersection<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFunction<TArrays>]): TArrays[0]
 export function intersection<TArrays extends ArrayMinLength<unknown[], 2>, TElem>(...args: ArrayMinLength<TElem[], 2> | [...TArrays, CompareFunction<TArrays>]): TArrays[0] {
@@ -45,10 +44,7 @@ export function intersection<TArrays extends ArrayMinLength<unknown[], 2>, TElem
     return firstArray.filter((element) => restSet.has(element))
   }
 
-  return firstArray.reduce((acc: TArrays[0], element) => {
-    if (restArrays.some((item) => cmp(element, item))) {
-      acc.push(element)
-    }
-    return acc
-  }, [] as TArrays[0])
+  return firstArray.filter((element) => {
+    return restArrays.some((restElement) => cmp(element, restElement))
+  })
 }

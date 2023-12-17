@@ -11,6 +11,11 @@ export type SortCriteria<T> = RequireAtLeastOne<{
   cmp?: SortCmp<T>
 }>
 
+// eslint-disable-next-line no-extend-native
+Array.prototype.toSorted ??= function (cmp) {
+  return [...this].sort(cmp)
+}
+
 /**
  * Sort an array based on the specified criteria.
  * Does not mutate the original array.
@@ -59,7 +64,7 @@ export const sort = <T>(
     criteria = [{ order: 'asc' }]
   }
 
-  return [...arr].sort((a, b) => {
+  return arr.toSorted((a, b) => {
     for (const { order = 'asc', by = (item: T) => item, cmp } of criteria) {
       const isAsc = order === 'asc'
       const handleOrder = (comparison: number) => (isAsc ? comparison : -comparison)

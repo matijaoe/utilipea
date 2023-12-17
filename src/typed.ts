@@ -8,8 +8,8 @@ export const toTypeString = (value: unknown): string => {
 /**
  * extract "RawType" from strings like "[object RawType]"
  */
-export const toRawType = (value: unknown): string => {
-  return toTypeString(value).slice(8, -1)
+export const toRawType = (val: unknown): string => {
+  return toTypeString(val).slice(8, -1)
 }
 
 export const hasOwn = <T extends Record<string | symbol, any>, K extends string | symbol>(
@@ -81,17 +81,17 @@ export const isString = (val: unknown): val is string => {
   return typeof val === 'string'
 }
 
-export const isInt = (value: unknown): value is number => {
-  return isNumber(value) && value % 1 === 0
+export const isInt = (val: unknown): val is number => {
+  return isNumber(val) && val % 1 === 0
 }
 
-export const isFloat = (value: unknown): value is number => {
-  return isNumber(value) && value % 1 !== 0
+export const isFloat = (val: unknown): val is number => {
+  return isNumber(val) && val % 1 !== 0
 }
 
-export const isNumber = (value: unknown): value is number => {
+export const isNumber = (val: unknown): val is number => {
   try {
-    return Number(value) === value
+    return Number(val) === val
   } catch {
     return false
   }
