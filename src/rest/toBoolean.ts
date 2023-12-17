@@ -4,9 +4,9 @@ const BOOL_TRUE = new Set(['true', 't', 'yes', 'y', 'on', '1'])
 const BOOL_FALSE = new Set(['false', 'f', 'no', 'n', 'off', '0'])
 
 type ToBooleanOptions = {
-  strict: boolean
-  trueValues: Set<string>
-  falseValues: Set<string>
+  strict?: boolean
+  trueValues?: Set<string>
+  falseValues?: Set<string>
 }
 
 export const toBoolean = (val: string | number | boolean, options?: ToBooleanOptions) => {
@@ -38,5 +38,5 @@ export const toBoolean = (val: string | number | boolean, options?: ToBooleanOpt
 }
 
 toBoolean('1', {
-  falseValues: ['fdsdf']
+  falseValues: new Set(['false', 'f', 'no', 'n', 'off', '0']),
 })

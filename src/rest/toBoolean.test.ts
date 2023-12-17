@@ -1,3 +1,4 @@
+/* eslint-disable test/no-identical-title */
 import { describe, expect, it } from 'vitest'
 import { toBoolean } from './toBoolean'
 
