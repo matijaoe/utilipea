@@ -1,5 +1,5 @@
 {
-  "name": "@matijaoe/utils",
+  "name": "utilipea",
   "type": "module",
   "version": "0.1.7",
   "author": {
@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/matijaoe/utils"
+    "url": "https://github.com/matijaoe/utilipeaØ"
   },
   "exports": {
     ".": {
