@@ -1,6 +1,6 @@
-import { ensureArray } from '..'
+import { toArray } from '..'
 
 export const remove = <T>(arr: T[], item: T | T[]): T[] => {
-  const items = ensureArray(item)
+  const items = toArray(item)
   return arr.filter((i) => !items.includes(i))
 }

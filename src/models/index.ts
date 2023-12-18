@@ -1,5 +1,4 @@
 // TODO: neatly organize this dump
-
 const StandardBuiltInObject = {
   Array: '[object Array]',
   ArrayBuffer: '[object ArrayBuffer]',
@@ -83,3 +82,28 @@ type BuildArrayMinLength<
 > = Current['length'] extends TMinLength
   ? [...Current, ...TElem[]]
   : BuildArrayMinLength<TElem, TMinLength, [...Current, TElem]>
+
+/**
+ * Promise, or maybe not
+ */
+export type Awaitable<T> = T | PromiseLike<T>
+
+/**
+ * Null or whatever
+ */
+export type Nullable<T> = T | null | undefined
+
+/**
+ * Array, or not yet
+ */
+export type Arrayable<T> = T | Array<T>
+
+export type DefinitelyArray<T> = Extract<
+  T,
+  Array<any> | ReadonlyArray<any>
+> extends never
+  ? ReadonlyArray<unknown>
+  : Extract<T, Array<any> | ReadonlyArray<any>>
+export type DefinitelyFunction<T> = Extract<T, Function> extends never
+  ? Function
+  : Extract<T, Function>

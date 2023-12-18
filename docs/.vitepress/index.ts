@@ -116,4 +116,4 @@ export async function generateSidebar() {
   return final
 }
 
-// await generateDocumentation()
+await generateDocumentation()
