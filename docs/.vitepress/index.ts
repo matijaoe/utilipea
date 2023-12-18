@@ -1,7 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
-import { sort, titlecase } from '../../src'
+import { sort, titlecase } from '../../packages/package/src'
 
 export async function getFiles(directoryPath: string) {
   try {
@@ -25,7 +25,7 @@ title: '${name}'
 }
 
 export async function generateMarkdownFiles(dirName: string) {
-  const files = await getFiles(join(__dirname, `../../src/${dirName}`))
+  const files = await getFiles(join(__dirname, `../../packages/package/src/${dirName}`))
   const filteredFiles = files?.filter((file) => {
     const isTs = file.endsWith('.ts')
     const isIndex = file.endsWith('index.ts')
@@ -55,7 +55,7 @@ export async function writeFile(path: string, content: string) {
 }
 
 export async function generateSidebarCategory(dirName: string) {
-  const files = await getFiles(join(__dirname, `../../src/${dirName}`))
+  const files = await getFiles(join(__dirname, `../../packages/package/src/${dirName}`))
   const filteredFiles = files?.filter((file) => {
     const isTs = file.endsWith('.ts')
     const isIndex = file.endsWith('index.ts')
@@ -74,7 +74,7 @@ export async function generateSidebarCategory(dirName: string) {
 }
 
 export const listDirectories = async () => {
-  const files = await getFiles(join(__dirname, '../../src'))
+  const files = await getFiles(join(__dirname, '../../packages/package/src'))
   const directories = files?.map((file) => {
     const dir = file.split('/').pop()
     return dir
@@ -84,7 +84,7 @@ export const listDirectories = async () => {
 
 export function listAllCategories() {
   const exclude = ['tests', 'models', 'helpers']
-  const files = readdirSync(join(__dirname, '../../src'), { withFileTypes: true })
+  const files = readdirSync(join(__dirname, '../../packages/package/src'), { withFileTypes: true })
   const directories = files.filter((f) => f.isDirectory()).map((f) => f.name)
   return sort(directories.filter((dir) => !exclude.includes(dir)))
 }
