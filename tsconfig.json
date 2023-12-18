@@ -1,35 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
-    "moduleDetection": "force",
-    "rootDir": "./src",
-    "module": "ESNext",
+    "lib": ["ESNext"],
+    "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "bundler",
-    "types": [
-      "bun-types",
-      "vitest/globals"
-    ],
+    "moduleDetection": "force",
     "allowImportingTsExtensions": true,
-    "allowJs": true,
-    "strict": true,
-    "noImplicitReturns": false,
-    "noUncheckedIndexedAccess": false,
-    "declaration": true,
-    "downlevelIteration": true,
     "noEmit": true,
-    "outDir": "./dist",
+    "composite": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "./dist/**/*"
-  ]
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "types": [
+      "bun-types" // add Bun global
+    ]
+  }
 }
