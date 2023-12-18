@@ -1,16 +1,22 @@
 import { readdir } from 'node:fs/promises'
-import * as path from 'node:path'
-import { join } from 'node:path'
+import path, { join } from 'node:path'
 import process from 'node:process'
 import { sort, titlecase } from '../../packages/package/src'
 
-export async function getFiles(directoryPath: string) {
+type MarkdownData = {
+  dirName: string
+  name: string
+  link: string
+  content: string
+}
+
+export async function getFiles(directoryPath: string): Promise<string[]> {
   try {
     const fileNames = await readdir(directoryPath)
-    const filePaths = fileNames.map((fn) => join(directoryPath, fn))
-    return filePaths
+    return fileNames.map((fn) => join(directoryPath, fn))
   } catch (err) {
     console.error(err)
+    return []
   }
 }
 
@@ -92,16 +98,16 @@ export const generateDocumentation = async () => {
   await writeMarkdownFiles(dirMarkdowns)
 }
 
-async function getDirMarkdowns(dirs: string[]) {
+async function getDirMarkdowns(dirs: string[]): Promise<MarkdownData[][]> {
   const dirMarkdownPromises = dirs.map(generateMarkdownFiles)
   const dirMarkdownsResults = await Promise.allSettled(dirMarkdownPromises)
 
   return dirMarkdownsResults
-    .filter((result): result is PromiseFulfilledResult<any> => result.status === 'fulfilled')
+    .filter((result): result is PromiseFulfilledResult<MarkdownData[]> => result.status === 'fulfilled')
     .map((result) => result.value)
 }
 
-async function writeMarkdownFiles(dirMarkdowns: any[]) {
+async function writeMarkdownFiles(dirMarkdowns: MarkdownData[][]) {
   const filePromises = dirMarkdowns.flatMap((markdowns) =>
     markdowns.map(({ dirName, name, content }) =>
       writeFile(path.resolve(process.cwd(), 'docs', dirName, `${name}.md`), content)
@@ -114,16 +120,10 @@ async function writeMarkdownFiles(dirMarkdowns: any[]) {
 export async function generateSidebar() {
   const dirs = await listAllCategories()
 
-  // should return array of objects with { title: string, items }
-  // TODO: do not use await inside map
   const promises = dirs.map(generateSidebarCategory)
   const itemsArray = await Promise.all(promises)
 
-  const final = dirs.map((dir, index) => {
-    return { text: titlecase(dir), items: itemsArray[index] }
-  })
-
-  return final
+  return dirs.map((dir, index) => ({ text: titlecase(dir), items: itemsArray[index] }))
 }
 
 await generateDocumentation()
