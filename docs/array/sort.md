@@ -69,6 +69,7 @@ sort(
 
 ## Source
 
-- [Source](https://github.com/matijaoe/utils/blob/main/src/array/sort.ts)
-- [Tests](https://github.com/matijaoe/utils/blob/main/src/array/sort.test.ts)
+- [Source](https://github.com/matijaoe/utils/blob/main/packages/package/src/array/sort.ts)
+- [Tests](https://github.com/matijaoe/utils/blob/main/packages/package/src/array/sort.test.ts)
 - [Docs](https://github.com/matijaoe/utils/blob/main/docs/array/sort.md)
+

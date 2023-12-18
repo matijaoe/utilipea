@@ -1,20 +1,38 @@
-import { readdirSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
-import { join } from 'node:path'
-import { sort, titlecase } from '../../src'
+import path, { join } from 'node:path'
+import process from 'node:process'
+import { sort, titlecase } from '../../packages/package/src'
 
-export async function getFiles(directoryPath: string) {
+type MarkdownData = {
+  dirName: string
+  name: string
+  link: string
+  content: string
+}
+
+export async function getFiles(directoryPath: string): Promise<string[]> {
   try {
-    const fileNames = await readdir(directoryPath)
-    const filePaths = fileNames.map((fn) => join(directoryPath, fn))
-    return filePaths
+    const fileNames = await readdir(directoryPath, { withFileTypes: true })
+    return fileNames.map((fn) => join(directoryPath, fn.name))
   } catch (err) {
     console.error(err)
+    return []
   }
 }
 
-const methodPageTemplate = (category: string, name: string) => {
-  return `---
+export async function getDirectories(directoryPath: string): Promise<string[]> {
+  try {
+    const fileNames = await readdir(directoryPath, { withFileTypes: true })
+    return fileNames.filter((fn) => fn.isDirectory()).map((fn) => fn.name)
+  } catch (err) {
+    console.error(err)
+    return []
+  }
+}
+
+const packageSrc = path.resolve(process.cwd(), 'packages', 'package', 'src')
+
+const methodPageTemplate = (category: string, name: string) => `---
 category: ${titlecase(category)}
 title: '${name}'
 ---
@@ -22,98 +40,90 @@ title: '${name}'
 # ${name}
 
 `
+
+function filterFiles(files?: string[]) {
+  const filesToIgnore = ['index.ts', 'test.ts', 'helpers.ts']
+  return files?.filter((file) => {
+    const isTs = file.endsWith('.ts')
+    return isTs && !filesToIgnore.some((f) => file.endsWith(f))
+  }) ?? []
 }
 
-export async function generateMarkdownFiles(dirName: string) {
-  const files = await getFiles(join(__dirname, `../../src/${dirName}`))
-  const filteredFiles = files?.filter((file) => {
-    const isTs = file.endsWith('.ts')
-    const isIndex = file.endsWith('index.ts')
-    const isTest = file.endsWith('test.ts')
-    const isHelpers = file.endsWith('helpers.ts')
-    return isTs && !isIndex && !isTest && !isHelpers
-  }) ?? []
-
-  const markdownFiles = filteredFiles.map((file) => {
-    const name = file.split('/').pop()?.replace('.ts', '') ?? ''
+function generateMarkdownMeta(files: string[], dirName: string): MarkdownData[] {
+  return files.map((file) => {
+    const name = getFileNameWithoutExtension(file)
     const link = `/${dirName}/${name}`
     const content = methodPageTemplate(dirName, name)
-
-    return { name, link, content }
+    return { dirName, name, link, content }
   })
+}
 
-  return markdownFiles
+export async function generateMarkdownFilesForCategory(dirName: string) {
+  const files = await getFiles(path.resolve(packageSrc, dirName))
+  const filteredFiles = filterFiles(files)
+  return generateMarkdownMeta(filteredFiles, dirName)
+}
+
+function getFileNameWithoutExtension(file: string) {
+  return file.split('/').pop()?.replace('.ts', '') ?? ''
 }
 
 export async function writeFile(path: string, content: string) {
-  // check if directory esx
   const file = Bun.file(path)
-  if (await file.exists()) {
-    return
-  }
+  if (await file.exists()) { return }
   await Bun.write(path, content)
 }
 
-export async function generateSidebarCategory(dirName: string) {
-  const files = await getFiles(join(__dirname, `../../src/${dirName}`))
-  const filteredFiles = files?.filter((file) => {
-    const isTs = file.endsWith('.ts')
-    const isIndex = file.endsWith('index.ts')
-    const isTest = file.endsWith('test.ts')
-    const isHelpers = file.endsWith('helpers.ts')
-    return isTs && !isIndex && !isTest && !isHelpers
-  }) ?? []
+export async function generateCategorySidebarItem(dirName: string) {
+  const files = await getFiles(path.resolve(packageSrc, dirName))
+  const filteredFiles = filterFiles(files)
 
   const sidebar = filteredFiles.map((file) => {
-    const text = file.split('/').pop()?.replace('.ts', '') ?? ''
+    const text = getFileNameWithoutExtension(file)
     const link = `/${dirName}/${text}`
     return { text, link }
   })
-
   return sidebar
 }
 
-export const listDirectories = async () => {
-  const files = await getFiles(join(__dirname, '../../src'))
-  const directories = files?.map((file) => {
-    const dir = file.split('/').pop()
-    return dir
-  })
-  return directories
-}
-
-export function listAllCategories() {
+export async function listCategories() {
   const exclude = ['tests', 'models', 'helpers']
-  const files = readdirSync(join(__dirname, '../../src'), { withFileTypes: true })
-  const directories = files.filter((f) => f.isDirectory()).map((f) => f.name)
+  const directories = await getDirectories(packageSrc)
   return sort(directories.filter((dir) => !exclude.includes(dir)))
 }
 
-export const generateDocumentation = async () => {
-  const dirs = listAllCategories()
-  for (const dirName of dirs) {
-    // eslint-disable-next-line no-await-in-loop
-    const obj = await generateMarkdownFiles(dirName)
-    for (const { name, content } of obj) {
-    // eslint-disable-next-line no-await-in-loop
-      await writeFile(join(__dirname, `../../docs/${dirName}/${name}.md`), content)
-    }
-  }
+async function getDirMarkdowns(dirs: string[]): Promise<MarkdownData[][]> {
+  const dirMarkdownPromises = dirs.map(generateMarkdownFilesForCategory)
+  const markdownFilesPerCategoryRes = await Promise.allSettled(dirMarkdownPromises)
+
+  return markdownFilesPerCategoryRes
+    .filter((result): result is PromiseFulfilledResult<MarkdownData[]> => result.status === 'fulfilled')
+    .map((result) => result.value)
+}
+
+async function writeMarkdownFiles(dirMarkdowns: MarkdownData[][]) {
+  const filePromises = dirMarkdowns.flatMap((markdowns) =>
+    markdowns.map(({ dirName, name, content }) => {
+      return writeFile(path.resolve(process.cwd(), 'docs', dirName, `${name}.md`), content)
+    })
+  )
+
+  await Promise.allSettled(filePromises)
 }
 
 export async function generateSidebar() {
-  const dirs = listAllCategories()
+  const categories = await listCategories()
 
-  // should return array of objects with { title: string, items }
-  // TODO: do not use await inside map
-  const promises = dirs.map(generateSidebarCategory)
-  const itemsArray = await Promise.all(promises)
+  const promises = categories.map(generateCategorySidebarItem)
+  const items = await Promise.all(promises)
 
-  const final = dirs.map((dir, index) => {
-    return { text: titlecase(dir), items: itemsArray[index] }
-  })
-
-  return final
+  return categories.map((dir, idx) => ({ text: titlecase(dir), items: items.at(idx) }))
 }
 
-// await generateDocumentation()
+export const generateDocumentation = async () => {
+  const categories = await listCategories()
+  const markdownContentPerGroup = await getDirMarkdowns(categories)
+  await writeMarkdownFiles(markdownContentPerGroup)
+}
+
+await generateDocumentation()

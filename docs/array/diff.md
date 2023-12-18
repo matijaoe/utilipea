@@ -21,7 +21,7 @@ diff(a, b)
 
 ## Source
 
-- [Source](https://github.com/matijaoe/utils/blob/main/src/array/diff.ts)
-- [Tests](https://github.com/matijaoe/utils/blob/main/src/array/diff.test.ts)
+- [Source](https://github.com/matijaoe/utils/blob/main/packages/package/src/array/diff.ts)
+- [Tests](https://github.com/matijaoe/utils/blob/main/packages/package/src/array/diff.test.ts)
 - [Docs](https://github.com/matijaoe/utils/blob/main/docs/array/diff.md)
 
