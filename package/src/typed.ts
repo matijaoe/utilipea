@@ -1,4 +1,4 @@
-import type { Falsy, PlainObject, Primitive } from './models'
+import type { DefinitelyArray, DefinitelyFunction, PlainObject, Primitive } from './models'
 import { StandardObject } from './models'
 
 export const toTypeString = (value: unknown): string => {
@@ -12,7 +12,7 @@ export const toRawType = (val: unknown): string => {
   return toTypeString(val).slice(8, -1)
 }
 
-export const hasOwn = <T extends Record<string | symbol, any>, K extends string | symbol>(
+export const hasOwn = <T extends Record<PropertyKey, any>, K extends PropertyKey>(
   val: T,
   key: K
 ): key is K => val.hasOwn(val, key)
@@ -22,15 +22,15 @@ export const isPrimitive = (value: unknown): value is Primitive => {
 }
 
 export const isDef = <T>(val: T): val is NonNullable<T> => {
-  return typeof val !== 'undefined' && val !== null
-}
-
-export const notNull = <T>(val: T): val is T => {
-  return val !== null
+  return val !== undefined && val !== null
 }
 
 export const isNil = <T>(val: T): val is Extract<T, null | undefined> => {
   return val == null
+}
+
+export const notNull = <T>(val: T): val is Exclude<T, null> => {
+  return val !== null
 }
 
 export const isNull = <T>(val: T): val is Extract<T, null> => {
@@ -38,28 +38,23 @@ export const isNull = <T>(val: T): val is Extract<T, null> => {
 }
 
 export const isUndefined = <T>(val: T): val is Extract<T, undefined> => {
-  return typeof val === 'undefined'
+  return val === undefined
 }
 
-export const isTruthy = <T>(val: T): val is Exclude<T, Falsy> => {
+export const notUndefined = <T>(val: T): val is Exclude<T, undefined> => {
+  return val !== undefined
+}
+
+export const isTruthy = <T>(val: T): val is NonNullable<T> => {
   return Boolean(val)
 }
 
-export const isBoolean = (data: unknown): data is boolean => {
-  return typeof data === 'boolean'
+export const isBoolean = (val: unknown): val is boolean => {
+  return typeof val === 'boolean'
 }
 
-type DefinitelyArray<T> = Extract<
-  T,
-  Array<any> | ReadonlyArray<any>
-> extends never
-  ? ReadonlyArray<unknown>
-  : Extract<T, Array<any> | ReadonlyArray<any>>
-
-export const isArray = <T>(
-  data: T | ReadonlyArray<unknown>
-): data is DefinitelyArray<T> => {
-  return Array.isArray(data)
+export const isArray = <T>(val: T | ReadonlyArray<unknown>): val is DefinitelyArray<T> => {
+  return Array.isArray(val)
 }
 
 export const isDate = (val: unknown): val is Date => {
@@ -70,9 +65,6 @@ export const isRegex = (val: unknown): val is RegExp => {
   return toTypeString(val) === StandardObject.RegExp
 }
 
-type DefinitelyFunction<T> = Extract<T, Function> extends never
-  ? Function
-  : Extract<T, Function>
 export const isFunction = <T> (val: T | Function): val is DefinitelyFunction<T> => {
   return typeof val === 'function'
 }

@@ -1,0 +1,53 @@
+{
+  "name": "utilipea",
+  "type": "module",
+  "version": "0.2.3",
+  "author": {
+    "name": "Matija Osrečki",
+    "url": "https://github.com/matijaoe"
+  },
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/matijaoe/utilipea"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "paths": {
+    "src": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean",
+    "prepack": "bun run build",
+    "release": "bumpp && npm publish",
+    "test": "vitest --typecheck",
+    "test:ui": "vitest --typecheck --ui",
+    "lint": "eslint .",
+    "format": "eslint . --fix",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@matijaoe/eslint-config": "^1.2.0",
+    "@vitest/ui": "^1.0.4",
+    "bumpp": "^9.2.0",
+    "bun-types": "^1.0.15",
+    "eslint": "^8.55.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitepress": "^1.0.0-rc.31",
+    "vitest": "^1.0.1"
+  }
+}

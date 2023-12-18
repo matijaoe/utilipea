@@ -19,13 +19,13 @@ type RangeOptions<T> = RangeOptionsEnd<T> | RangeOptionsLen<T>
  * @category Array
  *
  * @example
- * range({ len: 3 }) // =>  [0, 1, 2]
- * range({ end: 3 }) // =>  [0, 1, 2, 3]
- * range({ start: 1, len: 5 }) // =>  [1, 2, 3, 4, 5]
- * range({ start: 1, end: 3 }) // =>  [1, 2, 3]
- * range({ start: 1, end: 3, step: 2 }) // =>  [1, 3]
- * range({ start: 1, end: 3, fill: 'a' }) // =>  ['a', 'a', 'a']
- * range({ start: 1, end: 3, fill: (i) => i * i }) // =>  [1, 4, 9]
+ * list({ len: 3 }) // =>  [0, 1, 2]
+ * list({ end: 3 }) // =>  [0, 1, 2, 3]
+ * list({ start: 1, len: 5 }) // =>  [1, 2, 3, 4, 5]
+ * list({ start: 1, end: 3 }) // =>  [1, 2, 3]
+ * list({ start: 1, end: 3, step: 2 }) // =>  [1, 3]
+ * list({ start: 1, end: 3, fill: 'a' }) // =>  ['a', 'a', 'a']
+ * list({ start: 1, end: 3, fill: (i) => i * i }) // =>  [1, 4, 9]
  */
 export const list = <T = number>(opts: RangeOptions<T>): T[] => {
   const step = opts.step || 1
