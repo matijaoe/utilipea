@@ -9,9 +9,7 @@ import { boil } from './boil'
  */
 export function min(array: readonly [number, ...number[]]): number
 export function min(array: readonly number[]): number | null
-export function min<T>(
-  array: readonly T[],
-  by: (item: T) => number): T | null
+export function min<T>(array: readonly T[], by: (item: T) => number): T | null
 export function min<T>(
   array: readonly T[],
   by?: (item: T) => number

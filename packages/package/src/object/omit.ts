@@ -1,9 +1,10 @@
-import type { PlainObject } from '..'
+import { type PlainObject, diff } from '..'
+import { pick } from './pick'
 
 /**
- * Remove specified keys from an object.
+ * Remove specified keys from an obj.
  *
- * Does not mutate the original object.
+ * Does not mutate the original obj.
  * Objects are shallowly cloned.
  *
  * @example
@@ -11,15 +12,13 @@ import type { PlainObject } from '..'
  * omit(obj, 'a', 'c');
  * // => { b: 2 }
  */
-export const omit = <
-  T extends PlainObject,
-  K extends keyof T
->(obj: T, ...keys: K[]) => {
-  if (!obj) { return {} as Omit<T, K> }
+export const omit = <T extends PlainObject, K extends keyof T>(
+  obj: T,
+  ...keys: K[]
+): Omit<T, K> => {
   if (!keys?.length) { return obj }
 
-  const newObj = { ...obj }
-  keys.forEach((key) => delete newObj[key])
-
-  return newObj
+  const allKeys = Object.keys(obj)
+  const filteredKeys = diff(allKeys, keys as string[]) as Exclude<keyof T, K>[]
+  return pick(obj, ...filteredKeys)
 }

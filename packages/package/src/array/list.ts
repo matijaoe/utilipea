@@ -1,11 +1,12 @@
-import { isFunction, isUndefined } from '../typed'
+import { isFunction, notUndefined } from '../typed'
 
 type Mapper<T = number> = (i: number) => T
 
 type BaseRangeOptions<T = number> = {
   start?: number
   step?: number
-  fill?: T | Mapper<T>
+  fill?: T
+  map?: Mapper<T>
 }
 
 type RangeOptionsEnd<T = number> = BaseRangeOptions<T> & { end: number }
@@ -25,7 +26,7 @@ type RangeOptions<T> = RangeOptionsEnd<T> | RangeOptionsLen<T>
  * list({ start: 1, end: 3 }) // =>  [1, 2, 3]
  * list({ start: 1, end: 3, step: 2 }) // =>  [1, 3]
  * list({ start: 1, end: 3, fill: 'a' }) // =>  ['a', 'a', 'a']
- * list({ start: 1, end: 3, fill: (i) => i * i }) // =>  [1, 4, 9]
+ * list({ start: 1, end: 3, map: (i) => i * i }) // =>  [1, 4, 9]
  */
 export const list = <T = number>(opts: RangeOptions<T>): T[] => {
   const step = opts.step || 1
@@ -42,12 +43,10 @@ export const list = <T = number>(opts: RangeOptions<T>): T[] => {
   }
 
   const fill = isFunction(opts.fill) ? undefined : opts.fill
-  const mapper = isFunction(opts.fill) ? opts.fill : (i: number) => i as T
+  const mapper = opts.map || ((i: number) => i as T)
 
   return Array.from(
     { length: len },
-    (_, i) => !isUndefined(fill)
-      ? fill
-      : mapper(start + i * step)
+    (_, i) => notUndefined(fill) ? fill : mapper(start + i * step)
   )
 }

@@ -18,14 +18,6 @@ describe('omit', () => {
     expect(omit(obj, 'a', 'b', 'c')).toEqual({})
   })
 
-  it('returns an empty object if the input is falsy', () => {
-    expect(omit(null as any, 'a')).toEqual({})
-    expect(omit(undefined as any, 'a')).toEqual({})
-    expect(omit(false as any, 'a')).toEqual({})
-    expect(omit(0 as any, 'a')).toEqual({})
-    expect(omit('' as any, 'a')).toEqual({})
-  })
-
   it('returns the original object if no keys are specified', () => {
     const obj = { a: 1, b: 2, c: 3 }
     expect(omit(obj)).toBe(obj)

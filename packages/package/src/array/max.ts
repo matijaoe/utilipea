@@ -9,9 +9,7 @@ import { boil } from './boil'
  */
 export function max(array: readonly [number, ...number[]]): number
 export function max(array: readonly number[]): number | null
-export function max<T>(
-  array: readonly T[],
-  by: (item: T) => number): T | null
+export function max<T>(array: readonly T[], by: (item: T) => number): T | null
 export function max<T>(
   array: readonly T[],
   by?: (item: T) => number
