@@ -1,14 +1,12 @@
 import type { RequireAtLeastOne } from '..'
-import { isFunction, isString } from '..'
+import { isString } from '..'
 
 type SortBy<T> = (item: T) => number | bigint | Date | string
-type SortCmp<T> = (a: T, b: T) => number
 type SortOrder = 'asc' | 'desc'
 
 export type SortCriteria<T> = RequireAtLeastOne<{
   order?: SortOrder
   by?: SortBy<T>
-  cmp?: SortCmp<T>
 }>
 
 // eslint-disable-next-line no-extend-native
@@ -31,12 +29,14 @@ Array.prototype.toSorted ??= function (cmp) {
  * sort([3, 1, 2], { order: 'desc' })
  * // => [3, 2, 1]
  *
+ * // Sort by property
  * sort(
  *  ['apple', 'fig', 'banana', 'pineapple', 'pear']
  *  { by: (item) => item.length }
  * )
  * // => ['fig', 'pear', 'apple', 'banana', 'pineapple']
  *
+ * // Multiple criteria
  * sort(
  *  [
  *    { name: 'tom', age: 20 },
@@ -65,13 +65,9 @@ export const sort = <T>(
   }
 
   return arr.toSorted((a, b) => {
-    for (const { order = 'asc', by = (item: T) => item, cmp } of criteria) {
+    for (const { order = 'asc', by = (item: T) => item } of criteria) {
       const isAsc = order === 'asc'
       const handleOrder = (comparison: number) => (isAsc ? comparison : -comparison)
-
-      if (isFunction(cmp)) {
-        return handleOrder(cmp(a, b))
-      }
 
       const aValue = by(a)
       const bValue = by(b)

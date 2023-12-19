@@ -72,27 +72,4 @@ describe('[array] sort', () => {
     const result = sort(dates)
     expect(result).toEqual([dates[1], dates[0], dates[2]])
   })
-
-  it('sorts array of numbers with cmp function', () => {
-    const result = sort([1, 1, 2, 3, 4, 5, 9], { cmp: (a, b) => a - b })
-    expect(result).toEqual([1, 1, 2, 3, 4, 5, 9])
-  })
-
-  it('sorts array of objects with cmp function', () => {
-    const array = [{ id: 3 }, { id: 1 }, { id: 2 }]
-    const result = sort(array, { cmp: (a, b) => a.id - b.id })
-    expect(result).toEqual([{ id: 1 }, { id: 2 }, { id: 3 }])
-  })
-
-  it('sorts array of objects with cmp function in desc order', () => {
-    const array = [{ id: 3 }, { id: 1 }, { id: 2 }]
-    const result = sort(array, { order: 'desc', cmp: (a, b) => a.id - b.id })
-    expect(result).toEqual([{ id: 3 }, { id: 2 }, { id: 1 }])
-  })
-
-  it('sorts array of objects with cmp function, ignoring by function', () => {
-    const array = [{ id: 3, count: 2 }, { id: 1, count: 5 }, { id: 1, count: 4 }]
-    const result = sort(array, { cmp: (a, b) => a.count - b.count, by: (item) => item.id })
-    expect(result).toEqual([{ id: 3, count: 2 }, { id: 1, count: 4 }, { id: 1, count: 5 }])
-  })
 })
