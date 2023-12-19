@@ -132,6 +132,10 @@ export const typeOf = (val: any) => {
   return result.includes('function') ? 'function' : result
 }
 
+export const isUrl = (val: unknown): boolean => {
+  return val instanceof URL
+}
+
 export const isWindow = (val: any): boolean => {
   // @ts-ignore
   return typeof window !== 'undefined' && toTypeString(val) === StandardObject.Window
