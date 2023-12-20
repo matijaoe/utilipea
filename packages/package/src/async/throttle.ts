@@ -26,6 +26,7 @@ type ThrottleOptions = {
   trailing: true
 }
 
+// i dont even figure out if this works correctly, for flush and trailing 🤷🏻
 export const throttle = <TArgs extends any[], TRes>(
   func: (...args: TArgs) => TRes,
   interval: number,
@@ -38,30 +39,20 @@ export const throttle = <TArgs extends any[], TRes>(
   let lastArgs: TArgs | undefined
   let result: TRes | undefined
 
-  const throttled: ThrottledFunction<TArgs, TRes> = (...args: TArgs) => {
-    if (ready) {
-      result = func(...args)
-      ready = false
-    }
-
-    if (trailing) {
-      lastArgs = args
-    }
-
-    if (!timer) {
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        invokeFunc()
-        ready = leading
-        timer = undefined
-      }, interval)
-    }
-  }
-
   const invokeFunc = () => {
     if (lastArgs) {
       result = func(...lastArgs)
-      lastArgs = undefined
+      if (trailing) {
+        lastArgs = undefined
+      }
+    }
+    return result
+  }
+
+  const leadingEdge = () => {
+    if (ready && lastArgs) {
+      invokeFunc()
+      ready = false
     }
     return result
   }
@@ -69,12 +60,25 @@ export const throttle = <TArgs extends any[], TRes>(
   const trailingEdge = () => {
     timer = undefined
 
-    // Only invoke if we have `lastArgs` which means `func` has been
-    // debounced at least once.
     if (trailing && lastArgs) {
       return invokeFunc()
     }
     lastArgs = undefined
+    return result
+  }
+
+  const throttled: ThrottledFunction<TArgs, TRes> = (...args: TArgs) => {
+    lastArgs = args
+
+    leadingEdge()
+
+    if (!timer) {
+      timer = setTimeout(() => {
+        trailingEdge()
+        ready = leading
+      }, interval)
+    }
+
     return result
   }
 
@@ -96,11 +100,7 @@ export const throttle = <TArgs extends any[], TRes>(
   }
 
   throttled.flush = () => {
-    if (!timer) {
-      return result
-    }
-
-    return trailingEdge()
+    return !timer ? result : trailingEdge()
   }
 
   return throttled
