@@ -1,74 +1,132 @@
-import { type Func, type ThrottledFunction, isDef } from '..'
+// import type { ThrottledFunction } from '..'
 
-// TODO: wip
-export const throttle = <T extends (...args: any[]) => any>(func: T, interval: number) => {
-  let ready = true
+export type ThrottledFunction<TArgs extends any[], TRes> = {
+  (...args: TArgs): TRes | undefined
+  /**
+   * Checks if there is any invocation throttled
+   */
+  pending(): boolean
+  /**
+   * Cancels the throttled function invocation
+   */
+  cancel(): void
+  /**
+   * Flushes the throttled function invocation
+   */
+  flush(): TRes | undefined
+  /**
+   * Returns the last result of the throttled function
+   */
+  lastResult: () => TRes | undefined
+}
+
+type ThrottleOptions = {
+  leading?: boolean
+  trailing?: boolean
+  maxWait?: number
+}
+
+export const throttle = <TArgs extends any[], TRes>(
+  func: (...args: TArgs) => TRes,
+  interval: number,
+  opts: ThrottleOptions = {},
+): ThrottledFunction<TArgs, TRes> => {
+  opts = {
+    leading: true,
+    trailing: false,
+    ...opts
+  }
+
+  let maxWaitTimer: ReturnType<typeof setTimeout> | undefined
   let timer: ReturnType<typeof setTimeout> | undefined
-  let lastResult: ReturnType<T> | undefined
-  const wasCalled = false
+  let ready = opts.leading
 
-  const throttled = (...args: Parameters<T>): ReturnType<T> | undefined => {
-    if (!ready) {
-      return lastResult
+  let lastResult: TRes | undefined
+  let lastArgs: TArgs | undefined
+
+  const throttled: ThrottledFunction<TArgs, TRes> = (...args: TArgs) => {
+    if (ready) {
+      lastResult = func(...args)
+      ready = false
+
+      if (maxWaitTimer) {
+        clearTimeout(maxWaitTimer)
+        maxWaitTimer = undefined
+      }
     }
-    lastResult = func(...args)
-    ready = false
-    timer = setTimeout(() => {
-      ready = true
-      timer = undefined
-    }, interval)
+
+    if (opts.trailing) {
+      lastArgs = args
+    }
+
+    if (!timer) {
+      timer = setTimeout(() => {
+        if (lastArgs) {
+          lastResult = func(...lastArgs)
+          lastArgs = undefined
+        }
+        ready = opts.leading
+        timer = undefined
+      }, interval)
+    }
+
+    if (opts.maxWait && !maxWaitTimer) {
+      maxWaitTimer = setTimeout(() => {
+        if (lastArgs) {
+          lastResult = func(...lastArgs)
+          lastArgs = undefined
+        }
+        ready = opts.leading
+        maxWaitTimer = undefined
+      }, opts.maxWait)
+    }
+
     return lastResult
   }
 
-  throttled.isThrottled = () => {
+  throttled.lastResult = () => {
+    return lastResult
+  }
+
+  throttled.pending = () => {
     return timer !== undefined
   }
 
   throttled.cancel = () => {
+    if (!timer && !maxWaitTimer) { return }
     if (timer) {
       clearTimeout(timer)
       timer = undefined
-      ready = true
     }
+    if (maxWaitTimer) {
+      clearTimeout(maxWaitTimer)
+      maxWaitTimer = undefined
+    }
+    ready = opts.leading
+    lastArgs = undefined
   }
 
   throttled.flush = () => {
-    if (!ready) {
-      ready = true
-      lastResult = func()
-    }
-  }
+    if (!timer && !maxWaitTimer) { return }
 
-  throttled.wasCalledDuringThrottle = () => {
-    return wasCalled
+    if (timer) {
+      clearTimeout(timer)
+      timer = undefined
+    }
+
+    if (maxWaitTimer) {
+      clearTimeout(maxWaitTimer)
+      maxWaitTimer = undefined
+    }
+
+    if (lastArgs) {
+      lastResult = func(...lastArgs)
+      lastArgs = undefined
+    }
+
+    ready = opts.leading
+    return lastResult
   }
 
   return throttled
 }
-
-// Define a function that you want to throttle
-const logDate = () => {
-  console.log(new Date())
-  return new Date().toISOString()
-}
-
-// Create a throttled version of the function
-const throttledLogDate = throttle(logDate, 1000)
-
-// Call the throttled function multiple times
-console.log(throttledLogDate()) // Logs the current date and time
-console.log(throttledLogDate()) // Returns the same date and time as the previous call
-setTimeout(() => console.log(throttledLogDate()), 2000) // Logs a new date and time after 2 seconds
-
-// Define a function that you want to throttle
-const logMessage = (message: string) => {
-  console.log(message)
-}
-
-// Create a throttled version of the function
-const throttledLogMessage = throttle(logMessage, 1000)
-
-// Call the throttled function multiple times
-throttledLogMessage('Hello, world!') // Logs "Hello, world!"
-throttledLogMessage('Hello again!') // Does nothing because the function is throttled
-setTimeout(() => throttledLogMessage('Hello after 2 seconds!'), 2000) // Logs "Hello after 2 seconds!" after 2 seconds
