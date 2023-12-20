@@ -104,6 +104,9 @@ export type DefinitelyArray<T> = Extract<
 > extends never
   ? ReadonlyArray<unknown>
   : Extract<T, Array<any> | ReadonlyArray<any>>
+
 export type DefinitelyFunction<T> = Extract<T, Function> extends never
   ? Function
   : Extract<T, Function>
+
+export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array

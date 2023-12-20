@@ -1,4 +1,4 @@
-import { isArray, isFunction, isMap, isNil, isSet, isString } from '..'
+import { isArray, isFunction, isMap, isNil, isObjectType, isSet, isString } from '..'
 
 /**
  * Check if value is empty.
@@ -44,13 +44,11 @@ export const isEmpty = (val: unknown, opts?: { includeSymbols: boolean }) => {
     return val.byteLength === 0
   }
 
-  if (typeof val === 'object' || isFunction(val)) {
-    const keysLen = Object.keys(val as any).length
+  if (isObjectType(val) || isFunction(val)) {
     if (opts?.includeSymbols) {
-      const symbolsLen = Object.getOwnPropertySymbols(val as any).length
-      return keysLen === 0 && symbolsLen === 0
+      return Reflect.ownKeys(val).length === 0
     }
-    return keysLen === 0
+    return Object.keys(val!).length === 0
   }
 
   return true

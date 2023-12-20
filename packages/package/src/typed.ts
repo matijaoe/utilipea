@@ -53,8 +53,13 @@ export const isBoolean = (val: unknown): val is boolean => {
   return typeof val === 'boolean'
 }
 
+// figure out correct type guard
 export const isArray = <T>(val: T | ReadonlyArray<unknown>): val is DefinitelyArray<T> => {
   return Array.isArray(val)
+}
+
+export const isTypedArray = (value: unknown): value is TypedArray => {
+  return ArrayBuffer.isView(value) && !(value instanceof DataView)
 }
 
 export const isDate = (val: unknown): val is Date => {
@@ -91,6 +96,10 @@ export const isNumber = (val: unknown): val is number => {
 
 export const isSymbol = (val: unknown): val is symbol => {
   return typeof val === 'symbol'
+}
+
+export const isObjectType = (val: unknown): val is object => {
+  return typeof val === 'object'
 }
 
 export const isObject = (val: unknown): val is object => {

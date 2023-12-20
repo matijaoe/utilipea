@@ -14,7 +14,7 @@ describe('deepOmit', () => {
 
   it('return an empty object if all root keys are omitted', () => {
     const obj = { a: 1, b: { c: 2, d: 3 } }
-    expect(deepOmit(obj, { a: true, b: true })).toEqual({})
+    expect(deepOmit(obj, { a: true, b: true })).toStrictEqual({})
   })
 
   it('should return an empty object if the input is falsy', () => {
@@ -27,6 +27,6 @@ describe('deepOmit', () => {
 
   it('returns the original object if no keys are specified', () => {
     const obj = { a: 1, b: { c: 2, d: 3 } }
-    expect(deepOmit(obj, {})).toBe(obj)
+    expect(deepOmit(obj, {})).toStrictEqual(obj)
   })
 })

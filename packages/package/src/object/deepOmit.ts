@@ -21,11 +21,16 @@ import { hasNestedKeys } from '.'
  * deepOmit<typeof obj, OmittedType>(obj, { a: true, b: { c: true } });
  */
 export const deepOmit = <
-  T extends Record<PropertyKey, any>,
-  R extends Record<PropertyKey, any> = T
+T extends Record<PropertyKey, any>,
+R extends Record<PropertyKey, any> = T
 >(obj: T, keys: NestedOmit<T>): R => {
-  if (!obj) { return {} as R }
-  if (isEmpty(keys)) { return obj }
+  if (!obj) {
+    return {} as R
+  }
+
+  if (isEmpty(keys)) {
+    return obj
+  }
 
   const result = hasNestedKeys(keys) ? structuredClone(obj) : { ...obj }
 
@@ -40,4 +45,3 @@ export const deepOmit = <
 
   return result
 }
-

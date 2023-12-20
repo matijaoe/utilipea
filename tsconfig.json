@@ -10,8 +10,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "types": [
-      "bun-types",
-      "vitest/globals"
+      "bun-types"
     ],
     "allowImportingTsExtensions": true,
     "allowJs": true,
