@@ -1,0 +1,37 @@
+/**
+ * Given a delay and a function returns a new function
+ * that will only call the source function after delay
+ * milliseconds have passed without any invocations.
+ *
+ * The debounce function comes with a `cancel` method
+ * to cancel delayed `func` invocations and a `flush`
+ * method to invoke them immediately
+ */
+export const debounce = <TArgs extends any[]>(
+  { delay }: { delay: number },
+  func: (...args: TArgs) => any
+) => {
+  let timer: NodeJS.Timeout | undefined
+  let active = true
+
+  const debounced: DebounceFunction<TArgs> = (...args: TArgs) => {
+    if (active) {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        active && func(...args)
+        timer = undefined
+      }, delay)
+    } else {
+      func(...args)
+    }
+  }
+  debounced.isPending = () => {
+    return timer !== undefined
+  }
+  debounced.cancel = () => {
+    active = false
+  }
+  debounced.flush = (...args: TArgs) => func(...args)
+
+  return debounced
+}

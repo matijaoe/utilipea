@@ -110,3 +110,31 @@ export type DefinitelyFunction<T> = Extract<T, Function> extends never
   : Extract<T, Function>
 
 export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array
+
+export type Func<TArgs = any, KReturn = any | void> = (
+  ...args: TArgs[]
+) => KReturn
+
+export type DebounceFunction<TArgs extends any[]> = {
+  (...args: TArgs): void
+  /**
+   * Cancels the debounced function
+   */
+  cancel(): void
+  /**
+   * Checks if there is any invocation debounced
+   */
+  isPending(): boolean
+  /**
+   * Runs the debounced function immediately
+   */
+  flush(...args: TArgs): void
+}
+
+export type ThrottledFunction<TArgs extends any[]> = {
+  (...args: TArgs): void
+  /**
+   * Checks if there is any invocation throttled
+   */
+  isThrottled(): boolean
+}
