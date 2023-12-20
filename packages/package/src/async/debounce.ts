@@ -1,3 +1,19 @@
+export type DebounceFunction<TArgs extends any[]> = {
+  (...args: TArgs): void
+  /**
+   * Cancels the debounced function
+   */
+  cancel(): void
+  /**
+   * Checks if there is any invocation debounced
+   */
+  pending(): boolean
+  /**
+   * Runs the debounced function immediately
+   */
+  flush(...args: TArgs): void
+}
+
 /**
  * Given a delay and a function returns a new function
  * that will only call the source function after delay
@@ -25,7 +41,7 @@ export const debounce = <TArgs extends any[]>(
       func(...args)
     }
   }
-  debounced.isPending = () => {
+  debounced.pending = () => {
     return timer !== undefined
   }
   debounced.cancel = () => {
