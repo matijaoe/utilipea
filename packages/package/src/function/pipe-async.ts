@@ -1,5 +1,5 @@
+import type { Func } from '..'
 import { isFunction, isPromise } from '..'
-import type { Func } from '.'
 
 type MaybePromise<T> = T | Promise<T>
 type MaybeAsyncFunc<T, R> = Func<T, MaybePromise<R>>

@@ -1,5 +1,5 @@
+import type { Func } from '..'
 import { isFunction } from '..'
-import type { Func } from '.'
 
 export function pipe<A extends any[], B>(f1: (...args: A) => B): (...args: A) => B
 export function pipe<A, B>(value: A, f1: Func<A, B>): B

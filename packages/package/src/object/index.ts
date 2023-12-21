@@ -1,6 +1,7 @@
 export * from './deep-omit'
 export * from './has-nested-keys'
 export * from './object-entries'
+export * from './object-from-entries'
 export * from './object-keys'
 export * from './omit'
 export * from './pick'

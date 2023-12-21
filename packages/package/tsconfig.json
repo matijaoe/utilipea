@@ -3,12 +3,14 @@
     "target": "ESNext",
     "lib": [
       "ESNext",
-      "DOM"
+      "DOM",
+      "DOM.Iterable"
     ],
     "moduleDetection": "force",
     "rootDir": "./src",
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "types": [
       "bun-types",
       "vitest/globals",
@@ -17,14 +19,17 @@
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "strict": true,
-    "noImplicitReturns": false,
     "noUncheckedIndexedAccess": false,
     "declaration": true,
+    "declarationMap": true,
     "downlevelIteration": true,
     "noEmit": true,
     "outDir": "./dist",
+    "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts"
