@@ -35,11 +35,11 @@ describe('list function', () => {
   })
 
   it('should generate array of length 2 with mapper', () => {
-    expect(list({ len: 3, fill: (i) => `num-${i + 1}` })).toEqual(['num-1', 'num-2', 'num-3'])
+    expect(list({ len: 3, map: (i) => `num-${i + 1}` })).toEqual(['num-1', 'num-2', 'num-3'])
   })
 
   it('should generate array from 1 of length 2 with mapper', () => {
-    expect(list({ start: 1, len: 3, fill: (i) => `num-${i}` })).toEqual(['num-1', 'num-2', 'num-3'])
+    expect(list({ start: 1, len: 3, map: (i) => `num-${i}` })).toEqual(['num-1', 'num-2', 'num-3'])
   })
 
   it('should throw an error with negative step', () => {

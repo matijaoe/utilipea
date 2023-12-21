@@ -8,5 +8,7 @@ export * from './random'
 export * from './rest'
 export * from './string'
 export * from './typed'
+export * from './url'
+export * from './validate'
 
 export * from './models'

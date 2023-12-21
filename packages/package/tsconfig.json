@@ -11,7 +11,8 @@
     "moduleResolution": "bundler",
     "types": [
       "bun-types",
-      "vitest/globals"
+      "vitest/globals",
+      "web"
     ],
     "allowImportingTsExtensions": true,
     "allowJs": true,
