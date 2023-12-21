@@ -40,8 +40,24 @@ describe('toBoolean', () => {
     expect(toBoolean(1)).toBe(true)
   })
 
-  it('should convert 0 to true', () => {
+  it('should convert 0 to false', () => {
     expect(toBoolean(0)).toBe(false)
+  })
+
+  it('should convert "1" to false', () => {
+    expect(toBoolean('1')).toBe(false)
+  })
+
+  it('should convert "0" to false', () => {
+    expect(toBoolean('0')).toBe(false)
+  })
+
+  it('should convert "true" to false', () => {
+    expect(toBoolean('true')).toBe(true)
+  })
+
+  it('should convert "false" to false', () => {
+    expect(toBoolean('false')).toBe(false)
   })
 
   it.each(nonStrictBoolNumbers)('should convert %s to false', (val) => {
@@ -65,22 +81,22 @@ describe('toBoolean', () => {
   })
 
   it.each(customTrueValues)('should convert %s to true with custom trueValues', (val) => {
-    expect(toBoolean(val, { trueValues: new Set(customTrueValues) })).toBe(true)
+    expect(toBoolean(val, { trueValues: customTrueValues })).toBe(true)
   })
 
   it.each(trueString)('should convert %s to false with custom trueValues', (val) => {
-    expect(toBoolean(val, { trueValues: new Set(customTrueValues) })).toBe(false)
+    expect(toBoolean(val, { trueValues: customTrueValues })).toBe(false)
   })
 
   it.each(customFalseValues)('should convert %s to false with custom falseValues', (val) => {
-    expect(toBoolean(val, { falseValues: new Set(customFalseValues) })).toBe(false)
+    expect(toBoolean(val, { falseValues: customFalseValues })).toBe(false)
   })
 
   it.each(falseStrings)('should convert %s to false with custom falseValues', (val) => {
-    expect(toBoolean(val, { falseValues: new Set(customFalseValues) })).toBe(false)
+    expect(toBoolean(val, { falseValues: customFalseValues })).toBe(false)
   })
 
   it.each(falseStrings)('should throw for %s with custom falseValues in strict mode', (val) => {
-    expect(() => toBoolean(val, { falseValues: new Set(customFalseValues), strict: true })).toThrow()
+    expect(() => toBoolean(val, { falseValues: customFalseValues, strict: true })).toThrow()
   })
 })

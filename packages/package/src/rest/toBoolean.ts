@@ -1,18 +1,31 @@
 import { isBoolean, isNumber, isString } from '..'
+import type { EnumType } from './enum'
 
-export const BOOL_TRUE = new Set(['true', 't', 'yes', 'y', 'on', '1'] as const)
-export const BOOL_FALSE = new Set(['false', 'f', 'no', 'n', 'off', '0'] as const)
+const TrueSet = {
+  basic: ['true'],
+  full: ['true', 't', 'yes', 'y', 'on', '1'],
+  number: [1]
+} as const
+
+const FalseSet = {
+  basic: ['false'],
+  full: ['false', 'f', 'no', 'n', 'off', '0'],
+  number: [0]
+} as const
+
+type TrueValues = EnumType<typeof TrueSet>
+type FalseValues = EnumType<typeof FalseSet>
 
 type ToBooleanOptions = {
   strict?: boolean
-  trueValues?: Set<string>
-  falseValues?: Set<string>
+  trueValues?: ReadonlyArray<TrueValues | string>
+  falseValues?: ReadonlyArray<FalseValues | string>
 }
 
 export const toBoolean = (val: any, options?: ToBooleanOptions): val is boolean => {
   const {
-    trueValues = BOOL_TRUE,
-    falseValues = BOOL_FALSE,
+    trueValues = TrueSet.basic,
+    falseValues = FalseSet.basic,
     strict = false,
   } = options ?? {}
 
@@ -27,8 +40,8 @@ export const toBoolean = (val: any, options?: ToBooleanOptions): val is boolean 
 
   if (isString(val)) {
     val = val.trim().toLowerCase()
-    if (trueValues.has(val)) { return true }
-    if (falseValues.has(val)) { return false }
+    if (trueValues.includes(val)) { return true }
+    if (falseValues.includes(val)) { return false }
     if (strict) {
       throw new Error(`Cannot convert "${val}" to boolean`)
     }

@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@matijaoe/eslint-config": "^1.2.0",
+    "@types/web": "^0.0.130",
     "@vitest/ui": "^1.0.4",
     "bumpp": "^9.2.0",
     "bun-types": "^1.0.15",

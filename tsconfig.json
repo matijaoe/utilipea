@@ -3,8 +3,7 @@
     "composite": true,
     "target": "ESNext",
     "lib": [
-      "ESNext",
-      "DOM"
+      "ESNext"
     ],
     "moduleDetection": "force",
     "module": "ESNext",
