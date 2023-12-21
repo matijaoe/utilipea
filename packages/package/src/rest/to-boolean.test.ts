@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { titlecase } from '..'
-import { toBoolean } from './to-boolean'
+import { FalseSet, TrueSet, toBoolean } from './to-boolean'
 
 const trueString = ['true', 't', 'yes', 'y', 'on', '1']
 const trueStringVariations = [...trueString, ...trueString.map((v) => v.toUpperCase()), ...trueString.map(titlecase)]
@@ -17,7 +17,7 @@ const customFalseValues = ['nope', 'nah', 'howaboutno']
 
 describe('toBoolean', () => {
   it.each(trueStringVariations)('should convert %s to true', (val) => {
-    expect(toBoolean(val)).toBe(true)
+    expect(toBoolean(val, { trueValues: TrueSet.full, falseValues: TrueSet.full })).toBe(true)
   })
 
   it.each(falseStringsVariations)('should convert %s to false', (val) => {
@@ -65,11 +65,11 @@ describe('toBoolean', () => {
   })
 
   it.each(trueStringVariations)('should convert %s to true in strict mode', (val) => {
-    expect(toBoolean(val, { strict: true })).toBe(true)
+    expect(toBoolean(val, { strict: true, trueValues: TrueSet.full })).toBe(true)
   })
 
   it.each(falseStringsVariations)('should convert %s to false in strict mode', (val) => {
-    expect(toBoolean(val, { strict: true })).toBe(false)
+    expect(toBoolean(val, { strict: true, falseValues: FalseSet.full })).toBe(false)
   })
 
   it.each(nonStrictBoolNumbers)('should throw for %s in strict mode', (val) => {

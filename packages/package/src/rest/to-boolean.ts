@@ -1,22 +1,22 @@
 import { isBoolean, isNumber, isString } from '..'
 import type { EnumType } from './enum'
 
-const TrueSet = {
+export const TrueSet = {
   basic: ['true'],
   full: ['true', 't', 'yes', 'y', 'on', '1'],
   number: [1]
 } as const
 
-const FalseSet = {
+export const FalseSet = {
   basic: ['false'],
   full: ['false', 'f', 'no', 'n', 'off', '0'],
   number: [0]
 } as const
 
-type TrueValues = EnumType<typeof TrueSet>
-type FalseValues = EnumType<typeof FalseSet>
+export type TrueValues = EnumType<typeof TrueSet>
+export type FalseValues = EnumType<typeof FalseSet>
 
-type ToBooleanOptions = {
+export type ToBooleanOptions = {
   strict?: boolean
   trueValues?: ReadonlyArray<TrueValues | string>
   falseValues?: ReadonlyArray<FalseValues | string>
