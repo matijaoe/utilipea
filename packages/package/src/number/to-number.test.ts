@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { toNumber } from './toNumber'
+import { toNumber } from './to-number'
 
 describe('[number] toNumber', () => {
   it('converts int number', () => {

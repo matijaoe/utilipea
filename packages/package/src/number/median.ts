@@ -1,5 +1,5 @@
 import { sort } from '..'
-import { isOdd } from './isOdd'
+import { isOdd } from './is-odd'
 
 /**
  * Calculate the median of an array of numbers

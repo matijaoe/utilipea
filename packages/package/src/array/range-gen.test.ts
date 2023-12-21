@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { rangeGen } from './rangeGen'
+import { rangeGen } from './range-gen'
 import { toList } from '.'
 
 describe('[array] rangeGen', () => {

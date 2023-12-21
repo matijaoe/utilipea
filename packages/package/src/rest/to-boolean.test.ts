@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { titlecase } from '..'
-import { toBoolean } from './toBoolean'
+import { toBoolean } from './to-boolean'
 
 const trueString = ['true', 't', 'yes', 'y', 'on', '1']
 const trueStringVariations = [...trueString, ...trueString.map((v) => v.toUpperCase()), ...trueString.map(titlecase)]

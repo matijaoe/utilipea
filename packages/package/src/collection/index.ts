@@ -1,2 +1,3 @@
 export * from './clone'
-export * from './isEmpty'
+export * from './is-empty'
+export * from './set-has'

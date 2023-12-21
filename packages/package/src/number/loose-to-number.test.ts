@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { looseToNumber } from './looseToNumber'
+import { looseToNumber } from './loose-to-number'
 
 describe('[number] looseToNumber', () => {
   it('loosely converts int number', () => {

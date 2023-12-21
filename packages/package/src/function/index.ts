@@ -1,4 +1,4 @@
 export * from './pipe'
-export * from './pipeAsync'
+export * from './pipe-async'
 export * from './times'
 

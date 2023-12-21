@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isBetween } from './isBetween'
+import { isBetween } from './is-between'
 
 describe('isBetween', () => {
   it('is true when value is between min and max', () => {

@@ -1,3 +1,3 @@
-export * from './isExternalUrl'
-export * from './isRelative'
-export * from './isValidUrl'
+export * from './is-external-url'
+export * from './is-relative'
+export * from './is-valid-url'

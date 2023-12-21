@@ -1,6 +1,6 @@
 /* eslint-disable prefer-regex-literals */
 import { describe, expect, it } from 'vitest'
-import { isEmpty } from './isEmpty'
+import { isEmpty } from './is-empty'
 
 describe('isEmpty', () => {
   it('should return true for null and undefined', () => {

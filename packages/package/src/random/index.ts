@@ -1,2 +1,2 @@
-export * from './randomFloat'
-export * from './randomInt'
+export * from './random-float'
+export * from './random-int'
