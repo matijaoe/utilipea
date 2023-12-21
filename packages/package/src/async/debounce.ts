@@ -9,7 +9,7 @@ export type DebounceFunction<TArgs extends any[]> = {
    */
   pending(): boolean
   /**
-   * Runs the debounced function immediately
+   * Runs the debounced function immediately, and cancels the debounced invocation
    */
   flush(...args: TArgs): void
 }
@@ -23,31 +23,38 @@ export type DebounceFunction<TArgs extends any[]> = {
  * to cancel delayed `func` invocations and a `flush`
  * method to invoke them immediately
  */
-export const debounce = <TArgs extends any[]>(
-  { delay }: { delay: number },
-  func: (...args: TArgs) => any
+export const debounce = <TArgs extends any[], TRes>(
+  func: (...args: TArgs) => TRes,
+  delay: number,
 ) => {
-  let timer: NodeJS.Timeout | undefined
-  let active = true
+  let timer: ReturnType<typeof setTimeout> | undefined
+  let lastArgs: TArgs
 
   const debounced: DebounceFunction<TArgs> = (...args: TArgs) => {
-    if (active) {
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        active && func(...args)
-        timer = undefined
-      }, delay)
-    } else {
-      func(...args)
-    }
+    lastArgs = args
+
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      func(...lastArgs)
+      timer = undefined
+    }, delay)
   }
+
+  const cancel = () => {
+    clearTimeout(timer)
+    timer = undefined
+  }
+
   debounced.pending = () => {
     return timer !== undefined
   }
-  debounced.cancel = () => {
-    active = false
+
+  debounced.cancel = cancel
+
+  debounced.flush = () => {
+    cancel()
+    return func(...lastArgs)
   }
-  debounced.flush = (...args: TArgs) => func(...args)
 
   return debounced
 }

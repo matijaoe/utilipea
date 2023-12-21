@@ -38,17 +38,15 @@ export const throttle = <TArgs extends any[], TRes>(
     return result
   }
 
-  throttled.pending = () => {
-    return timer !== undefined
-  }
-
   throttled.lastResult = () => {
     return result
   }
 
-  throttled.cancel = () => {
-    if (!timer) { return }
+  throttled.pending = () => {
+    return timer !== undefined
+  }
 
+  throttled.cancel = () => {
     clearTimeout(timer)
     timer = undefined
     ready = false
