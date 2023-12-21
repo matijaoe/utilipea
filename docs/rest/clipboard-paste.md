@@ -1,7 +1,7 @@
 ---
 category: Rest
-title: 'clipboard-paste'
+title: 'clipboardPaste'
 ---
 
-# clipboard-paste
+# clipboardPaste
 

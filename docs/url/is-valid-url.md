@@ -1,7 +1,7 @@
 ---
 category: Url
-title: 'is-valid-url'
+title: 'isValidUrl'
 ---
 
-# is-valid-url
+# isValidUrl
 

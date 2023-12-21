@@ -1,7 +1,7 @@
 ---
 category: Array
-title: 'range-gen'
+title: 'rangeGen'
 ---
 
-# range-gen
+# rangeGen
 

@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-promise'
+title: 'isPromise'
 ---
 
-# is-promise
+# isPromise
 

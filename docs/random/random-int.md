@@ -1,7 +1,7 @@
 ---
 category: Random
-title: 'random-int'
+title: 'randomInt'
 ---
 
-# random-int
+# randomInt
 

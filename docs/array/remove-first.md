@@ -1,7 +1,7 @@
 ---
 category: Array
-title: 'remove-first'
+title: 'removeFirst'
 ---
 
-# remove-first
+# removeFirst
 

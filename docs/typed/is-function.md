@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-function'
+title: 'isFunction'
 ---
 
-# is-function
+# isFunction
 

@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-typed-array'
+title: 'isTypedArray'
 ---
 
-# is-typed-array
+# isTypedArray
 

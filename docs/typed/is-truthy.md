@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-truthy'
+title: 'isTruthy'
 ---
 
-# is-truthy
+# isTruthy
 

@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-plain-object'
+title: 'isPlainObject'
 ---
 
-# is-plain-object
+# isPlainObject
 

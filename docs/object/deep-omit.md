@@ -1,7 +1,7 @@
 ---
 category: Object
-title: 'deep-omit'
+title: 'deepOmit'
 ---
 
-# deep-omit
+# deepOmit
 

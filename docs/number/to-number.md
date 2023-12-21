@@ -1,7 +1,7 @@
 ---
 category: Number
-title: 'to-number'
+title: 'toNumber'
 ---
 
-# to-number
+# toNumber
 

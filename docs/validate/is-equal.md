@@ -1,7 +1,7 @@
 ---
 category: Validate
-title: 'is-equal'
+title: 'isEqual'
 ---
 
-# is-equal
+# isEqual
 

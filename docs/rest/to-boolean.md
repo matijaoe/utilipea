@@ -1,7 +1,7 @@
 ---
 category: Rest
-title: 'to-boolean'
+title: 'toBoolean'
 ---
 
-# to-boolean
+# toBoolean
 

@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-string'
+title: 'isString'
 ---
 
-# is-string
+# isString
 

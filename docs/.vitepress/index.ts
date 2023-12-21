@@ -1,6 +1,7 @@
 import { readdir } from 'node:fs/promises'
 import path, { join } from 'node:path'
 import process from 'node:process'
+import { camelCase } from 'scule'
 import { sort, titlecase } from '../../packages/package/src'
 
 type MarkdownData = {
@@ -34,10 +35,10 @@ const packageSrc = path.resolve(process.cwd(), 'packages', 'package', 'src')
 
 const methodPageTemplate = (category: string, name: string) => `---
 category: ${titlecase(category)}
-title: '${name}'
+title: '${camelCase(name)}'
 ---
 
-# ${name}
+# ${camelCase(name)}
 
 `
 
@@ -81,7 +82,7 @@ export async function generateCategorySidebarItem(dirName: string) {
   const sidebar = filteredFiles.map((file) => {
     const text = getFileNameWithoutExtension(file)
     const link = `/${dirName}/${text}`
-    return { text, link }
+    return { text: camelCase(text), link }
   })
   return sidebar
 }

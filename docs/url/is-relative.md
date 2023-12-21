@@ -1,7 +1,7 @@
 ---
 category: Url
-title: 'is-relative'
+title: 'isRelative'
 ---
 
-# is-relative
+# isRelative
 

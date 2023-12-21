@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-object-type'
+title: 'isObjectType'
 ---
 
-# is-object-type
+# isObjectType
 

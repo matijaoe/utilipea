@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-symbol'
+title: 'isSymbol'
 ---
 
-# is-symbol
+# isSymbol
 

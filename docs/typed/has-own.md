@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'has-own'
+title: 'hasOwn'
 ---
 
-# has-own
+# hasOwn
 

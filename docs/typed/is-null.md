@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-null'
+title: 'isNull'
 ---
 
-# is-null
+# isNull
 

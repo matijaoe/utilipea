@@ -1,7 +1,7 @@
 ---
 category: Number
-title: 'loose-to-number'
+title: 'looseToNumber'
 ---
 
-# loose-to-number
+# looseToNumber
 

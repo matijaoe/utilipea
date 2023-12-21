@@ -1,7 +1,7 @@
 ---
 category: Url
-title: 'is-external-url'
+title: 'isExternalUrl'
 ---
 
-# is-external-url
+# isExternalUrl
 

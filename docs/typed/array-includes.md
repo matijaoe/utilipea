@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'array-includes'
+title: 'arrayIncludes'
 ---
 
-# array-includes
+# arrayIncludes
 

@@ -1,11 +1,10 @@
 # Get Started
 
-You made a wise choice, my friend. Let's get started.
+You made a wise choice. Let's get started.
 
 ## Installation
 
-Getting toolip into your project
-
+Getting utilipea into your project
 
 ### pnpm
 ```bash
@@ -14,7 +13,7 @@ pnpm add utilipea
 
 ### bun
 ```bash
-bun i utilipea
+bun add utilipea
 ```
 
 ### npm

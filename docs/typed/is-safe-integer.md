@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-safe-integer'
+title: 'isSafeInteger'
 ---
 
-# is-safe-integer
+# isSafeInteger
 

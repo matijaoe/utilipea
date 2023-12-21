@@ -1,7 +1,7 @@
 ---
 category: Async
-title: 'try-catch'
+title: 'tryCatch'
 ---
 
-# try-catch
+# tryCatch
 

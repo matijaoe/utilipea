@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-def'
+title: 'isDef'
 ---
 
-# is-def
+# isDef
 

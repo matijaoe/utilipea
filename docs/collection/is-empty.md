@@ -1,7 +1,7 @@
 ---
 category: Collection
-title: 'is-empty'
+title: 'isEmpty'
 ---
 
-# is-empty
+# isEmpty
 

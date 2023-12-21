@@ -1,7 +1,7 @@
 ---
 category: Rest
-title: 'clipboard-copy'
+title: 'clipboardCopy'
 ---
 
-# clipboard-copy
+# clipboardCopy
 

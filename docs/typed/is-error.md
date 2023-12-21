@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-error'
+title: 'isError'
 ---
 
-# is-error
+# isError
 

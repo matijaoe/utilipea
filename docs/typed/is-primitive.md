@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-primitive'
+title: 'isPrimitive'
 ---
 
-# is-primitive
+# isPrimitive
 

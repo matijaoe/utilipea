@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-finite'
+title: 'isFinite'
 ---
 
-# is-finite
+# isFinite
 

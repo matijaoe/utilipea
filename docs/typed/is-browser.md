@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-browser'
+title: 'isBrowser'
 ---
 
-# is-browser
+# isBrowser
 

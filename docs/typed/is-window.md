@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-window'
+title: 'isWindow'
 ---
 
-# is-window
+# isWindow
 

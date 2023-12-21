@@ -1,7 +1,7 @@
 ---
 category: Object
-title: 'object-from-entries'
+title: 'objectFromEntries'
 ---
 
-# object-from-entries
+# objectFromEntries
 

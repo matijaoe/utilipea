@@ -1,7 +1,7 @@
 ---
 category: Object
-title: 'object-keys'
+title: 'objectKeys'
 ---
 
-# object-keys
+# objectKeys
 

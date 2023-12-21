@@ -1,7 +1,7 @@
 ---
 category: Array
-title: 'clamp-array-range'
+title: 'clampArrayRange'
 ---
 
-# clamp-array-range
+# clampArrayRange
 

@@ -1,7 +1,7 @@
 ---
 category: Number
-title: 'is-between'
+title: 'isBetween'
 ---
 
-# is-between
+# isBetween
 

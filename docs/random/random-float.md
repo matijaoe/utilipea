@@ -1,7 +1,7 @@
 ---
 category: Random
-title: 'random-float'
+title: 'randomFloat'
 ---
 
-# random-float
+# randomFloat
 

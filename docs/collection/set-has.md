@@ -1,7 +1,7 @@
 ---
 category: Collection
-title: 'set-has'
+title: 'setHas'
 ---
 
-# set-has
+# setHas
 

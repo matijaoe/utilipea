@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-float'
+title: 'isFloat'
 ---
 
-# is-float
+# isFloat
 

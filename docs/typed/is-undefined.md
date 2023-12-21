@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-undefined'
+title: 'isUndefined'
 ---
 
-# is-undefined
+# isUndefined
 

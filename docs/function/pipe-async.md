@@ -1,7 +1,7 @@
 ---
 category: Function
-title: 'pipe-async'
+title: 'pipeAsync'
 ---
 
-# pipe-async
+# pipeAsync
 

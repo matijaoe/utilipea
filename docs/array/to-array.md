@@ -1,7 +1,7 @@
 ---
 category: Array
-title: 'to-array'
+title: 'toArray'
 ---
 
-# to-array
+# toArray
 

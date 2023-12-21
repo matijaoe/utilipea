@@ -1,7 +1,7 @@
 ---
 category: Array
-title: 'remove-last'
+title: 'removeLast'
 ---
 
-# remove-last
+# removeLast
 

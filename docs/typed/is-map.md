@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-map'
+title: 'isMap'
 ---
 
-# is-map
+# isMap
 

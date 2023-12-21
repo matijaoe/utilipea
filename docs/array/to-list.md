@@ -1,7 +1,7 @@
 ---
 category: Array
-title: 'to-list'
+title: 'toList'
 ---
 
-# to-list
+# toList
 

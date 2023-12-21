@@ -1,7 +1,7 @@
 ---
 category: Number
-title: 'is-even'
+title: 'isEven'
 ---
 
-# is-even
+# isEven
 

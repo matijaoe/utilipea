@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-date'
+title: 'isDate'
 ---
 
-# is-date
+# isDate
 

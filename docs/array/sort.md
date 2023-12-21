@@ -5,7 +5,6 @@ title: 'sort'
 
 # sort
 
-
 Sorts an array based on the specified criteria. Does not mutate the original array.
 
 ## Usage

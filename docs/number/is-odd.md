@@ -1,7 +1,7 @@
 ---
 category: Number
-title: 'is-odd'
+title: 'isOdd'
 ---
 
-# is-odd
+# isOdd
 

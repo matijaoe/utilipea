@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-boolean'
+title: 'isBoolean'
 ---
 
-# is-boolean
+# isBoolean
 

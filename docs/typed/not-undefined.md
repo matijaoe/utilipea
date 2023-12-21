@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'not-undefined'
+title: 'notUndefined'
 ---
 
-# not-undefined
+# notUndefined
 

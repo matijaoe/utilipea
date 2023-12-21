@@ -1,7 +1,7 @@
 ---
 category: Object
-title: 'has-nested-keys'
+title: 'hasNestedKeys'
 ---
 
-# has-nested-keys
+# hasNestedKeys
 

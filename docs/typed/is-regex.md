@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-regex'
+title: 'isRegex'
 ---
 
-# is-regex
+# isRegex
 

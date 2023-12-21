@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-url'
+title: 'isUrl'
 ---
 
-# is-url
+# isUrl
 

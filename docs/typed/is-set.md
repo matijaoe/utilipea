@@ -1,7 +1,7 @@
 ---
 category: Typed
-title: 'is-set'
+title: 'isSet'
 ---
 
-# is-set
+# isSet
 
