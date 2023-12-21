@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { deepOmit } from './deepOmit'
+import { deepOmit } from './deep-omit'
 
 describe('deepOmit', () => {
   it('removes specified keys from an object', () => {

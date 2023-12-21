@@ -14,6 +14,7 @@
     "typescript": "^5.0.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "type-fest": "^4.8.3"
   }
 }
