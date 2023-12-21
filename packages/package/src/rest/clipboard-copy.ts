@@ -6,4 +6,3 @@ export const clipboardCopy = async (val: string | ClipboardItem[]) => {
   }
   return window.navigator.clipboard.write(val)
 }
-
