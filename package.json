@@ -13,6 +13,9 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "dependencies": {
+    "vitepress": "^1.0.0-rc.32"
+  },
   "devDependencies": {
     "bun-types": "latest",
     "type-fest": "^4.8.3"
