@@ -29,13 +29,14 @@ export const debounce = <TArgs extends any[], TRes>(
 ) => {
   let timer: ReturnType<typeof setTimeout> | undefined
   let lastArgs: TArgs
+  let result: TRes | undefined
 
   const debounced: DebounceFunction<TArgs> = (...args: TArgs) => {
     lastArgs = args
 
     clearTimeout(timer)
     timer = setTimeout(() => {
-      func(...lastArgs)
+      result = func(...lastArgs)
       timer = undefined
     }, delay)
   }
@@ -53,7 +54,8 @@ export const debounce = <TArgs extends any[], TRes>(
 
   debounced.flush = () => {
     cancel()
-    return func(...lastArgs)
+    result = func(...lastArgs)
+    return result
   }
 
   return debounced
