@@ -1,5 +1,5 @@
 ---
-category: Rest
+category: Browser
 title: 'clipboardCopy'
 ---
 

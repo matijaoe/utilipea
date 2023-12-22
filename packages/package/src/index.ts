@@ -1,5 +1,6 @@
 export * from './array'
 export * from './async'
+export * from './browser'
 export * from './collection'
 export * from './function'
 export * from './number'

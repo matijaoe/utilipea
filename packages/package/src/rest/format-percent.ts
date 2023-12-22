@@ -4,16 +4,16 @@
  * @category Format
  *
  * @example
- * formatPercentage(0.5)
+ * formatPercent(0.5)
  * // => '50%'
  *
- * formatPercentage(0.5, { minimumFractionDigits: 2 })
+ * formatPercent(0.5, { minimumFractionDigits: 2 })
  * // => '50.00%'
  *
- * formatPercentage(0.12345, { maximumFractionDigits: 2 })
+ * formatPercent(0.12345, { maximumFractionDigits: 2 })
  * // => '12.35%'
  */
-export const formatPercentage = (
+export const formatPercent = (
   val: number,
   opts: {
     minimumFractionDigits?: number
