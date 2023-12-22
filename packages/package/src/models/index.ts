@@ -45,10 +45,10 @@ export type StandardObjectModel = typeof StandardObject[keyof typeof StandardObj
 export type PlainObject = Record<PropertyKey, any>
 
 export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> =
-    Pick<T, Exclude<keyof T, Keys>>
-    & {
-      [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>
-    }[Keys]
+  Pick<T, Exclude<keyof T, Keys>>
+  & {
+    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>
+  }[Keys]
 
 export type Primitive = number | string | undefined | symbol | bigint | null
 

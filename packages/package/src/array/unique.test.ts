@@ -18,7 +18,7 @@ describe('[array] unique', () => {
   })
 
   it('returns unique arrays based on the first element', () => {
-    const result = unique([[1, 2], [1, 2], [3, 4]], { by: (item) => item[0] })
+    const result = unique([[1, 2], [1, 2], [3, 4]], { by: (item) => item.at(0) })
     expect(result).toEqual([[1, 2], [3, 4]])
   })
 

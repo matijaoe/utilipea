@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+bun --prefix ./packages/package run lint
+bun --prefix ./packages/package run test

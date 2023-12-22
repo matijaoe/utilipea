@@ -16,9 +16,9 @@ import { isArray } from '..'
  * clamp(0, [1, 5]) // 1
  * clamp(7, [1, 5]) // 5
  */
-export function clamp(val: number, range: { min: number; max?: number } | { min?: number; max: number }): number
+export function clamp(val: number, range: { min: number, max?: number } | { min?: number, max: number }): number
 export function clamp(val: number, range: [number, number]): number
-export function clamp(val: number, range: { min: number; max?: number } | { min?: number; max: number } | [number, number]): number {
+export function clamp(val: number, range: { min: number, max?: number } | { min?: number, max: number } | [number, number]): number {
   let min: number, max: number
 
   if (isArray(range)) {

@@ -57,8 +57,8 @@ describe('[collection] clone', () => {
       const cloned = clone(list)
 
       expect(list).not.toBe(cloned)
-      expect(list[2]).not.toBe(cloned[2])
-      expect(list[2][0]).not.toBe(cloned[2][0])
+      expect(list.at(2)).not.toBe(cloned.at(2))
+      expect(list.at(2).at(0)).not.toBe(cloned.at(2).at(0))
 
       expect(cloned).toEqual([1, [1, 2, 3], [[[5]]]])
     })
@@ -93,14 +93,14 @@ describe('[collection] clone', () => {
     it('clones array with objects', () => {
       const list: any = [{ a: { b: 1 } }, [{ c: { d: 1 } }]]
       const cloned = clone(list)
-      list[1][0] = null
+      list.at(1)[0] = null
       expect(cloned).toEqual([{ a: { b: 1 } }, [{ c: { d: 1 } }]])
     })
 
     it('clones array with arrays', () => {
       const list: Array<Array<any>> = [[1], [[3]]]
       const cloned = clone(list)
-      list[1][0] = null
+      list.at(1)[0] = null
       expect(cloned).toEqual([[1], [[3]]])
     })
 
@@ -109,17 +109,17 @@ describe('[collection] clone', () => {
       const list = [{ b: obj }, { b: obj }]
       const cloned = clone(list)
 
-      expect(list[0].b).toBe(list[1].b)
-      expect(cloned[0].b).toBe(cloned[1].b)
-      expect(cloned[0].b).not.toBe(list[0].b)
-      expect(cloned[1].b).not.toBe(list[1].b)
+      expect(list.at(0).b).toBe(list.at(1).b)
+      expect(cloned.at(0).b).toBe(cloned.at(1).b)
+      expect(cloned.at(0).b).not.toBe(list.at(0).b)
+      expect(cloned.at(1).b).not.toBe(list.at(1).b)
 
-      expect(cloned[0].b).toEqual({ a: 1 })
-      expect(cloned[1].b).toEqual({ a: 1 })
+      expect(cloned.at(0).b).toEqual({ a: 1 })
+      expect(cloned.at(1).b).toEqual({ a: 1 })
 
       obj.a = 2
-      expect(cloned[0].b).toEqual({ a: 1 })
-      expect(cloned[1].b).toEqual({ a: 1 })
+      expect(cloned.at(0).b).toEqual({ a: 1 })
+      expect(cloned.at(1).b).toEqual({ a: 1 })
     })
   })
 

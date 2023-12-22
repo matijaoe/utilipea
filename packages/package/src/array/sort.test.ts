@@ -70,6 +70,6 @@ describe('[array] sort', () => {
   it('sorts array of dates', () => {
     const dates = [new Date(2020, 1, 1), new Date(2019, 1, 1), new Date(2021, 1, 1)]
     const result = sort(dates)
-    expect(result).toEqual([dates[1], dates[0], dates[2]])
+    expect(result).toEqual([dates.at(1), dates.at(0), dates.at(2)])
   })
 })

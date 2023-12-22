@@ -48,7 +48,7 @@ export const isEmpty = (val: unknown, opts?: { includeSymbols: boolean }) => {
     if (opts?.includeSymbols) {
       return Reflect.ownKeys(val).length === 0
     }
-    return Object.keys(val!).length === 0
+    return Object.keys(val).length === 0
   }
 
   return true

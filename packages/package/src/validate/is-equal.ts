@@ -27,7 +27,7 @@ export const isEqual = (x: unknown, y: unknown): boolean => {
   }
 
   if (isMap(x) && isMap(y) || isSet(x) && isSet(y)) {
-    return isEqualArray(Array.from(x), Array.from(y))
+    return isEqualArray([...x], [...y])
   }
 
   if (x instanceof ArrayBuffer && y instanceof ArrayBuffer) {

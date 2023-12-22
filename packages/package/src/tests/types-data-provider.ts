@@ -26,27 +26,38 @@ export const typesDataProvider = (
     | 'promise'
 ): TestObj => {
   switch (t) {
-    case 'number':
+    case 'number': {
       return 5
-    case 'array':
+    }
+    case 'array': {
       return [1, 2, 3]
-    case 'boolean':
+    }
+    case 'boolean': {
       return false
-    case 'date':
+    }
+    case 'date': {
       return new Date()
-    case 'function':
+    }
+    case 'function': {
       return () => {}
-    case 'null':
+    }
+    case 'null': {
       return null
-    case 'promise':
+    }
+    case 'promise': {
       return Promise.resolve(5)
-    case 'string':
+    }
+    case 'string': {
       return 'text'
-    case 'object':
+    }
+    case 'object': {
       return { a: 'asd' }
-    case 'error':
+    }
+    case 'error': {
       return new Error('yikes')
-    case 'undefined':
+    }
+    case 'undefined': {
       return undefined
+    }
   }
 }

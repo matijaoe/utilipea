@@ -34,6 +34,7 @@
     "format": "eslint . --fix"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.4.6",
     "@types/web": "^0.0.130",
     "@vitest/ui": "^1.0.4",
     "bumpp": "^9.2.0",

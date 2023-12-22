@@ -16,4 +16,3 @@ Run docs
 ```bash
 bun run docs:dev
 ```
-

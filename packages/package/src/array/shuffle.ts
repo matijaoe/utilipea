@@ -20,7 +20,7 @@ import { randomIntInsecure, randomInt as randomIntSecure } from '../random'
  * console.log(arr)
  * // => [3, 5, 1, 4, 2]
  */
-export const shuffle = <T>(array: T[], opts?: { secure?: boolean; mutate?: boolean }) => {
+export const shuffle = <T>(array: T[], opts?: { secure?: boolean, mutate?: boolean }) => {
   const arr = opts?.mutate ? array : [...array]
 
   const randomInt = opts?.secure ? randomIntSecure : randomIntInsecure
