@@ -1,3 +1,5 @@
+import { isNumber, isString } from '..'
+
 /**
  * Convert a value to a number, using `parseFloat()`.
  *
@@ -11,9 +13,10 @@
  * toNumber('foo', 'bar') // 'bar'
  */
 export const looseToNumber = <T = undefined>(
-  val: any,
+  val: unknown,
   fallback?: T
 ): number | T => {
-  const n = Number.parseFloat(val)
+  if (isNumber(val)) { return val }
+  const n = isString(val) ? Number.parseFloat(val) : Number.NaN
   return Number.isNaN(n) ? fallback as T : n
 }

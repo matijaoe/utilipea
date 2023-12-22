@@ -12,7 +12,7 @@ export const insert = <T>(arr1: T[], arr2: T | T[], index?: number): T[] => {
   }
 
   if (!index) {
-    return items.concat(arr1)
+    return [...items, ...arr1]
   }
 
   const normalizedIndex = clamp(index, [-arr1.length, arr1.length])
@@ -20,5 +20,5 @@ export const insert = <T>(arr1: T[], arr2: T | T[], index?: number): T[] => {
   const front = arr1.slice(0, normalizedIndex)
   const back = arr1.slice(normalizedIndex)
 
-  return front.concat(items, back)
+  return [...front, ...items, ...back]
 }

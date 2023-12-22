@@ -1,5 +1,3 @@
-import { isInt } from '..'
-
 /**
  * Generates a random integer between the specified minimum and maximum values (inclusive).
  *
@@ -9,8 +7,8 @@ import { isInt } from '..'
  * randomInt(1, 10)
  * // => 6
  */
-export const randomIntInsecure = (min: number, max: number) => {
-  if (!isInt(min) || !isInt(max)) {
+export const randomIntInsecure = (min: number, max: number): number => {
+  if (!Number.isInteger(min) || !Number.isInteger(max)) {
     throw new TypeError('min and max must be integers')
   }
 
@@ -30,9 +28,10 @@ export const randomIntInsecure = (min: number, max: number) => {
  * randomInt(1, 10)
  * // => 8
  */
-export const randomInt = (min: number, max: number) => {
+
+export const randomInt = (min: number, max: number): number => {
   // Taken from https://stackoverflow.com/a/41452318
-  if (!isInt(min) || !isInt(max)) {
+  if (!Number.isInteger(min) || !Number.isInteger(max)) {
     throw new TypeError('min and max must be integers')
   }
 

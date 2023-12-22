@@ -66,13 +66,10 @@ export default antfu({
           trailingUnderscore: 'allow',
         },
       ],
-      'ts/no-explicit-any': 'warn',
+      'ts/no-explicit-any': 'off',
       'ts/no-throw-literal': 'error',
       'ts/no-use-before-define': 'off',
       'ts/prefer-as-const': 'error',
-      'ts/prefer-destructuring': 'error',
-      'ts/prefer-for-of': 'error',
-      'ts/prefer-nullish-coalescing': 'error',
       'ts/prefer-ts-expect-error': 'off',
     },
   },
@@ -91,6 +88,7 @@ export default antfu({
     'style/comma-dangle': ['error', 'only-multiline'],
     'style/eol-last': ['error', 'always'],
     'style/max-statements-per-line': ['error', { max: 2 }],
+    'style/no-trailing-spaces': 'off',
 
     'unicorn/better-regex': 'error',
     'unicorn/catch-error-name': ['error', { name: 'error' }],
@@ -119,7 +117,7 @@ export default antfu({
     'unicorn/no-keyword-prefix': 'off',
     'unicorn/no-lonely-if': 'error',
     'unicorn/no-negated-condition': 'error', // * really make sure we want this
-    'unicorn/no-null': 'error', // ! controversial
+    'unicorn/no-null': 'error',
     'unicorn/no-object-as-default-parameter': 'error',
     'unicorn/no-typeof-undefined': 'error',
     'unicorn/no-unnecessary-await': 'error',
@@ -129,7 +127,6 @@ export default antfu({
     'unicorn/no-useless-promise-resolve-reject': 'error',
     'unicorn/no-useless-spread': 'error',
     'unicorn/no-useless-switch-case': 'error',
-    // 'unicorn/no-useless-undefined': 'error',
     'unicorn/no-zero-fractions': 'error',
     'unicorn/number-literal-case': 'error',
     'unicorn/numeric-separators-style': 'error',
@@ -175,5 +172,7 @@ export default antfu({
     'unicorn/switch-case-braces': 'error',
     'unicorn/template-indent': 'error',
     'unicorn/text-encoding-identifier-case': 'error',
+
+    'eslint-comments/no-unlimited-disable': 'off',
   },
 })

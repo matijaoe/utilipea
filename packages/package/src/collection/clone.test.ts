@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { describe, expect, it } from 'vitest'
 import { clone } from './clone'
 
@@ -100,6 +101,7 @@ describe('[collection] clone', () => {
     it('clones array with arrays', () => {
       const list: Array<Array<any>> = [[1], [[3]]]
       const cloned = clone(list)
+      // @ts-ignore
       list.at(1)[0] = null
       expect(cloned).toEqual([[1], [[3]]])
     })
@@ -109,17 +111,17 @@ describe('[collection] clone', () => {
       const list = [{ b: obj }, { b: obj }]
       const cloned = clone(list)
 
-      expect(list.at(0).b).toBe(list.at(1).b)
-      expect(cloned.at(0).b).toBe(cloned.at(1).b)
-      expect(cloned.at(0).b).not.toBe(list.at(0).b)
-      expect(cloned.at(1).b).not.toBe(list.at(1).b)
+      expect(list.at(0)?.b).toBe(list.at(1)?.b)
+      expect(cloned.at(0)?.b).toBe(cloned.at(1)?.b)
+      expect(cloned.at(0)?.b).not.toBe(list.at(0)?.b)
+      expect(cloned.at(1)?.b).not.toBe(list.at(1)?.b)
 
-      expect(cloned.at(0).b).toEqual({ a: 1 })
-      expect(cloned.at(1).b).toEqual({ a: 1 })
+      expect(cloned.at(0)?.b).toEqual({ a: 1 })
+      expect(cloned.at(1)?.b).toEqual({ a: 1 })
 
       obj.a = 2
-      expect(cloned.at(0).b).toEqual({ a: 1 })
-      expect(cloned.at(1).b).toEqual({ a: 1 })
+      expect(cloned.at(0)?.b).toEqual({ a: 1 })
+      expect(cloned.at(1)?.b).toEqual({ a: 1 })
     })
   })
 

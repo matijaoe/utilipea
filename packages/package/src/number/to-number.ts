@@ -1,3 +1,5 @@
+import { isNumber, isString } from '..'
+
 /**
  * Convert a value to a number, using `Number()`.
  *
@@ -11,9 +13,10 @@
  * toNumber('foo', 'bar') // 'bar'
  */
 export const toNumber = <T = undefined>(
-  val: any,
+  val: unknown,
   fallback?: T
 ): number | T => {
-  const n = Number(val)
+  if (isNumber(val)) { return val }
+  const n = isString(val) ? Number(val) : Number.NaN
   return Number.isNaN(n) ? fallback as T : n
 }

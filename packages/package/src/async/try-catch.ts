@@ -11,7 +11,7 @@
  * ```
  * @param promise A Promise to be executed.
  * @returns A Promise that resolves to an array containing the result or error.
- * If the Promise executes successfully, the array contains the result and a null error.
+ * If the Promise executes successfully, the array contains the result and a undefined error.
  * If the Promise throws an error, the array contains undefined for the result and the error object.
  *
  */

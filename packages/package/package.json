@@ -29,6 +29,7 @@
     "prepack": "bun run build",
     "release": "bumpp && npm publish",
     "test": "vitest --typecheck",
+    "test:run": "vitest --typecheck --run",
     "test:ui": "vitest --typecheck --ui",
     "lint": "eslint .",
     "format": "eslint . --fix"

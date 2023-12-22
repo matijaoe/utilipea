@@ -1,6 +1,6 @@
 import { isString } from '..'
 
-export const clipboardCopy = async (val: string | ClipboardItem[]) => {
+export const clipboardCopy = async (val: string | ClipboardItem[]): Promise<void> => {
   if (isString(val)) {
     return window.navigator.clipboard.writeText(val)
   }

@@ -22,6 +22,11 @@ export type ToBooleanOptions = {
   falseValues?: ReadonlyArray<FalseValues | string>
 }
 
+// TODO: simpler parseBoolean implementaiton used for queryParams
+// think of better names
+// toBooleanExact ?
+export const parseBooleanQuery = (val: string) => !['false', '0', ''].includes(val)
+
 export const toBoolean = (val: any, options?: ToBooleanOptions): val is boolean => {
   const {
     trueValues = TrueSet.basic,
@@ -40,8 +45,8 @@ export const toBoolean = (val: any, options?: ToBooleanOptions): val is boolean 
 
   if (isString(val)) {
     val = val.trim().toLowerCase()
-    if (trueValues.includes(val)) { return true }
-    if (falseValues.includes(val)) { return false }
+    if (trueValues.includes(val as string)) { return true }
+    if (falseValues.includes(val as string)) { return false }
     if (strict) {
       throw new Error(`Cannot convert "${val}" to boolean`)
     }

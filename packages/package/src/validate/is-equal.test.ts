@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { describe, expect, it } from 'vitest'
 import { isEqual } from '.'
 
@@ -27,7 +28,7 @@ describe('isEqual', () => {
     expect(isEqual(undefined, null)).toBe(false)
   })
 
-  // eslint-disable-next-line test/prefer-lowercase-title
+   
   it('NaN', () => {
     expect(isEqual(Number.NaN, Number.NaN)).toBe(true)
     expect(isEqual(Number.NaN, 1)).toBe(false)

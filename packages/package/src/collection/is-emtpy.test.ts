@@ -1,4 +1,5 @@
 /* eslint-disable prefer-regex-literals */
+/* eslint-disable unicorn/no-null */
 import { describe, expect, it } from 'vitest'
 import { isEmpty } from './is-empty'
 

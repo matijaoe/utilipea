@@ -1,3 +1,5 @@
+/* eslint-disable ts/no-unsafe-argument */
+/* eslint-disable ts/no-unsafe-return */
 import type { Func } from '..'
 import { isFunction } from '..'
 

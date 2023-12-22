@@ -26,7 +26,7 @@ export const isEqual = (x: unknown, y: unknown): boolean => {
     return isEqualPlainObject(x, y)
   }
 
-  if (isMap(x) && isMap(y) || isSet(x) && isSet(y)) {
+  if ((isMap(x) && isMap(y)) || (isSet(x) && isSet(y))) {
     return isEqualArray([...x], [...y])
   }
 

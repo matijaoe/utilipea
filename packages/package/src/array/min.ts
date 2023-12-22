@@ -8,12 +8,12 @@ import { boil } from './boil'
  * min([{ num: 1 }, { num: 2 }], x => x.num) // => { num: 1 }
  */
 export function min(array: readonly [number, ...number[]]): number
-export function min(array: readonly number[]): number | null
-export function min<T>(array: readonly T[], by: (item: T) => number): T | null
+export function min(array: readonly number[]): number | undefined
+export function min<T>(array: readonly T[], by: (item: T) => number): T | undefined
 export function min<T>(
   array: readonly T[],
   by?: (item: T) => number
-): T | null {
-  by ??= (item: any) => item
+): T | undefined {
+  by ??= (item: T) => item as unknown as number
   return boil(array, (a, b) => (by!(a) < by!(b) ? a : b))
 }

@@ -9,8 +9,9 @@ export type SortCriteria<T> = RequireAtLeastOne<{
   by?: SortBy<T>
 }>
 
-// eslint-disable-next-line no-extend-native
+// eslint-disable-next-line no-extend-native, ts/unbound-method
 Array.prototype.toSorted ??= function (cmp) {
+  // eslint-disable-next-line ts/no-unsafe-return, ts/no-unsafe-assignment
   return [...this].sort(cmp)
 }
 

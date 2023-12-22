@@ -9,8 +9,6 @@ This is useful since `Object.entries()` always returns an array of `Array<[strin
  
 @example
 ```
-import {objectEntries} from 'ts-extras';
- 
 const stronglyTypedEntries = objectEntries({a: 1, b: 2, c: 3});
 //=> Array<['a' | 'b' | 'c', number]>
  

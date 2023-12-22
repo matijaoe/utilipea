@@ -33,7 +33,7 @@
  */
 export function range(len: number): number[]
 export function range(start: number, end: number, step?: number): number[]
-export function range(...args: any): number[] {
+export function range(...args: [number] | [number, number, number?]): number[] {
   let start: number, end: number, step: number, length: number
 
   if (args.length === 1) {
