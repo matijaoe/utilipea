@@ -13,12 +13,9 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./package.json": "./package.json"
+      "import": "./dist/index.js"
+    }
   },
-  "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -28,7 +25,7 @@
     "src": "./src/index.ts"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean",
+    "build": "tsup src/index.ts --format esm --dts --clean",
     "prepack": "bun run build",
     "release": "bumpp && npm publish",
     "test": "vitest --typecheck",
@@ -37,7 +34,6 @@
     "format": "eslint . --fix"
   },
   "devDependencies": {
-    "@matijaoe/eslint-config": "^1.2.0",
     "@types/web": "^0.0.130",
     "@vitest/ui": "^1.0.4",
     "bumpp": "^9.2.0",

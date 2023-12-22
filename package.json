@@ -17,6 +17,7 @@
     "vitepress": "^1.0.0-rc.32"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.4.6",
     "bun-types": "latest",
     "scule": "^1.1.1",
     "type-fest": "^4.8.3"
