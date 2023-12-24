@@ -64,3 +64,8 @@ function range(start: number, end: number, step?: number): number[];
 | `start` | `number` | Start index. Defaults to `0`. Inclusive. |
 | `end` | `number` | End index. Exclusive. |
 | `step` | `number` | Step between elements. Defaults to `1`. |
+
+## Related
+
+- [`rangeGen`](/array/range-gen)
+- [`list`](/array/range)

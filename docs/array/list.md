@@ -9,7 +9,6 @@ Create an array of elements
 
 ## Basic usage
 
-
 ```ts
 import { list } from 'utilipea'
 
@@ -48,7 +47,6 @@ Either `len` or `end` must be provided. `start` and `end` are inclusive.
 | `fill` | `any` | Value to fill the array with. |
 | `map` | `(i: number) => any` | Function to map the array elements. |
 
-
 ## Type Declarations
 
 ```ts
@@ -68,3 +66,8 @@ type RangeOptions<T> = RangeOptionsEnd<T> | RangeOptionsLen<T>
 
 declare const list: <T = number>(opts: RangeOptions<T>) => T[];
 ```
+
+## Related
+
+- [`range`](/array/range)
+- [`rangeGen`](/array/range-gen)

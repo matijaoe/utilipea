@@ -51,3 +51,8 @@ declare function max(array: readonly [number, ...number[]]): number;
 declare function max(array: readonly number[]): number | undefined;
 declare function max<T>(array: readonly T[], by: (item: T) => number): T | undefined;
 ```
+
+## Related
+
+* [`boil`](/array/boil)
+* [`min`](/array/min)

@@ -46,3 +46,8 @@ boil(books, (a, b) => a.year < b.year ? a : b)
 ```ts
 declare const boil: <T>(array: readonly T[], cmp: (a: T, b: T) => T) => T;
 ```
+
+## Related
+
+* [`min`](/array/min)
+* [`max`](/array/max)
