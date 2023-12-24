@@ -4,6 +4,9 @@ import { type ArrayMinLength, flatten, isFunction, unique } from '..'
 export type CompareFunction<TArrays extends ArrayMinLength<unknown[], 2>> = (a: TArrays[0][number], b: ArrayTail<TArrays>[number][number]) => boolean
 export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...infer U] ? U : never
 
+// TODO: interesectionBy, intersectionWith
+// do i want them separate or as options?
+
 /**
  * Create an intersection of all given arrays.
  *
@@ -17,9 +20,8 @@ export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...in
  *
  * // ---- Custom compare function ----
  * const cmp = (a, b) => Math.floor(a) === Math.floor(b);
- *
- * intersection([1.2, 1.1], [1.3, 2.4], cmp)
- * // => [1.2]
+ * intersection([2.1, 1.2], [2.3, 3.4], cmp)
+ * // => [1.2, 1.1]
  *
  * // ---- Only compare by id ----
  * const arr1 = [{ id: 1, name: 'Yeet' }, { id: 3, name: 'John' }];

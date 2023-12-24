@@ -1,9 +1,21 @@
 /**
- * Go through a list of items, starting with the first item,
- * and comparing with the second. Keep the one you want then
- * compare that to the next item in the list with the same
+ * Reduce a list of items down to one item
+ * 
+ * Given an array of items return the final item that "wins" the comparison condition.
  *
- * Ex. const greatest = () => boil(numbers, (a, b) => a > b)
+ * @category Array
+ * 
+ * @example
+ * const books = [
+ *  { title: 'Frankenstein', pages: 199 },
+ *  { title: 'Ulysses', pages: 732 },
+ *  { title: 'Dune', pages: 412 }
+ * ]
+ * 
+ * const longest = boil(books, (a, b) => a.pages > b.pages ? a : b)
+ * // => { title: 'Ulysses', pages: 732 }
+ * 
+ * @see [`utilipea.vercel.app/array/boil.html`](https://utilipea.vercel.app/array/boil.html)
  */
 export const boil = <T>(
   array: readonly T[],
