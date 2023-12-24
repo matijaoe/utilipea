@@ -5,7 +5,7 @@ title: 'boil'
 
 # boil
 
-Reduce an array to a single item based
+Reduce an array to a single item
 
 ## Basic Usage
 
@@ -16,14 +16,14 @@ import { boil } from 'utilipea'
 
 const books = [
   {
-    title: 'Frankenstein',
-    year: 1818,
-    pages: 199
-  },
-  {
     title: 'Ulysses',
     year: 1922,
     pages: 732
+  },
+  {
+    title: 'Frankenstein',
+    year: 1818,
+    pages: 199
   },
   {
     title: 'Dune',
@@ -39,4 +39,10 @@ boil(books, (a, b) => a.pages > b.pages ? a : b)
 // oldest
 boil(books, (a, b) => a.year < b.year ? a : b)
 // => { title: 'Frankenstein', year: 1818, pages: 199 }
+```
+
+## Type Declarations
+
+```ts
+declare const boil: <T>(array: readonly T[], cmp: (a: T, b: T) => T) => T;
 ```

@@ -22,3 +22,12 @@ export const intersects = <T, K extends PropertyKey>(
   const dictB = new Set<K>(listB.map(identity))
   return listA.some((value) => dictB.has(identity(value)))
 }
+
+const presidents = [{ id: 1, name: 'Donald' }, { id: 2, name: 'Joe' }]
+const podcasters = [{ id: 3, name: 'Joe' }, { id: 4, name: 'Theo' }]
+
+intersects(presidents, podcasters, (a) => a.name)
+// => true
+
+intersects(presidents, podcasters, (a) => a.id)
+// => false

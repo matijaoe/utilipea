@@ -3,7 +3,7 @@ import antfu from '@antfu/eslint-config'
 export default antfu({
   typescript: true,
   jsonc: true,
-  markdown: false,
+  markdown: true,
 
   typescript: {
     tsconfigPath: 'tsconfig.json',

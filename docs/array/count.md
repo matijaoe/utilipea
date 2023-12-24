@@ -25,3 +25,8 @@ count(books, (book) => book.decade)
 // => { '1930s': 3, '1940s': 2 }
 ```
 
+## Type Declarations
+
+```ts
+declare const count: <T, TId extends PropertyKey>(list: readonly T[], identity: (item: T) => TId) => Record<TId, number>;
+```
