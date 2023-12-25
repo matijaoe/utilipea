@@ -16,5 +16,5 @@ export const median = (numbers: readonly number[]) => {
   const s = sort(numbers)
   const mid = Math.floor(s.length / 2)
 
-  return isOdd(s.length) ? s[mid] : (s[mid - 1]! + s[mid]) / 2
+  return isOdd(s.length) ? s.at(mid) : (s.at(mid - 1)! + s.at(mid)!) / 2
 }

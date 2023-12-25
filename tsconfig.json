@@ -14,7 +14,7 @@
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "strict": true,
-    "noImplicitReturns": false,
+    "noImplicitReturns": true,
     "noUncheckedIndexedAccess": false,
     "declaration": true,
     "downlevelIteration": true,
