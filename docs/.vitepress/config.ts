@@ -26,6 +26,11 @@ export default defineConfig({
         link: 'https://www.npmjs.com/package/utilipea'
       },
       { icon: 'github', link: 'https://github.com/utilipea' },
-    ]
+    ],
+
+    editLink: {
+      pattern: 'https://github.com/matijaoe/utilipea/edit/main/docs/:path'
+    }
   }
+  
 })

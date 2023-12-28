@@ -3,7 +3,7 @@ import antfu from '@antfu/eslint-config'
 export default antfu({
   typescript: true,
   jsonc: true,
-  markdown: false,
+  markdown: true,
 
   typescript: {
     tsconfigPath: 'tsconfig.json',
@@ -46,6 +46,7 @@ export default antfu({
       'ts/ban-ts-comment': 'off',
       'ts/consistent-type-definitions': ['error', 'type'],
       'ts/default-param-last': 'error',
+      'ts/dot-notation': ['error', { allowIndexSignaturePropertyAccess: true }],
       'ts/no-floating-promises': 'error', // check performance
       'ts/naming-convention': [
         'error',

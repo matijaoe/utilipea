@@ -38,7 +38,7 @@ category: ${titlecase(category)}
 title: '${camelCase(name)}'
 ---
 
-# ${camelCase(name)}
+# {{ $frontmatter.title }}
 
 `
 

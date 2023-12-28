@@ -21,11 +21,17 @@ clampArrayRange(0, books) // => 0
 clampArrayRange(1, books) // => 1
 clampArrayRange(2, books) // => 2
 
-// out of range, returns min index
+// out of range, return min index
 clampArrayRange(-1, books) // => 0
 clampArrayRange(-2, books) // => 0
 
-// out of range, returns max index
+// out of range, return max index
 clampArrayRange(3, books) // => 2
 clampArrayRange(4, books) // => 2
+```
+
+## Type Declarations
+
+```ts
+declare const clampArrayRange: (n: number, arr: readonly unknown[]) => number;
 ```

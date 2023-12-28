@@ -25,6 +25,7 @@
     "downlevelIteration": true,
     "noEmit": true,
     "outDir": "./dist",
+    "removeComments": false,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,

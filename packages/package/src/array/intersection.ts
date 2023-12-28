@@ -4,7 +4,7 @@ import { type ArrayMinLength, flatten, isFunction, unique } from '..'
 export type CompareFunction<TArrays extends ArrayMinLength<unknown[], 2>> = (a: TArrays[0][number], b: ArrayTail<TArrays>[number][number]) => boolean
 export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...infer U] ? U : never
 
-// TODO: interesectionBy, intersectionWith
+// TODO: interesectionBy, intersectionWith? should be in line with interesects
 // do i want them separate or as options?
 
 /**

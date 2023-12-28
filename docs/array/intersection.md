@@ -30,14 +30,13 @@ intersection([2.1, 1.2], [2.3, 3.4], cmp)
 const arr1 = [{ id: 1, name: 'Bob' }, { id: 2, name: 'Dave' }];
 const arr2 = [{ id: 3, name: 'Carl' }, { id: 4, name: 'Bob' }];
 
-intersection(arr1, arr2, (a, b) => a.id === b.id)
+intersection(arr1, arr2, (a, b) => a.name === b.name)
 // => [{ id: 1, name: 'Bob' }]
 ```
 
 ### Comparison by value
 
-Values are compared by reference. To compare by value, use a custom comparator function. 
-To compare objects by value, use [`isEqual`](/validate/is-equal.html).
+Non-primitive values are compared by reference. To (deeply) compare by value, use [`isEqual`](/validate/is-equal.html).
 
 ```ts{9}
 const objects = [{ x: 1, y: 2 }, { x: 2, y: 1 }];
@@ -52,3 +51,9 @@ intersection(objects, others, isEqual);
 // => [{ x: 1, y: 2 }]
 ```
 
+## Type Declarations
+
+```ts
+declare function intersection<TElem>(...arraysOrCompareFn: ArrayMinLength<TElem[], 2>): TElem[];
+declare function intersection<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFunction<TArrays>]): TArrays[0];
+```
