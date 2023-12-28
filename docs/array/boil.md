@@ -3,7 +3,7 @@ category: Array
 title: 'boil'
 ---
 
-# boil
+# {{ $frontmatter.title }}
 
 Reduce an array to a single item
 

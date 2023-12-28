@@ -6,23 +6,22 @@ You made a wise choice. Let's get started.
 
 Getting utilipea into your project
 
-### pnpm
-```bash
-pnpm add utilipea
+::: code-group
+
+```bash [npm]
+$ npm i utilipea
 ```
 
-### bun
-```bash
-bun add utilipea
+```bash [yarn]
+$ yarn add utilipea
 ```
 
-### npm
-```bash
-npm i utilipea
+```bash [pnpm]
+$ pnpm add utilipea
 ```
 
-### yarn
-```bash
-yarn add utilipea
+```bash [bun]
+$ bun add utilipea
 ```
 
+:::
