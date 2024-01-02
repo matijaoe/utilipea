@@ -21,5 +21,6 @@ export const boil = <T>(
   array: readonly T[],
   cmp: (a: T, b: T) => T
 ) => {
+  if (!array.length) { return undefined }
   return array?.reduce(cmp)
 }
