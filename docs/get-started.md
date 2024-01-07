@@ -12,12 +12,12 @@ Getting utilipea into your project
 $ npm i utilipea
 ```
 
-```bash [yarn]
-$ yarn add utilipea
-```
-
 ```bash [pnpm]
 $ pnpm add utilipea
+```
+
+```bash [yarn]
+$ yarn add utilipea
 ```
 
 ```bash [bun]

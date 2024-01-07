@@ -6,6 +6,9 @@ import { boil } from './boil'
  * @example
  * max([2, 3, 5]) // => 5
  * max([{ num: 1 }, { num: 2 }], x => x.num) // => { num: 2 }
+ * 
+ * @see [utilipea.vercel.app/array/max.html](https://utilipea.vercel.app/array/max.html)
+ * 
  */
 export function max(array: readonly [number, ...number[]]): number
 export function max(array: readonly number[]): number | undefined

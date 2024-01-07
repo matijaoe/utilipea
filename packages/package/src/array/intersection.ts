@@ -29,6 +29,8 @@ export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...in
  *
  * intersection(arr1, arr2, (a, b) => a.id === b.id)
  * // => [{ id: 3, name: 'John' }]
+ * 
+ * @see [utilipea.vercel.app/array/intersection.html](https://utilipea.vercel.app/array/intersection.html)
  *
  */
 export function intersection<TElem>(...arraysOrCompareFn: ArrayMinLength<TElem[], 2>): TElem[]

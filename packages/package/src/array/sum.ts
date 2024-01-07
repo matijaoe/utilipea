@@ -1,3 +1,5 @@
+import { isNumber } from '..'
+
 /**
  * Calculate the sum of an array of numbers or objects.
  *
@@ -16,10 +18,10 @@
  *
  * sum([])
  * // => 0
+ * 
+ * @see [utilipea.vercel.app/array/sum.html](https://utilipea.vercel.app/array/sum.html)
+ * 
  */
-
-import { isNumber } from '..'
-
 export function sum(array: readonly [number, ...number[]]): number
 export function sum(array: readonly number[]): number
 export function sum<T>(array: readonly T[], fn: (item: T) => number): number

@@ -4,6 +4,8 @@ import { type ArrayMinLength, type CompareFunction, flatten, isFunction, unique 
  * Create a new array with values from the first array that are not present in the other arrays.
  *
  * Optionally, use a compare function to determine the comparison of elements (default is `===`).
+ * 
+ * @category Array
  *
  * @example
  * diff([2, 1], [2, 3], [6])
@@ -20,6 +22,9 @@ import { type ArrayMinLength, type CompareFunction, flatten, isFunction, unique 
  *
  * diff(arr1, arr2, (a, b) => a.id === b.id)
  * // => [{ id: 1, name: 'Yeet' }]
+ * 
+ * @see [utilipea.vercel.app/array/diff.html](https://utilipea.vercel.app/array/diff.html)
+ * 
  */
 export function diff<TElem>(...args: ArrayMinLength<TElem[], 2>): TElem[]
 export function diff<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFunction<TArrays>]): TArrays[0]

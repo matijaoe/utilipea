@@ -22,6 +22,9 @@ export type DebounceFunction<TArgs extends any[]> = {
  * The debounce function comes with a `cancel` method
  * to cancel delayed `func` invocations and a `flush`
  * method to invoke them immediately
+ * 
+ * @see [utilipea.vercel.app/async/debounce.html](https://utilipea.vercel.app/async/debounce.html)
+ * 
  */
 export const debounce = <TArgs extends any[], TRes>(
   func: (...args: TArgs) => TRes,

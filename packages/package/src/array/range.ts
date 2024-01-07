@@ -29,7 +29,9 @@
  * // Descending range with positive step:
  * range(5, 0, 2)
  * // => [5, 3, 1]
- *
+ * 
+ * @see [utilipea.vercel.app/array/range.html](https://utilipea.vercel.app/array/range.html)
+ * 
  */
 export function range(len: number): number[]
 export function range(start: number, end: number, step?: number): number[]
