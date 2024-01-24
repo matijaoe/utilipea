@@ -7,7 +7,8 @@
  * chunk([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)
  * // => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
  * 
- * @see [utilipea.vercel.app/array/chunk.html](https://utilipea.vercel.app/array/chunk.html)
+ * @see 
+ * [utilipea.vercel.app/array/chunk.html](https://utilipea.vercel.app/array/chunk.html)
  * 
  */
 export const chunk = <T>(list: readonly T[], size: number = 2): Array<T[]> => {
