@@ -11,6 +11,9 @@
  * const arr1 = [{ id: 1, name: 'Pat'}]
  * const arr2 = [{ id: 2, name: 'Mat'}, { id: 3, name: 'Pat'}]}]
  * intersects(arr1, arr2, (x) => x.name) // => true
+ * 
+ * @see [utilipea.vercel.app/array/intersects.html](https://utilipea.vercel.app/array/intersects.html)
+ * 
  */
 export const intersects = <T, K extends PropertyKey>(
   listA: readonly T[],

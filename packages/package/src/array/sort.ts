@@ -56,6 +56,8 @@ Array.prototype.toSorted ??= function (cmp) {
  * //  { name: 'bob', age: 10 },
  * // ]
  *
+ * @see [utilipea.vercel.app/array/sort.html](https://utilipea.vercel.app/array/sort.html)
+ * 
  */
 export const sort = <T>(
   arr: readonly T[],

@@ -5,6 +5,10 @@
  *
  * @example
  * flatten([[1, 2], [3, 4]]) // [1, 2, 3, 4]
+ * 
+ * @see 
+ * [utilipea.vercel.app/array/flatten.html](https://utilipea.vercel.app/array/flatten.html)
+ * 
  */
 export const flatten = <T>(lists: readonly T[][]): T[] => {
   return lists.reduce((acc, list) => {

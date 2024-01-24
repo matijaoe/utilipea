@@ -19,6 +19,9 @@ import { randomIntInsecure, randomInt as randomIntSecure } from '../random'
  * // => [3, 5, 1, 4, 2]
  * console.log(arr)
  * // => [3, 5, 1, 4, 2]
+ * 
+ * @see [utilipea.vercel.app/array/shuffle.html](https://utilipea.vercel.app/array/shuffle.html)
+ * 
  */
 export const shuffle = <T>(array: T[], opts?: { secure?: boolean, mutate?: boolean }) => {
   const arr = opts?.mutate ? array : [...array]

@@ -31,6 +31,9 @@ import { isDef, isFunction } from '..'
  *   console.log(square)
  * }
  * // => 1 4 9
+ * 
+ *  @see [utilipea.vercel.app/array/range-gen.html](https://utilipea.vercel.app/array/range-gen.html)
+ * 
  */
 export function* rangeGen<T = number>(
   startOrLength: number,
