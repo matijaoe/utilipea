@@ -1,5 +1,10 @@
-type ByOptions<T, K extends string | number | symbol> = {
-  by: (item: T) => K
+import { isFunction } from '../typed'
+
+type PropFunction<T, K extends keyof T> = (item: T) => T[K]
+type By<T, K extends keyof T> = K | PropFunction<T, K>
+
+type ByOptions<T, K extends keyof T> = {
+  by: By<T, K>
   cmp?: never
 }
 
@@ -8,7 +13,49 @@ type CmpOptions<T> = {
   cmp: (a: T, b: T) => boolean
 }
 
-type UniqueOptions<T, K extends string | number | symbol> = ByOptions<T, K> | CmpOptions<T>
+type UniqueOptions<T, K extends keyof T> = ByOptions<T, K> | CmpOptions<T>
+
+export const unique = <TElem, TKey extends keyof TElem>(
+  arr: Array<TElem>,
+  by?: By<TElem, TKey>
+) => {
+  if (!by) {
+    return [...new Set(arr)]
+  }
+
+  const byFn = isFunction(by)
+    ? by
+    : (item: TElem) => item[by]
+    
+  const seen = new Set<TElem[TKey]>()
+  return arr.filter((item) => {
+    const key = byFn(item)
+    if (seen.has(key)) {
+      return false
+    }
+    seen.add(key)
+    return true
+  })
+}
+
+export const uniqueWith = <TElem>(
+  arr: Array<TElem>,
+  compareFn?: (a: TElem, b: TElem) => boolean
+) => {
+  if (!compareFn) {
+    return [...new Set(arr)]
+  }
+  
+  const uniqueArray: TElem[] = []
+  arr.forEach((value) => {
+    if (!uniqueArray.some((uniqueValue) => compareFn(value, uniqueValue))) {
+      uniqueArray.push(value)
+    }
+  })
+  return uniqueArray
+}
+
+console.log(unique([{ name: 'matija', age: 24 }, { name: 'lovro', age: 22 }]))
 
 /**
  * Return an array with unique elements from the input array.
@@ -36,35 +83,22 @@ type UniqueOptions<T, K extends string | number | symbol> = ByOptions<T, K> | Cm
  * )
  * // => ['apple', 'banana']
  */
-export const unique = <T, K extends string | number | symbol>(
-  arr: Array<T>,
-  options?: UniqueOptions<T, K>
+
+// TODO: probably remove
+export const unique_advanced = <TElem, TKey extends keyof TElem>(
+  arr: Array<TElem>,
+  options?: UniqueOptions<TElem, TKey>
 ) => {
-  const { by, cmp } = options || {}
+  const { by: byArg, cmp } = options || {}
 
-  if (!by && !cmp) {
-    return [...new Set(arr)]
+  if (byArg) {
+    return unique(arr, byArg)
   }
 
-  if (by) {
-    const seen = new Set<K>()
-    return arr.filter((item) => {
-      const key = by(item)
-      if (seen.has(key)) {
-        return false
-      }
-      seen.add(key)
-      return true
-    })
-  }
-
+  // TODO: not working as expected
   if (cmp) {
-    const uniqueArray: T[] = []
-    arr.forEach((value) => {
-      if (!uniqueArray.some((uniqueValue) => cmp(value, uniqueValue))) {
-        uniqueArray.push(value)
-      }
-    })
-    return uniqueArray
+    return uniqueWith(arr, cmp)
   }
+
+  return unique(arr)
 }
