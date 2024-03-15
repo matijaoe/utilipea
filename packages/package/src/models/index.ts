@@ -114,3 +114,6 @@ export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array
 export type Func<TArgs = any, KReturn = any | void> = (
   ...args: TArgs[]
 ) => KReturn
+
+export type PropFunction<T, K extends keyof T> = (item: T) => T[K]
+export type By<T, K extends keyof T> = K | PropFunction<T, K>

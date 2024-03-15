@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { isEqual } from '../validate'
 import { unique } from './unique'
 
 describe('[array] unique', () => {
@@ -12,23 +13,13 @@ describe('[array] unique', () => {
     expect(result).toEqual(['a', 'b', 'c'])
   })
 
-  it('returns unique objects based on a property', () => {
-    const result = unique([{ id: 1 }, { id: 2 }, { id: 1 }], { by: (item) => item.id })
-    expect(result).toEqual([{ id: 1 }, { id: 2 }])
-  })
-
-  it('returns unique arrays based on the first element', () => {
-    const result = unique([[1, 2], [1, 2], [3, 4]], { by: (item) => item.at(0) })
-    expect(result).toEqual([[1, 2], [3, 4]])
-  })
-
   it('returns unique elements using a custom comparison function', () => {
-    const result = unique([1, 1.5, 2, 2.1], { cmp: (a, b) => Math.floor(a) === Math.floor(b) })
+    const result = unique([1, 1.5, 2, 2.1], (a, b) => Math.floor(a) === Math.floor(b))
     expect(result).toEqual([1, 2])
   })
 
   it('returns unique strings ignoring case', () => {
-    const result = unique(['apple', 'APPLE', 'banana'], { cmp: (a, b) => a.toLowerCase() === b.toLowerCase() })
+    const result = unique(['apple', 'APPLE', 'banana'], (a, b) => a.toLowerCase() === b.toLowerCase())
     expect(result).toEqual(['apple', 'banana'])
   })
 
@@ -38,16 +29,17 @@ describe('[array] unique', () => {
   })
 
   it('returns unique elements from an array with mixed types', () => {
-    const result = unique([1, '1', 2, '2'])
-    expect(result).toEqual([1, '1', 2, '2'])
+    const result = unique([1, '2', '1', 2])
+    expect(result).toEqual([1, '2', '1', 2])
   })
 
-  it('returns unique complex objects based on a property', () => {
-    const result = unique([
-      { id: 1, name: 'Alice' },
-      { id: 2, name: 'Bob' },
-      { id: 1, name: 'Alice' }
-    ], { by: (item) => item.id })
-    expect(result).toEqual([{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }])
+  it('returns unique elements from an array with mixed types with conversion', () => {
+    const result = unique([1, '2', '1', 2], (a, b) => a.toString() === b.toString())
+    expect(result).toEqual([1, '2'])
+  })
+  
+  it('compare with isEqual', () => {
+    const result = unique([{ x: 1, y: 2 }, { x: 2, y: 1 }, { x: 1, y: 2 }], isEqual)
+    expect(result).toEqual([{ x: 1, y: 2 }, { x: 2, y: 1 }])
   })
 })
