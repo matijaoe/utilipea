@@ -21,5 +21,5 @@ if (error) {
 ## Type signature
 ```ts
 declare function intersection<TElem>(...arraysOrCompareFn: ArrayMinLength<TElem[], 2>): TElem[];
-declare function intersection<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFunction<TArrays>]): TArrays[0];
+declare function intersection<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFn<TArrays>]): TArrays[0];
 ```

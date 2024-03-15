@@ -1,4 +1,4 @@
-import { type ArrayMinLength, type CompareFunction, flatten, isFunction, unique } from '..'
+import { type ArrayMinLength, type CompareFn, flatten, isFunction, unique } from '..'
 
 /**
  * Create a new array with values from the first array that are not present in the other arrays.
@@ -27,10 +27,10 @@ import { type ArrayMinLength, type CompareFunction, flatten, isFunction, unique 
  * 
  */
 export function diff<TElem>(...args: ArrayMinLength<TElem[], 2>): TElem[]
-export function diff<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFunction<TArrays>]): TArrays[0]
-export function diff<TArrays extends ArrayMinLength<unknown[], 2>, TElem>(...args: ArrayMinLength<TElem[], 2> | [...TArrays, CompareFunction<TArrays>]): TArrays[0] {
+export function diff<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFn<TArrays>]): TArrays[0]
+export function diff<TArrays extends ArrayMinLength<unknown[], 2>, TElem>(...args: ArrayMinLength<TElem[], 2> | [...TArrays, CompareFn<TArrays>]): TArrays[0] {
   const hasCmp = isFunction(args.at(-1))
-  const cmp = hasCmp && args.pop() as CompareFunction<TArrays>
+  const cmp = hasCmp && args.pop() as CompareFn<TArrays>
 
   const arrays = args as TArrays
   const firstArray = unique(arrays.shift()!)!

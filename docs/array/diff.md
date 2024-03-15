@@ -37,7 +37,7 @@ diff(arr1, arr2, (a, b) => a.name === b.name)
 
 ```ts
 declare function diff<TElem>(...args: ArrayMinLength<TElem[], 2>): TElem[];
-declare function diff<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFunction<TArrays>]): TArrays[0];
+declare function diff<TArrays extends ArrayMinLength<unknown[], 2>>(...args: [...TArrays, CompareFn<TArrays>]): TArrays[0];
 ```
 
 ## Related
