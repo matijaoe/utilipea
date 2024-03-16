@@ -72,7 +72,6 @@ export type NestedOmit<T> = {
  * @template TElem The type of the array elements.
  * @template TMinLength The minimum length of the array.
  */
-
 export type ArrayMinLength<TElem, TMinLength extends number> = BuildArrayMinLength<TElem, TMinLength, []>
 
 type BuildArrayMinLength<
@@ -82,6 +81,62 @@ type BuildArrayMinLength<
 > = Current['length'] extends TMinLength
   ? [...Current, ...TElem[]]
   : BuildArrayMinLength<TElem, TMinLength, [...Current, TElem]>
+
+/**
+ * This type builds an array with an exact length.
+ *
+ * @example
+ * let arr: ArrayExactLength<number, 3> = [1, 2, 3];
+ * // => OK
+ *
+ * arr = [1, 2];
+ * // => Type '[number, number]' is not assignable to type '[number, number, number]'.
+ *
+ * @template TElem The type of the array elements.
+ * @template TLength The exact length of the array.
+ */
+export type ArrayExactLength<TElem, TLength extends number> = BuildArrayExactLength<TElem, TLength>
+
+type BuildArrayExactLength<
+  TElem,
+  TLength extends number,
+  TArray extends Array<TElem> = []
+> = TArray['length'] extends TLength
+  ? TArray
+  : BuildArrayExactLength<TElem, TLength, [...TArray, TElem]>
+
+/**
+ * This type builds an array with an max length.
+ *
+ * @example
+ * let arr: ArrayMaxLength<number, 2> = [1, 2];
+ * // => OK
+ *
+ * arr = [1];
+ * // => OK
+ * 
+ * arr = [1, 2, 3];
+ * // => Type '[number, number, number]' is not assignable to type '[] | [number] | [number, number]'
+ *
+ * @template TElem The type of the array elements.
+ * @template TLength The exact length of the array.
+ */
+export type ArrayMaxLength<TElem, TMaxLength extends number> = BuildArrayMaxLength<TElem, TMaxLength>
+
+type BuildArrayMaxLength<
+  TElem,
+  TMaxLength extends number,
+  TArray extends Array<TElem> = []
+> = TArray['length'] extends TMaxLength
+  ? TArray
+  : TArray | BuildArrayMaxLength<TElem, TMaxLength, [...TArray, TElem]>
+  
+export type ArrayExactLengths<TElem, TLengths extends number[]> = 
+  TLengths[number] extends infer TLength
+    ? TLength extends number
+      ? ArrayExactLength<TElem, TLength>
+      : never
+    : never
 
 /**
  * Promise, or maybe not
@@ -116,7 +171,7 @@ export type Func<TArgs = any, KReturn = any | void> = (
 ) => KReturn
 
 export type PropFunction<T, K extends keyof T> = (item: T) => T[K]
-export type By<T, K extends keyof T> = K | PropFunction<T, K>
+export type By<T, K extends keyof T> = K | ((item: T) => T[K])
 
 export type CompareFn<TArrays extends ArrayMinLength<unknown[], 2>> = (a: TArrays[0][number], b: ArrayTail<TArrays>[number][number]) => boolean
 export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...infer U] ? U : never

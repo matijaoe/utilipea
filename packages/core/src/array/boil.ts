@@ -15,8 +15,7 @@
  * const longest = boil(books, (a, b) => a.pages > b.pages ? a : b)
  * // => { title: 'Ulysses', pages: 732 }
  * 
- * @see
- * [utilipea.vercel.app/array/boil.html](https://utilipea.vercel.app/array/boil.html)
+ * @see https://utilipea.vercel.app/array/boil.html
  */
 export const boil = <T>(
   array: readonly T[],

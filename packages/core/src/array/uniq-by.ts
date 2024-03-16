@@ -2,20 +2,20 @@ import { isFunction } from '..'
 import type { By } from '../models'
 
 /**
- * Return an array with unique elements from the input array. 
+ * Return an array with uniq( elements from the input array. 
  * First occurrence of each element is kept.
  * Accepts an optional identity function to convert each item in the list to a comparable identity value
  *
  * @category Array
  *
  * @example
- * uniqueBy([1, 2, 3, 2, 1])
+ * uniq([1, 2, 3, 2, 1])
  * // => [1, 2, 3]
  *
- * uniqueBy([1, 2, 3, 2, 1], (n) => n % 2)
+ * uniq([1, 2, 3, 2, 1], (n) => n % 2)
  * // => [1, 2]
  *
- * uniqueBy([{ id: 1 }, { id: 2 }, { id: 1 }], item => item.id)
+ * uniq([{ id: 1 }, { id: 2 }, { id: 1 }], item => item.id)
  * // => [{ id: 1 }, { id: 2 }]
  * 
  * 
@@ -25,13 +25,13 @@ import type { By } from '../models'
  *   { name: 'dan', age: 24 }
  * ]
  * 
- * uniqueBy(people, 'age')
+ * uniq(people, 'age')
  * // => [{ name: 'joe', age: 87 }, { name: 'joe', age: 24 }]
  * 
- * uniqueBy(people, 'name)
+ * uniq(people, 'name)
  * // => [{ name: 'joe', age: 87 }, { name: 'dan', age: 24 }]
  */
-export const uniqueBy = <TElem, TKey extends keyof TElem>(
+export const uniqBy = <TElem, TKey extends keyof TElem>(
   arr: TElem[],
   by?: By<TElem, TKey>,
 ) => {

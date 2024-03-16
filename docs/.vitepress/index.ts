@@ -2,7 +2,7 @@ import { readdir } from 'node:fs/promises'
 import path, { join } from 'node:path'
 import process from 'node:process'
 import { camelCase } from 'scule'
-import { sort, titlecase } from '../../packages/package/src'
+import { sort, titlecase } from '../../packages/core/src'
 
 type MarkdownData = {
   dirName: string

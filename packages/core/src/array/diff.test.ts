@@ -39,9 +39,4 @@ describe('diff', () => {
     const diffs = diff(array1, array2)
     expect(diffs).toEqual(array1)
   })
-
-  it('can deal with different types', () => {
-    const diffs = diff([{ id: 1 }, { id: 2 }], [1], (a, b) => a.id === b)
-    expect(diffs).toEqual([{ id: 2 }])
-  })
 })

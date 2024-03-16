@@ -15,22 +15,14 @@
  * @see [utilipea.vercel.app/array/intersects.html](https://utilipea.vercel.app/array/intersects.html)
  * 
  */
-export const intersects = <T, K extends PropertyKey>(
-  listA: readonly T[],
-  listB: readonly T[],
-  identity = (x: T) => x as unknown as K
+export const intersects = <TElem, TKey extends keyof TElem>(
+  listA: readonly TElem[],
+  listB: readonly TElem[],
+  // TODO: implement By
+  identity = (x: TElem) => x as unknown as TKey
 ): boolean => {
   if (!listA || !listB) { return false }
 
-  const dictB = new Set<K>(listB.map(identity))
+  const dictB = new Set<TKey>(listB.map(identity))
   return listA.some((value) => dictB.has(identity(value)))
 }
-
-const presidents = [{ id: 1, name: 'Donald' }, { id: 2, name: 'Joe' }]
-const podcasters = [{ id: 3, name: 'Joe' }, { id: 4, name: 'Theo' }]
-
-intersects(presidents, podcasters, (a) => a.name)
-// => true
-
-intersects(presidents, podcasters, (a) => a.id)
-// => false

@@ -12,17 +12,17 @@
  * group(fish, (f) => f.source)
  * // => { ocean: [{ name: 'Marlin', source: 'ocean' }], lake: [{ name: 'Bass', source: 'lake' }, { name: 'Trout', source: 'lake' }] }
  * 
- * @see [utilipea.vercel.app/array/group.html](https://utilipea.vercel.app/array/group.html)
- * 
+ * @see 
+ * [utilipea.vercel.app/array/group.html](https://utilipea.vercel.app/array/group.html)
  */
-export const group = <T, Key extends PropertyKey>(
+export const group = <T, TKey extends PropertyKey>(
   array: readonly T[],
-  identity: (item: T) => Key
-): Partial<Record<Key, T[]>> => {
+  identity: (item: T) => TKey
+): Partial<Record<TKey, T[]>> => {
   return array.reduce((acc, item) => {
     const groupId = identity(item)
     acc[groupId] ??= []
     acc[groupId].push(item)
     return acc
-  }, {} as Record<Key, T[]>)
+  }, {} as Record<TKey, T[]>)
 }
