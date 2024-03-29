@@ -1,5 +1,5 @@
 /**
- * Flatten a 2-dimensional array into a 1-dimensional array.
+ * Flatten a 2-dimensional array into a 1-dimensional array. Faster than using `Array.prototype.flat()`.
  *
  * @category Array
  *

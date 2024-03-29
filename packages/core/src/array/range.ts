@@ -30,7 +30,7 @@
  * range(5, 0, 2)
  * // => [5, 3, 1]
  * 
- * @see [utilipea.vercel.app/array/range.html](https://utilipea.vercel.app/array/range.html)
+ * @see https://utilipea.vercel.app/array/range.html
  * 
  */
 export function range(len: number): number[]

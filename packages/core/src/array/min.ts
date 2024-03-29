@@ -7,7 +7,7 @@ import { boil } from './boil'
  * min([2, 3, 5]) // => 2
  * min([{ num: 1 }, { num: 2 }], x => x.num) // => { num: 1 }
  * 
- * @see [utilipea.vercel.app/array/min.html](https://utilipea.vercel.app/array/min.html)
+ * @see https://utilipea.vercel.app/array/min.html
  * 
  */
 export function min(array: readonly [number, ...number[]]): number

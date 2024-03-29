@@ -26,6 +26,9 @@ import { isArray, isFunction, isMap, isNil, isObjectType, isSet, isString } from
  * isEmpty([1, 2, 3])     // false
  * isEmpty('foo')         // false
  * isEmpty({ a: 1 })      // false
+ * 
+ * @see https://utilipea.vercel.app/collection/is-empty.html
+ * 
  */
 export const isEmpty = (val: unknown, opts?: { includeSymbols: boolean }) => {
   if (isNil(val)) {

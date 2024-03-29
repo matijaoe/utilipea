@@ -3,15 +3,15 @@ export type ThrottledFunction<TArgs extends any[], TRes> = {
   /**
    * Checks if there is any invocation throttled
    */
-  pending(): boolean
+  pending: () => boolean
   /**
    * Cancels the throttled function invocation
    */
-  cancel(): void
+  cancel: () => void
   /**
    * Returns the last result of the throttled function
    */
-  lastResult(): TRes | undefined
+  lastResult: () => TRes | undefined
 }
 
 export const throttle = <TArgs extends any[], TRes>(

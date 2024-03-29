@@ -1,5 +1,5 @@
 /* eslint-disable */
 // TODO: advanced implementation, pasting images
-export const pasteFromClipboard = async () => {
+export const clipboardPaste = async () => {
   return window.navigator.clipboard.read()
 }

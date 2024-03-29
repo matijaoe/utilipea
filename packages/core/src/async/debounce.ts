@@ -3,15 +3,15 @@ export type DebounceFunction<TArgs extends any[]> = {
   /**
    * Cancels the debounced function
    */
-  cancel(): void
+  cancel: () => void
   /**
    * Checks if there is any invocation debounced
    */
-  pending(): boolean
+  pending: () => boolean
   /**
    * Runs the debounced function immediately, and cancels the debounced invocation
    */
-  flush(...args: TArgs): void
+  flush: (...args: TArgs) => void
 }
 
 /**
@@ -23,7 +23,7 @@ export type DebounceFunction<TArgs extends any[]> = {
  * to cancel delayed `func` invocations and a `flush`
  * method to invoke them immediately
  * 
- * @see [utilipea.vercel.app/async/debounce.html](https://utilipea.vercel.app/async/debounce.html)
+ * @see https://utilipea.vercel.app/async/debounce.html
  * 
  */
 export const debounce = <TArgs extends any[], TRes>(

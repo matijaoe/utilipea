@@ -13,6 +13,7 @@ export const randomFloat = (min: number, max: number) => {
   }
 
   const randomBuffer = new Uint32Array(2)
+  // TODO: uncrypto
   crypto.getRandomValues(randomBuffer)
 
   const [first, second] = randomBuffer

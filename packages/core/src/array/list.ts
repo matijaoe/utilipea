@@ -28,7 +28,7 @@ type RangeOptions<T> = RangeOptionsEnd<T> | RangeOptionsLen<T>
  * list({ start: 1, end: 3, fill: 'a' }) // => ['a', 'a', 'a']
  * list({ start: 1, end: 3, map: (i) => i * i }) // => [1, 4, 9]
  * 
- * @see [utilipea.vercel.app/array/list.html](https://utilipea.vercel.app/array/list.html)
+ * @see https://utilipea.vercel.app/array/list.html
  * 
  */
 export const list = <T = number>(opts: RangeOptions<T>): T[] => {

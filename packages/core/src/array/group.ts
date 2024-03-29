@@ -26,3 +26,5 @@ export const group = <T, TKey extends PropertyKey>(
     return acc
   }, {} as Record<TKey, T[]>)
 }
+
+// TODO: group with cmp, and groupBy with identity

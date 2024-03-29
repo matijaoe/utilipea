@@ -3,7 +3,7 @@ import { chunk } from './chunk'
 
 describe('chunk', () => {
   it('should return an array of chunks of the given size (default 2)', () => {
-    expect(chunk([1, 2, 3, 4, 5, 6, 7, 8, 9])).toEqual([
+    expect(chunk([1, 2, 3, 4, 5, 6, 7, 8, 9], 2)).toEqual([
       [1, 2],
       [3, 4],
       [5, 6],
