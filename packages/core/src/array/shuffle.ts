@@ -1,4 +1,4 @@
-import { randomIntInsecure, randomInt as randomIntSecure } from '../random'
+import { randomInt } from '../random'
 
 /**
  * Shuffle an array. Does not mutate the original array, unless mutate option is set to true.
@@ -20,13 +20,12 @@ import { randomIntInsecure, randomInt as randomIntSecure } from '../random'
  * console.log(arr)
  * // => [3, 5, 1, 4, 2]
  * 
- * @see [utilipea.vercel.app/array/shuffle.html](https://utilipea.vercel.app/array/shuffle.html)
+ * @see https://utilipea.vercel.app/array/shuffle.html
  * 
  */
-export const shuffle = <T>(array: T[], opts?: { secure?: boolean, mutate?: boolean }) => {
+export const shuffle = <T>(array: T[], opts?: { mutate?: boolean }) => {
   const arr = opts?.mutate ? array : [...array]
 
-  const randomInt = opts?.secure ? randomIntSecure : randomIntInsecure
   for (let i = arr.length - 1; i > 0; i--) {
     const j = randomInt(0, i);
     [arr[i], arr[j]] = [arr[j], arr[i]]

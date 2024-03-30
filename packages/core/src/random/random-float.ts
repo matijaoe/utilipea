@@ -1,3 +1,5 @@
+import * as crypto from 'uncrypto'
+
 /**
  * Generates a random float between two given numbers, including those numbers.
  *
@@ -13,7 +15,7 @@ export const randomFloat = (min: number, max: number) => {
   }
 
   const randomBuffer = new Uint32Array(2)
-  // TODO: uncrypto
+  // eslint-disable-next-line ts/no-unsafe-call
   crypto.getRandomValues(randomBuffer)
 
   const [first, second] = randomBuffer

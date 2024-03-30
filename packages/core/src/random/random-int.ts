@@ -1,37 +1,18 @@
-/**
- * Generates a random integer between the specified minimum and maximum values (inclusive).
- *
- * It uses `Math.random` to generate the random number.
- *
- * @example
- * randomInt(1, 10)
- * // => 6
- */
-export const randomIntInsecure = (min: number, max: number): number => {
-  if (!Number.isInteger(min) || !Number.isInteger(max)) {
-    throw new TypeError('min and max must be integers')
-  }
-
-  if (min >= max) {
-    throw new Error('max must be greater than min')
-  }
-
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
+import * as crypto from 'uncrypto'
+import { isInt } from '../typed'
 
 /**
  * Generates a random float between two given numbers (inclusive).
  *
- * It uses `crypto.getRandomValues` to generate the random number.
+ * ses `crypto.getRandomValues` to generate the random number.
  *
  * @example
  * randomInt(1, 10)
  * // => 8
  */
-
 export const randomInt = (min: number, max: number): number => {
   // Taken from https://stackoverflow.com/a/41452318
-  if (!Number.isInteger(min) || !Number.isInteger(max)) {
+  if (!isInt(min) || !isInt(max)) {
     throw new TypeError('min and max must be integers')
   }
 
@@ -46,6 +27,7 @@ export const randomInt = (min: number, max: number): number => {
 
   let randomValue: number
   do {
+    // eslint-disable-next-line ts/no-unsafe-call
     crypto.getRandomValues(randomBuffer)
     randomValue = 0
     for (let index = 0; index < randomBytes; index++) {
