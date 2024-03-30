@@ -11,7 +11,6 @@ import type { ArrayMaxLength } from '../models'
  * 
  * @see https://utilipea.vercel.app/array/chunk.html
  */
-
 export const chunk = <TElem, TChunkSize extends number>(list: readonly TElem[], size: TChunkSize) => {
   if (!list || size < 1) { return [] as ArrayMaxLength<TElem, TChunkSize>[] }
 

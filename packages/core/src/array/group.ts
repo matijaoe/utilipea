@@ -12,8 +12,7 @@
  * group(fish, (f) => f.source)
  * // => { ocean: [{ name: 'Marlin', source: 'ocean' }], lake: [{ name: 'Bass', source: 'lake' }, { name: 'Trout', source: 'lake' }] }
  * 
- * @see 
- * [utilipea.vercel.app/array/group.html](https://utilipea.vercel.app/array/group.html)
+ * @see https://utilipea.vercel.app/array/group.html
  */
 export const group = <T, TKey extends PropertyKey>(
   array: readonly T[],

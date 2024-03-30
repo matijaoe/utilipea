@@ -1,7 +1,8 @@
-import { isFunction } from '../typed'
+import type { By } from '..'
+import { isFunction } from '..'
 
 /**
- * Count the number of items in an array when grouped by a given key or condition.
+ * Count the number of items in an array when grouped by a given key or condition. Returns a Map.
  * 
  * @category Array
  *
@@ -17,19 +18,15 @@ import { isFunction } from '../typed'
  * 
  * @see https://utilipea.vercel.app/array/group.html
  */
-export type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
-
-export const count = <TElem, TKey extends keyof TElem & PropertyKey>(
+export const countAsMap = <TElem, TKey extends keyof TElem>(
   list: readonly TElem[],
-  by: ByPropertyKey<TElem, TKey>
+  by: By<TElem, TKey>
 ) => {
   const byFn = isFunction(by) ? by : (item: TElem) => item[by]
 
   return list?.reduce((acc, item) => {
-    const id = byFn(item)?.toString()
-    if (id === undefined) { return acc }
-    acc[id] ??= 0
-    acc[id] += 1
+    const id = byFn(item)
+    acc.set(id, (acc.get(id) || 0) + 1)
     return acc
-  }, {} as Record<PropertyKey, number>)
+  }, new Map<TElem[TKey], number>())
 }

@@ -1,5 +1,5 @@
 /**
- * Reduce a list of items down to one item
+ * Reduce a list of items down to one item.
  * 
  * Given an array of items return the final item that "wins" the comparison condition.
  *
