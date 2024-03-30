@@ -1,6 +1,11 @@
+import type { By } from '../models'
+import { isFunction } from '../typed'
+
 /**
  * Given two arrays, returns true if any elements intersect
  *
+ * @category Array
+ * 
  * @example
  * const arr1 = [1, 2, 3]
  * const arr2 = [3, 4, 5]
@@ -11,18 +16,24 @@
  * const arr1 = [{ id: 1, name: 'Pat'}]
  * const arr2 = [{ id: 2, name: 'Mat'}, { id: 3, name: 'Pat'}]}]
  * intersects(arr1, arr2, (x) => x.name) // => true
+ * intersects(arr1, arr2, 'id') // => false
  * 
- * @see [utilipea.vercel.app/array/intersects.html](https://utilipea.vercel.app/array/intersects.html)
- * 
+ * @see https://utilipea.vercel.app/array/intersects.html
  */
 export const intersects = <TElem, TKey extends keyof TElem>(
   listA: readonly TElem[],
   listB: readonly TElem[],
-  // TODO: implement By
-  identity = (x: TElem) => x as unknown as TKey
+  by?: By<TElem, TKey>
 ): boolean => {
   if (!listA || !listB) { return false }
 
-  const dictB = new Set<TKey>(listB.map(identity))
-  return listA.some((value) => dictB.has(identity(value)))
+  if (!by) {
+    const dictB = new Set<TElem>(listB)
+    return listA.some((value) => dictB.has(value))
+  }
+
+  const byFn = isFunction(by) ? by : (item: TElem) => item[by]
+
+  const dictB = new Set<TElem[TKey]>(listB.map((item) => byFn(item)))
+  return listA.some((value) => dictB.has(byFn(value)))
 }

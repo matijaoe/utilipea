@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { intersectionBy } from './intersection'
+import { intersectionBy } from './intersection-by'
 
 describe('intersection', () => {
   it('returns the correct intersections', () => {

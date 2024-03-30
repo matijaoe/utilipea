@@ -23,33 +23,3 @@ export const _removeBy = <TElem, TKey extends keyof TElem & PropertyKey>(
     return !items.includes(value)
   })
 }
-
-const arr = [
-  {
-    id: 1,
-    name: 'one',
-    test: { id: 1 },
-  },
-  {
-    id: 2,
-    name: 'two',
-    test: { id: 2 },
-  },
-  {
-    id: 3,
-    name: 'three',
-    test: { id: 3 },
-  },
-  {
-    id: 4,
-    name: 'four',
-    test: { id: 4 },
-  },
-  {
-    id: 5,
-    name: 'five',
-    test: { id: 5 },
-  }
-]
-const rem = _removeBy(arr, (el) => el.id, { id: 1 })
-console.log('rem :', rem)

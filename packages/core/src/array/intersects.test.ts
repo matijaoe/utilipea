@@ -22,15 +22,19 @@ describe('intersects', () => {
     const arr1 = [{ id: 1, name: 'Pat' }]
     const arr2 = [{ id: 2, name: 'Mat' }, { id: 3, name: 'Pat' }]
 
-    const result = intersects(arr1, arr2, (x) => x.name)
-    expect(result).toEqual(true)
+    const result1 = intersects(arr1, arr2, (x) => x.name)
+    expect(result1).toEqual(true)
+    const result2 = intersects(arr1, arr2, 'name')
+    expect(result2).toEqual(result1)
   })
 
   it('does not intersect with identity', () => {
     const arr1 = [{ id: 1, name: 'Pat' }]
     const arr2 = [{ id: 2, name: 'Mat' }, { id: 3, name: 'Kat' }]
 
-    const result = intersects(arr1, arr2, (x) => x.name)
-    expect(result).toEqual(false)
+    const result1 = intersects(arr1, arr2, (x) => x.name)
+    expect(result1).toEqual(false)
+    const result2 = intersects(arr1, arr2, 'name')
+    expect(result2).toEqual(result1)
   })
 })
