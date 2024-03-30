@@ -1,37 +1,17 @@
 import { isFunction, notUndefined } from '../typed'
 
-type Mapper<T = number> = (i: number) => T
-
 export type BaseRangeOptions<T = number> = {
   start?: number
   step?: number
   fill?: T
-  map?: Mapper<T>
+  map?: (i: number) => T
 }
 
-type RangeOptionsEnd<T = number> = BaseRangeOptions<T> & { end: number }
-type RangeOptionsLen<T = number> = BaseRangeOptions<T> & { len: number }
-
-type RangeOptions<T> = RangeOptionsEnd<T> | RangeOptionsLen<T>
-
-/**
- * Generate a list of elements from start to end (inclusive).
- *
- * @category Array
- *
- * @example
- * list({ len: 3 }) // => [0, 1, 2]
- * list({ end: 3 }) // => [0, 1, 2, 3]
- * list({ start: 1, len: 5 }) // => [1, 2, 3, 4, 5]
- * list({ start: 1, end: 3 }) // => [1, 2, 3]
- * list({ start: 1, end: 3, step: 2 }) // => [1, 3]
- * list({ start: 1, end: 3, fill: 'a' }) // => ['a', 'a', 'a']
- * list({ start: 1, end: 3, map: (i) => i * i }) // => [1, 4, 9]
- * 
- * @see https://utilipea.vercel.app/array/list.html
- * 
- */
-export const list = <T = number>(opts: RangeOptions<T>): T[] => {
+export function list<T = number>(opts: BaseRangeOptions<T> & { end: number }): T[]
+export function list<T = number>(opts: BaseRangeOptions<T> & { len: number }): T[]
+export function list<T = number>(
+  opts: BaseRangeOptions<T> & ({ end: number } | { len: number })
+): T[] {
   const step = opts.step || 1
 
   if (step <= 0) {
