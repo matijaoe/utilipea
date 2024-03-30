@@ -1,5 +1,7 @@
 import { isFunction } from '../typed'
 
+export type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
+
 /**
  * Count the number of items in an array when grouped by a given key or condition.
  * 
@@ -17,8 +19,6 @@ import { isFunction } from '../typed'
  * 
  * @see https://utilipea.vercel.app/array/group.html
  */
-export type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
-
 export const count = <TElem, TKey extends keyof TElem & PropertyKey>(
   list: readonly TElem[],
   by: ByPropertyKey<TElem, TKey>
