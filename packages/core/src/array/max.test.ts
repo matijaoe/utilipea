@@ -21,8 +21,12 @@ describe('max', () => {
       { game: 'd', score: 400 },
       { game: 'e', score: 500 }
     ]
-    const result = max(list, (x) => x.score)
-    expect(result?.game).toEqual('e')
-    expect(result?.score).toEqual(500)
+    const result1 = max(list, (x) => x.score)
+    expect(result1?.game).toEqual('e')
+    expect(result1?.score).toEqual(500)
+
+    const result2 = max(list, 'score')
+    expect(result2?.game).toEqual(result1?.game)
+    expect(result2?.score).toEqual(result1?.score)
   })
 })
