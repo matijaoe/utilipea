@@ -3,8 +3,7 @@
  * If n > 0 items will shift n steps to the right
  * If n < 0 items will shift n steps to the left
  * 
- * @see [utilipea.vercel.app/array/shift.html](https://utilipea.vercel.app/array/shift.html)
- * 
+ * @see https://utilipea.vercel.app/array/shift.html
  */
 export const shift = <T>(arr: Array<T>, n: number) => {
   if (!arr?.length) { return arr }

@@ -1,4 +1,4 @@
-import type { PlainObject } from '..'
+import type { PlainObject, TypedArray } from '..'
 import { isDate, isMap, isPlainObject, isRegex, isSet, isTypedArray } from '..'
 
 export const isEqual = (x: unknown, y: unknown): boolean => {
