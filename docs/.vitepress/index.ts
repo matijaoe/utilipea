@@ -31,7 +31,7 @@ export async function getDirectories(directoryPath: string): Promise<string[]> {
   }
 }
 
-const packageSrc = path.resolve(process.cwd(), 'packages', 'package', 'src')
+const packageSrc = path.resolve(process.cwd(), 'packages', 'core', 'src')
 
 const methodPageTemplate = (category: string, name: string) => `---
 category: ${titlecase(category)}
