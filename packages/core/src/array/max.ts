@@ -1,4 +1,4 @@
-import type { By } from '../models'
+import type { ByIdentity } from '../models'
 import { isFunction } from '../typed'
 import { boil } from './boil'
 
@@ -13,16 +13,16 @@ import { boil } from './boil'
  * @see https://utilipea.vercel.app/array/max.html
  * 
  */
+
 export function max(array: readonly [number, ...number[]]): number
 export function max(array: readonly number[]): number | undefined
-export function max<TElem, TKey extends keyof TElem>(array: readonly TElem[], by: By<TElem, TKey>): TElem | undefined
-export function max<TElem, TKey extends keyof TElem>(
-  array: readonly TElem[],
-  by?: By<TElem, TKey>
-): TElem | undefined {
-  by ??= (x: TElem) => x as unknown as TElem[TKey]
-  
-  // eslint-disable-next-line ts/no-unsafe-return
-  const byFn = isFunction(by) ? by : (item: TElem) => item[by]
+export function max<T>(array: readonly T[], by: ByIdentity<T, number>): T | undefined
+export function max<T>(
+  array: readonly T[],
+  by?: ByIdentity<T, number>
+): T | undefined {
+  by ??= (item: T) => item as unknown as number
+   
+  const byFn = isFunction(by) ? by : (item: T) => item[by]
   return boil(array, (a, b) => (byFn(a) > byFn(b) ? a : b))
 }

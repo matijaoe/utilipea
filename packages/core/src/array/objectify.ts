@@ -2,7 +2,7 @@
  * Convert an array to a dictionary by mapping each item
  * into a dictionary key & value
  * 
- * @see [utilipea.vercel.app/array/objectify.html](https://utilipea.vercel.app/array/objectify.html)
+ * @see https://utilipea.vercel.app/array/objectify.html
  * 
  */
 export const objectify = <T, Key extends PropertyKey, Value = T>(

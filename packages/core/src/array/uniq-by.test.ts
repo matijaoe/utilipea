@@ -16,9 +16,14 @@ describe('[array] unique', () => {
     const result = uniqBy([{ id: 1 }, { id: 2 }, { id: 1 }], 'id')
     expect(result).toEqual([{ id: 1 }, { id: 2 }])
   })
+  
+  it('returns unique objects based on a property getter', () => {
+    const result = uniqBy([{ id: 1 }, { id: 2 }, { id: 1 }], (item) => item.id)
+    expect(result).toEqual([{ id: 1 }, { id: 2 }])
+  })
 
   it('returns unique arrays based on the first element', () => {
-    const result = uniqBy([[1, 2], [1, 2], [3, 4]], (item) => item.at(0)!)
+    const result = uniqBy([[1, 2], [1, 2], [3, 4]], (item: number[]) => item.at(0)!)
     expect(result).toEqual([[1, 2], [3, 4]])
   })
 

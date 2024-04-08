@@ -1,4 +1,4 @@
-import type { By } from '..'
+import type { ByIdentity } from '..'
 import { isFunction } from '..'
 
 /**
@@ -18,15 +18,15 @@ import { isFunction } from '..'
  * 
  * @see https://utilipea.vercel.app/array/group.html
  */
-export const countAsMap = <TElem, TKey extends keyof TElem>(
-  list: readonly TElem[],
-  by: By<TElem, TKey>
-) => {
-  const byFn = isFunction(by) ? by : (item: TElem) => item[by]
 
+export const countAsMap = <T>(
+  list: readonly T[],
+  by: ByIdentity<T>
+) => {
+  const byFn = isFunction(by) ? by : (item: T) => item[by] as PropertyKey
   return list?.reduce((acc, item) => {
     const id = byFn(item)
     acc.set(id, (acc.get(id) || 0) + 1)
     return acc
-  }, new Map<TElem[TKey], number>())
+  }, new Map<PropertyKey, number>())
 }

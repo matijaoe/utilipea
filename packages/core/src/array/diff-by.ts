@@ -1,14 +1,13 @@
-import type { ArrayMinLength, By } from '../models'
+import type { ArrayMinLength, ByIdentity } from '../models'
 import { isArray, isFunction } from '../typed'
 import { flatten } from './flatten'
 
 export function diffBy<
   TElem, 
   TArrays extends ArrayMinLength<TElem[], 2>, 
-  TKey extends keyof TElem
->(...args: ArrayMinLength<TElem[], 2> | [...TArrays, By<TElem, TKey >]): TArrays[0] {
+>(...args: ArrayMinLength<TElem[], 2> | [...TArrays, ByIdentity<TElem>]): TArrays[0] {
   const hasByDefined = !isArray(args.at(-1))
-  const by = hasByDefined && args.pop() as By<TElem, TKey>
+  const by = hasByDefined && args.pop() as ByIdentity<TElem>
 
   const [firstArray, ..._restArrays] = args as TArrays
   const restArrays = flatten(_restArrays)

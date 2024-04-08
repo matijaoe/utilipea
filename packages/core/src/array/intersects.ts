@@ -1,4 +1,4 @@
-import type { By } from '../models'
+import type { ByIdentity } from '../models'
 import { isFunction } from '../typed'
 
 /**
@@ -20,20 +20,20 @@ import { isFunction } from '../typed'
  * 
  * @see https://utilipea.vercel.app/array/intersects.html
  */
-export const intersects = <TElem, TKey extends keyof TElem>(
-  listA: readonly TElem[],
-  listB: readonly TElem[],
-  by?: By<TElem, TKey>
+export const intersects = <T>(
+  listA: readonly T[],
+  listB: readonly T[],
+  by?: ByIdentity<T>
 ): boolean => {
   if (!listA || !listB) { return false }
 
   if (!by) {
-    const dictB = new Set<TElem>(listB)
+    const dictB = new Set<T>(listB)
     return listA.some((value) => dictB.has(value))
   }
 
-  const byFn = isFunction(by) ? by : (item: TElem) => item[by]
+  const byFn = isFunction(by) ? by : (item: T) => item[by] as PropertyKey
 
-  const dictB = new Set<TElem[TKey]>(listB.map((item) => byFn(item)))
+  const dictB = new Set<PropertyKey>(listB.map((item) => byFn(item)))
   return listA.some((value) => dictB.has(byFn(value)))
 }

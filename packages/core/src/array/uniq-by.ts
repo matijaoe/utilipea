@@ -1,5 +1,5 @@
 import { isFunction } from '..'
-import type { By } from '../models'
+import type { ByIdentity } from '../models'
 
 /**
  * Return an array with uniq( elements from the input array. 
@@ -31,19 +31,17 @@ import type { By } from '../models'
  * uniq(people, 'name)
  * // => [{ name: 'joe', age: 87 }, { name: 'dan', age: 24 }]
  */
-export const uniqBy = <TElem, TKey extends keyof TElem>(
+export const uniqBy = <TElem>(
   arr: TElem[],
-  by?: By<TElem, TKey>,
+  by?: ByIdentity<TElem>,
 ) => {
   if (!by) {
     return [...new Set(arr)]
   }
 
-  const byFn = isFunction(by)
-    ? by
-    : (item: TElem) => item[by]
+  const byFn = isFunction(by) ? by : (item: TElem) => item[by] as PropertyKey
 
-  const seen = new Set<TElem[TKey]>()
+  const seen = new Set<PropertyKey>()
   return arr.filter((item) => {
     const key = byFn(item)
     if (seen.has(key)) {

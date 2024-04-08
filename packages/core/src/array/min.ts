@@ -1,4 +1,4 @@
-import type { By } from '../models'
+import type { ByIdentity } from '../models'
 import { isFunction } from '../typed'
 import { boil } from './boil'
 
@@ -14,14 +14,13 @@ import { boil } from './boil'
  */
 export function min(array: readonly [number, ...number[]]): number
 export function min(array: readonly number[]): number | undefined
-export function min<TElem, TKey extends keyof TElem>(array: readonly TElem[], by: By<TElem, TKey>): TElem | undefined
-export function min<TElem, TKey extends keyof TElem>(
-  array: readonly TElem[],
-  by?: By<TElem, TKey>
-): TElem | undefined {
-  by ??= (x: TElem) => x as unknown as TElem[TKey]
-  
-  // eslint-disable-next-line ts/no-unsafe-return
-  const byFn = isFunction(by) ? by : (item: TElem) => item[by]
+export function min<T>(array: readonly T[], by: ByIdentity<T, number>): T | undefined
+export function min<T>(
+  array: readonly T[],
+  by?: ByIdentity<T, number>
+): T | undefined {
+  by ??= (item: T) => item as unknown as number
+   
+  const byFn = isFunction(by) ? by : (item: T) => item[by]
   return boil(array, (a, b) => (byFn(a) < byFn(b) ? a : b))
 }

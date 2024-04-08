@@ -32,7 +32,7 @@ import { isDef, isFunction } from '..'
  * }
  * // => 1 4 9
  * 
- *  @see [utilipea.vercel.app/array/range-gen.html](https://utilipea.vercel.app/array/range-gen.html)
+ *  @see https://utilipea.vercel.app/array/range-gen.html
  * 
  */
 export function* rangeGen<T = number>(

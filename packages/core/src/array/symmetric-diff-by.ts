@@ -1,4 +1,4 @@
-import type { ArrayMinLength, By } from '../models'
+import type { ArrayMinLength, ByIdentity } from '../models'
 import { isArray, isFunction } from '../typed'
 
 /**
@@ -31,10 +31,9 @@ import { isArray, isFunction } from '../typed'
 export const symmetricDiff = <
   TElem,
   TArrays extends ArrayMinLength<TElem[], 2>, 
-  TKey extends keyof TElem
->(...args: ArrayMinLength<TElem[], 2> | [...TArrays, By<TElem, TKey>]): TElem[] => {
+>(...args: ArrayMinLength<TElem[], 2> | [...TArrays, ByIdentity<TElem>]): TElem[] => {
   const hasByDefined = !isArray(args.at(-1))
-  const by = hasByDefined && args.pop() as By<TElem, TKey>
+  const by = hasByDefined && args.pop() as ByIdentity<TElem>
 
   const arrays = args as TArrays
 
@@ -56,4 +55,4 @@ export const symmetricDiff = <
 export const xorBy = symmetricDiff
 
 // TODO: not correct, should be empty
-console.log(xorBy([{ x: 2 }], [{ x: 2 }, { x: 1 }], [{ x: 2 }, { x: 1 }], 'x'))
+// console.log(xorBy([{ x: 2 }], [{ x: 2 }, { x: 1 }], [{ x: 2 }, { x: 1 }], 'x'))

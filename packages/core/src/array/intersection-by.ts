@@ -1,4 +1,4 @@
-import type { ArrayMinLength, By } from '..'
+import type { ArrayMinLength, ByIdentity } from '..'
 import { isArray, isFunction, uniq, uniqBy } from '..'
 
 /**
@@ -12,10 +12,9 @@ import { isArray, isFunction, uniq, uniqBy } from '..'
 export const intersectionBy = <
   TElem,
   TArrays extends ArrayMinLength<TElem[], 2>, 
-  TKey extends keyof TElem
->(...args: ArrayMinLength<TElem[], 2> | [...TArrays, By<TElem, TKey>]): TArrays[0] => {
+>(...args: ArrayMinLength<TElem[], 2> | [...TArrays, ByIdentity<TElem>]): TArrays[0] => {
   const hasByDefined = !isArray(args.at(-1))
-  const by = hasByDefined && args.pop() as By<TElem, TKey>
+  const by = hasByDefined && args.pop() as ByIdentity<TElem>
 
   const [firstArray, ...restArrays] = args as TArrays
 

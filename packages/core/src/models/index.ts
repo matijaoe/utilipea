@@ -170,8 +170,12 @@ export type Func<TArgs = any, KReturn = any | void> = (
   ...args: TArgs[]
 ) => KReturn
 
-export type PropFunction<T, K extends keyof T> = (item: T) => T[K]
-export type By<T, K extends keyof T> = K | ((item: T) => T[K])
+type ByPropertyGetter<T, K = PropertyKey> = (item: T) => K
+type KeysPointingToPropertyKey<T, V = PropertyKey> = {
+  [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T]
+
+export type ByIdentity<T, K = PropertyKey> = ByPropertyGetter<T, K> | KeysPointingToPropertyKey<T, K>
 
 export type CompareFn<TArrays extends ArrayMinLength<unknown[], 2>> = (a: TArrays[0][number], b: ArrayTail<TArrays>[number][number]) => boolean
 export type ArrayTail<TArray extends unknown[]> = TArray extends [unknown, ...infer U] ? U : never
