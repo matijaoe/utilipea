@@ -1,6 +1,6 @@
 import { isFunction } from '../typed'
 
-export type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
+type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
 
 /**
  * Sorts an array of items into groups. The return value is a map where the keys are

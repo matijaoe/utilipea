@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { isString } from '..'
 
 export const clipboardCopy = async (val: string | ClipboardItem[]): Promise<void> => {

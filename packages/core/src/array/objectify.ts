@@ -12,7 +12,7 @@ export const objectify = <T, Key extends PropertyKey, Value = T>(
 ): Record<Key, Value> => {
   getValue ??= (v: T) => v as unknown as Value
   return array.reduce((acc, item) => {
-    acc[getKey(item)] = getValue!(item)
+    acc[getKey(item)] = getValue(item)
     return acc
   }, {} as Record<Key, Value>)
 }

@@ -20,7 +20,7 @@ import { isFunction } from '../typed'
  * 
  * @see https://utilipea.vercel.app/array/intersects.html
  */
-export const intersects = <T>(
+export const intersectsBy = <T>(
   listA: readonly T[],
   listB: readonly T[],
   by?: ByIdentity<T>

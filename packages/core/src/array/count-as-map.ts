@@ -18,7 +18,6 @@ import { isFunction } from '..'
  * 
  * @see https://utilipea.vercel.app/array/group.html
  */
-
 export const countAsMap = <T>(
   list: readonly T[],
   by: ByIdentity<T>

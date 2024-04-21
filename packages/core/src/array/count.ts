@@ -1,6 +1,6 @@
 import { isFunction } from '../typed'
 
-export type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
+type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
 
 /**
  * Count the number of items in an array when grouped by a given key or condition.

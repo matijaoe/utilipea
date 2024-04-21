@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { intersects } from './intersects'
+import { intersectsBy } from './intersects-by'
 
-describe('intersects', () => {
+describe('intersectsBy', () => {
   it('does intersect', () => {
     const arr1 = [1, 2, 3, 4, 5]
     const arr2 = [3, 4, 5, 6, 7]
 
-    const result = intersects(arr1, arr2)
+    const result = intersectsBy(arr1, arr2)
     expect(result).toEqual(true)
   })
 
@@ -14,7 +14,7 @@ describe('intersects', () => {
     const arr1 = [1, 2, 3, 4, 5]
     const arr2 = [6, 7, 8, 9, 10]
 
-    const result = intersects(arr1, arr2)
+    const result = intersectsBy(arr1, arr2)
     expect(result).toEqual(false)
   })
 
@@ -22,9 +22,9 @@ describe('intersects', () => {
     const arr1 = [{ id: 1, name: 'Pat' }]
     const arr2 = [{ id: 2, name: 'Mat' }, { id: 3, name: 'Pat' }]
 
-    const result1 = intersects(arr1, arr2, (x) => x.name)
+    const result1 = intersectsBy(arr1, arr2, (x) => x.name)
     expect(result1).toEqual(true)
-    const result2 = intersects(arr1, arr2, 'name')
+    const result2 = intersectsBy(arr1, arr2, 'name')
     expect(result2).toEqual(result1)
   })
 
@@ -32,9 +32,9 @@ describe('intersects', () => {
     const arr1 = [{ id: 1, name: 'Pat' }]
     const arr2 = [{ id: 2, name: 'Mat' }, { id: 3, name: 'Kat' }]
 
-    const result1 = intersects(arr1, arr2, (x) => x.name)
+    const result1 = intersectsBy(arr1, arr2, (x) => x.name)
     expect(result1).toEqual(false)
-    const result2 = intersects(arr1, arr2, 'name')
+    const result2 = intersectsBy(arr1, arr2, 'name')
     expect(result2).toEqual(result1)
   })
 })

@@ -7,7 +7,6 @@ import { isArray, isFunction, uniq, uniqBy } from '..'
  * The order is based on the first array.
  * 
  * Accepts an optional identity function to convert each item in the list to a comparable identity value
- * 
  */
 export const intersectionBy = <
   TElem,
@@ -22,7 +21,7 @@ export const intersectionBy = <
     return uniq(firstArray).filter((item) => restArrays.every((arr) => arr.includes(item))) 
   }
 
-  const byFn = isFunction(by) ? by : (item: TElem) => item[by]
+  const byFn = isFunction(by) ? by : (item: TElem) => item[by] as PropertyKey
 
   const uniqFirstArr = uniqBy(firstArray, byFn)
   return uniqFirstArr.filter((item) => {

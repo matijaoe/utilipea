@@ -23,7 +23,9 @@ import { hasNestedKeys } from '.'
 export const deepOmit = <
 T extends Record<PropertyKey, any>,
 R extends Record<PropertyKey, any> = T
->(obj: T, keys: NestedOmit<T>): R => {
+>(obj: T, 
+    keys: NestedOmit<T>
+  ): R => {
   if (!obj) {
     return {} as R
   }

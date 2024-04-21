@@ -30,5 +30,5 @@ export function sum<T extends number | object>(
   fn?: (item: T) => number
 ) {
   fn ??= (item: T) => isNumber(item) ? item : 0
-  return array?.reduce((acc, item) => acc + fn!(item), 0) ?? 0
+  return array?.reduce((acc, item) => acc + fn(item), 0) ?? 0
 }

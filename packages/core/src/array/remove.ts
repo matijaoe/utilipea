@@ -1,6 +1,6 @@
 import { isFunction, toArray } from '..'
 
-export type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
+type ByPropertyKey<T, K extends keyof T & PropertyKey> = K | ((item: T) => T[K] & PropertyKey)
 
 export const remove = <TElem>(arr: TElem[], item: TElem | TElem[]): TElem[] => {
   const items = toArray(item)

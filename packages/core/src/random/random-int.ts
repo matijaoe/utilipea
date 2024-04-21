@@ -27,7 +27,6 @@ export const randomInt = (min: number, max: number): number => {
 
   let randomValue: number
   do {
-    // eslint-disable-next-line ts/no-unsafe-call
     crypto.getRandomValues(randomBuffer)
     randomValue = 0
     for (let index = 0; index < randomBytes; index++) {
