@@ -34,7 +34,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/array/intersection-many.ts"  ],
   "exclude": [
     "node_modules",
     "./dist/**/*"

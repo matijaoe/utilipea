@@ -1,6 +1,6 @@
 ---
 category: Array
-title: 'unique'
+title: 'groupBy'
 ---
 
 # {{ $frontmatter.title }}

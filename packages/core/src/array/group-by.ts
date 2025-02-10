@@ -9,13 +9,13 @@
  *  { name: 'Bass', source: 'lake' },
  *  { name: 'Trout', source: 'lake' }
  * ]
- * group(fish, (f) => f.source)
+ * groupBy(fish, (f) => f.source)
  * // => { ocean: [{ name: 'Marlin', source: 'ocean' }], lake: [{ name: 'Bass', source: 'lake' }, { name: 'Trout', source: 'lake' }] }
  * 
- * @see [utilipea.vercel.app/array/group.html](https://utilipea.vercel.app/array/group.html)
+ * @see [utilipea.vercel.app/array/groupBy.html](https://utilipea.vercel.app/array/groupBy.html)
  * 
  */
-export const group = <T, Key extends PropertyKey>(
+export const groupBy = <T, Key extends PropertyKey>(
   array: readonly T[],
   identity: (item: T) => Key
 ): Partial<Record<Key, T[]>> => {

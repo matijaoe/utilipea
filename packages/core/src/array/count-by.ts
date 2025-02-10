@@ -1,7 +1,7 @@
 /**
- * Count  occurrences of an item in an array
+ * Count occurrences of an item in an array
  */
-export const count = <T, TId extends PropertyKey>(
+export const countBy = <T, TId extends PropertyKey>(
   list: readonly T[],
   identity: (item: T) => TId
 ) => {

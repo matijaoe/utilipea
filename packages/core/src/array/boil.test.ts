@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { boil } from '.'
 
 describe('boil', () => {
-  it('compares and keeps item based on condition', () => {
+  it('should compare and keep item based on condition', () => {
     const list = [
       { game: 'a', score: 100 },
       { game: 'b', score: 200 },
@@ -15,7 +15,7 @@ describe('boil', () => {
     expect(result?.score).toEqual(500)
   })
 
-  it('does not fail when provided array is empty', () => {
+  it('should not fail when provided array is empty', () => {
     const result = boil([], () => true)
     expect(result).toEqual(undefined)
   })

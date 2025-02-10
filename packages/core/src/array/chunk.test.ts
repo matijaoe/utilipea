@@ -32,15 +32,15 @@ describe('chunk', () => {
     expect(chunk([])).toEqual([])
   })
 
-  it('return an empty array when given size 0', () => {
+  it('should return an empty array when given size 0', () => {
     expect(chunk([1, 2, 3, 4, 5, 6, 7, 8], 0)).toEqual([])
   })
 
-  it('return an empty array when given size is negative', () => {
+  it('should return an empty array when given size is negative', () => {
     expect(chunk([1, 2, 3, 4, 5, 6, 7, 8], -3)).toEqual([])
   })
 
-  it('return an array of chunks of uneven size', () => {
+  it('should handle size greater than array length', () => {
     expect(chunk([1, 2, 3, 4, 5, 6, 7, 8], 10)).toEqual([[1, 2, 3, 4, 5, 6, 7, 8]])
   })
 
