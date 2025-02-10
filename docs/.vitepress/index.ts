@@ -2,7 +2,7 @@ import { readdir } from 'node:fs/promises'
 import path, { join } from 'node:path'
 import process from 'node:process'
 import { camelCase } from 'scule'
-import { sort, titlecase } from '../../packages/package/src'
+import { sort, titlecase } from '../../packages/core/src'
 
 type MarkdownData = {
   dirName: string
@@ -31,7 +31,10 @@ export async function getDirectories(directoryPath: string): Promise<string[]> {
   }
 }
 
-const packageSrc = path.resolve(process.cwd(), 'packages', 'package', 'src')
+const packageSrc = path.resolve(
+  path.dirname(new URL(import.meta.url).pathname),
+  '../../packages/core/src'
+)
 
 const methodPageTemplate = (category: string, name: string) => `---
 category: ${titlecase(category)}
